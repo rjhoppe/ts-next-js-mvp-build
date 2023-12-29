@@ -1,3 +1,5 @@
 https://github.com/vercel/next.js/discussions/49885
 
 Very good idea at the bottom
+
+pnpm run dev
