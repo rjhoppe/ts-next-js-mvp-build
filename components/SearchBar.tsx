@@ -1,6 +1,8 @@
 const SearchBar = () => {
   return (
-    <div>SearchBar</div>
+    <section>
+      
+    </section>
   )
 }
 

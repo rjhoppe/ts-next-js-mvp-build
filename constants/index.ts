@@ -95,6 +95,32 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 
 // DataTable Component
 
+// TEMPLATES SECTION
+export const temp_columns = [
+  {name: "TEMPLATE", uid: "template", sortable: true},
+  {name: "LAST MODIFIED DATE", uid: "last_modified_time"},
+  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
+  {name: "ACTIVE", uid: "active"},
+  {name: "ACTIONS", uid: "actions"},
+];
+
+export const temp_records = [
+];
+
+
+// RULES SECTION
+export const rules_columns = [
+  {name: "ID", uid: "id"},
+  {name: "IF", uid: "if", sortable: true},
+  {name: "THEN", uid: "then"},
+  {name: "LAST MODIFIED DATE", uid: "last_modified_time"},
+  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
+  {name: "DELAY", uid: "delay"},
+  {name: "ACTIONS", uid: "actions"},
+];
+
+export const rules_records = [
+];
 
 // RECORDS SECTION - DUMMY DATA
 export const columns = [

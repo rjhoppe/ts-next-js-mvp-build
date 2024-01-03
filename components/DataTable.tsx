@@ -40,12 +40,12 @@ const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victims", "status",
 type Records = typeof records[0];
 
 const DataTable = () => {
-
+  
 	const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+  const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: "last_modified_time",
     direction: "descending",
@@ -241,7 +241,7 @@ const DataTable = () => {
           <span className="text-default-400 text-small">Total records: {records.length}</span>
           <label className="flex items-center text-default-400 text-small">
             Rows per page:
-            <select defaultValue={10}
+            <select defaultValue={5}
               className="bg-transparent outline-none text-default-400 text-small"
               onChange={onRowsPerPageChange}
             >
