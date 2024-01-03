@@ -61,8 +61,6 @@ export const NEW_NAV_DASH_LINKS2 = [
   { href: '/', icon: FaSignOutAlt, key: 'sign-out', label: 'Sign Out'},
 ];
 
-
-
 export const NAV_DASH_LINKS = [
   { href: '/', icon: '', key: 'post-contact', label: 'Post-Contact' },
   { href: '/', icon: '', key: 'community', label: 'Community' },
@@ -84,19 +82,72 @@ export const NAV_REDIRECT_LINKS = [
 ];
 
 // BreadCrumbs Component 
-
-
-
-
+export const BREADCRUMB_ITEMS = [
+  { title: 'Cases', key: 'cases' },
+  { title: 'Rules', key: 'rules' },
+  { title: 'Templates', key: 'templates' },
+];
 
 // Icons Component
-
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+// DataTable Component
+
+// TEMPLATES SECTION
+export const temp_columns = [
+  {name: "TEMPLATE", uid: "template", sortable: true},
+  {name: "LAST MODIFIED DATE", uid: "last_modified_time"},
+  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
+  {name: "ACTIVE", uid: "active"},
+  {name: "ACTIONS", uid: "actions"},
+];
+
+export const temp_records = [
+];
+
+
+// RULES SECTION
+export const rules_columns = [
+  {name: "ID", uid: "id"},
+  {name: "IF", uid: "if", sortable: true},
+  {name: "THEN", uid: "then"},
+  {name: "LAST MODIFIED DATE", uid: "last_modified_time"},
+  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
+  {name: "DELAY", uid: "delay"},
+  {name: "ACTIONS", uid: "actions"},
+];
+
+export const rules_records = [
+];
+
 // RECORDS SECTION - DUMMY DATA
-export const RECORDS = [
+export const columns = [
+  {name: "ID", uid: "id", sortable: true},
+  {name: "EMAILS", uid: "emails"},
+  {name: "CASE NUMBER", uid: "case_number"},
+  {name: "CASE TIME", uid: "case_time"},
+  {name: "CASE TYPE", uid: "case_type"},
+  {name: "ASSIGNEE", uid: "assignee"},
+  {name: "VICTIMS", uid: "victims"},
+  // Make below validate for UTC time
+  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
+  {name: "PHONE NUMBERS", uid: "phone_numbers"},
+  {name: "STATUS", uid: "status", sortable: true},
+  {name: "LAST MODIFIED DATE", uid: "last_modified_time"},
+  {name: "ACTIONS", uid: "actions"},
+];
+
+export const statusOptions = [
+  {name: "Active", uid: "active"},
+  {name: "Investigator Assigned", uid: "invest_assigned"},
+  {name: "Court Scheduled", uid: "court_scheduled"},
+  {name: "Rejected", uid: "rejected"},
+  {name: "Closed", uid: "closed"},
+];
+
+export const records = [
   {
     id: 1,
     victims: "Tony Reichert",

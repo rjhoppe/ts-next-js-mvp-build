@@ -1,14 +1,35 @@
+'use client';
 import { Link } from "@nextui-org/link";
 import { Snippet } from "@nextui-org/snippet";
 import { Code } from "@nextui-org/code"
 import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
-import { title, subtitle } from "@/components/primitives";
+import DataTable from "@/components/DataTable";
+import RulesTable from "@/components/RulesTable";
+import TemplatesTable from "@/components/TemplatesTable";
+import Breadcrumb from "@/components/Breadcrumbs";
+import { Divider } from "@nextui-org/divider";
+import { useState } from "react";
+// import { title, subtitle } from "@/components/primitives";
 
 export default function Home() {
+
+	const [data, setData] = useState('')
+
+	const childToParent = (childdata: string) => {
+		console.log(childdata)
+		console.log(typeof(childdata))
+		setData(childdata);
+	};
+
 	return (
 		<>
-			
+			<Breadcrumb childToParent={childToParent}/>
+			<Divider className='my-4'/>
+			{
+				data === 'templates' ? <TemplatesTable /> : data === 'rules' ? <RulesTable />
+				: <DataTable />
+			}
 		</>
-	);
+	)
 }

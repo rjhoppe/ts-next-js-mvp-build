@@ -10,6 +10,7 @@ import Navbar from "@/archive/Navbar";
 import NewNavbar from "@/components/NavBarNew";
 import Breadcrumb from "@/components/Breadcrumbs";
 import { Divider } from "@nextui-org/divider";
+import { useState } from "react";
 
 export const metadata: Metadata = {
 	title: 'Victim Notifications v2',
@@ -23,19 +24,17 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
-			<body className="overflow-hidden">
+			<body>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
-					<div className="flex flex-row">
+					<div className="flex flex-row w-screen">
 						<NewNavbar />
-						<div className="flex flex-col mt-8 ml-10">
+						<div className="flex flex-col mt-8 ml-10 mr-40 w-screen">
 							<h1 className="flex text-2xl border-2 border-green-500">Victim Notifications</h1>
-							<Breadcrumb />
-							<Divider className='my-4'/>
+							<main className="container mx-auto max-w-7xl px-6 flex-grow">
+								{children}
+							</main>
 						</div>
 					</div>
-					<main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
-						{children}
-					</main>
 					<footer className="w-full flex items-center justify-center py-3">
 					</footer>
 				</Providers>

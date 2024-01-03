@@ -1,23 +1,40 @@
 'use client'
 import React from "react";
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/breadcrumbs";
-import { Divider } from "@nextui-org/divider";
 
-const Breadcrumb = () => {
+const Breadcrumb = ({ childToParent }: any) => {
   const [currentPage, setCurrentPage] = React.useState<React.Key>("cases");
 
+  const data = currentPage
   // Refactor this to use constants
 
   return (
     <section className="flex border-2 border-blue-500 mt-10">
-      <Breadcrumbs underline="active" onAction={(key) => setCurrentPage(key)}>
-        <BreadcrumbItem size="lg" key="cases" isCurrent={currentPage === "cases"}>
+      <Breadcrumbs underline="active" onAction={(key) => [setCurrentPage(key), childToParent(key)]}>
+        <BreadcrumbItem 
+          separator='' 
+          size="lg" 
+          key="cases" 
+          isCurrent={currentPage === "cases"}
+        >
           Cases
         </BreadcrumbItem>
-        <BreadcrumbItem key="rules" isCurrent={currentPage === "rules"}>
+        <BreadcrumbItem 
+          className="ml-10" 
+          separator='' 
+          size="lg" 
+          key="rules" 
+          isCurrent={currentPage === "rules"}
+        >
           Rules
         </BreadcrumbItem>
-        <BreadcrumbItem key="templates" isCurrent={currentPage === "templates"}>
+        <BreadcrumbItem 
+          className="ml-10" 
+          separator='' 
+          size="lg" 
+          key="templates" 
+          isCurrent={currentPage === "templates"}
+        >
           Templates
         </BreadcrumbItem>
       </Breadcrumbs>

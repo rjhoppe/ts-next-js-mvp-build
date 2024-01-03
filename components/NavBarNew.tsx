@@ -3,6 +3,7 @@ import React from "react"
 import { NEW_NAV_DASH_LINKS } from "@/constants"
 import { NEW_NAV_DASH_LINKS2 } from "@/constants"
 import { FaGear } from "react-icons/fa6";
+import { FaUser } from "react-icons/fa";
 
 import { NAV_MES_LINKS } from "@/constants"
 import { NAV_SET_LINKS } from "@/constants"
@@ -17,7 +18,7 @@ import { Chela_One } from "next/font/google"
 
 const NewNavbar = () => {
   return (
-    <nav className="border-2 border-red-500 flex flex-col h-full max-w-[25%] max-h-[100%]">
+    <nav className="border-2 border-red-500 flex flex-col max-w-[25%] max-h-fit">
       <ul className="flex flex-col h-full gap-5">
         <Button
           href='/'
@@ -47,6 +48,12 @@ const NewNavbar = () => {
           <NavBlock href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}
       </ul>
+      <div className="flex justify-center mb-3 gap-3">
+        <FaUser />
+        <p className="flex text-gray-50 -translate-y-0.5 cursor-pointer
+        transition-all hover:font-bold bg-transparent"
+        >Rick Hoppe</p>
+      </div>
     </nav>
   )
 }
@@ -61,16 +68,18 @@ type NavBlockProps = {
 
 const NavBlock = ({ title, label, key, href, children } : NavBlockProps) => {
   return (
-    <div className="flex flex-col gap-5">
-      <Button
-        href={href} 
-        key={key}
-        className='text-gray-50 flexCenter cursor-pointer pb-1.5 
-        transition-all hover:font-bold bg-transparent'
-        >
-        {children}
-        {label}
-      </Button>
+    <div className="flex flex-col">
+      <div className="flex flex-col gap-3">
+        <Button
+          href={href} 
+          key={key}
+          className='text-gray-50 flexCenter cursor-pointer pb-1.5 
+          transition-all hover:font-bold bg-transparent'
+          >
+          {children}
+          {label}
+        </Button>
+      </div>
     </div>
   )
 }
