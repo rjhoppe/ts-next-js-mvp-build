@@ -18,21 +18,22 @@ import { Chela_One } from "next/font/google"
 
 const NewNavbar = () => {
   return (
-    <nav className="border-2 border-red-500 flex flex-col max-w-[25%] max-h-fit">
-      <ul className="flex flex-col h-full gap-5">
+    <nav className="border-2 border-red-500 flex flex-col max-w-[25%] h-screen">
+      <ul className="flex flex-col h-full gap-5 p-5">
         <Button
+          as={Link}
           href='/'
           key='My90'
           className='text-xl text-gray-50 flexCenter cursor-pointer pb-1.5 
           transition-all hover:font-bold bg-transparent mt-5'
         >My90
         </Button>
-        <Divider className='my-2'/>
+        <Divider className='-my-2'/>
         {NEW_NAV_DASH_LINKS.map((link) => (
           <NavBlock title={link.title} href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}
-        <Divider className='my-2'/>
-        <div className="flex flex-col gap-5">
+        <Divider className='-my-2'/>
+        <div className="flex flex-col gap-5 -my-3">
           <Button
             href='/'
             key='settings'
@@ -43,7 +44,7 @@ const NewNavbar = () => {
               Settings
           </Button>
         </div>
-        <Divider className='my-2'/>
+        <Divider className='-my-1'/>
         {NEW_NAV_DASH_LINKS2.map((link) => (
           <NavBlock href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}

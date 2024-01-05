@@ -10,6 +10,8 @@ import {
   FaShield, 
 } from "react-icons/fa6";
 
+import { HiPencil } from "react-icons/hi";
+
  import { FaSignOutAlt } from "react-icons/fa";
  import { MdSignpost } from "react-icons/md";
  import { BiSolidMessageDetail } from "react-icons/bi";
@@ -105,6 +107,41 @@ export const temp_columns = [
 ];
 
 export const temp_records = [
+  {
+    template: 'Template A',
+    last_modified_time: '08/06/2023, 14:35',
+    last_modified_by: 'Brown, Tracy (1234)',
+    active: 'True',
+    actions: 'HiPencil',
+  },
+  {
+    template: 'Template B',
+    last_modified_time: '08/06/2023, 14:35',
+    last_modified_by: 'Brown, Tracy (1234)',
+    active: 'False',
+    actions: 'HiPencil',
+  },
+  {
+    template: 'Template C',
+    last_modified_time: '08/06/2023, 14:35',
+    last_modified_by: 'Brown, Tracy (1234)',
+    active: 'False',
+    actions: 'HiPencil',
+  },
+  {
+    template: 'Template D',
+    last_modified_time: '08/06/2023, 14:35',
+    last_modified_by: 'Brown, Tracy (1234)',
+    active: 'True',
+    actions: 'HiPencil',
+  },
+  {
+    template: 'Template E',
+    last_modified_time: '08/06/2023, 14:35',
+    last_modified_by: 'Brown, Tracy (1234)',
+    active: 'True',
+    actions: 'HiPencil',
+  },
 ];
 
 
@@ -120,6 +157,51 @@ export const rules_columns = [
 ];
 
 export const rules_records = [
+  {
+    id: '1',
+    if: 'Status set to "Investigator assigned"',
+    then: 'Email victims in case using "Template A"',
+    last_modified_time: '10/31/2023, 8:02',
+    last_modified_by: 'Brown, Tracy (1234)',
+    delay: '1 hour',
+    actions: 'HiPencil',
+  },
+  {
+    id: '2',
+    if: 'Status set to "Closed"',
+    then: 'Email victims in case using "Template B"',
+    last_modified_time: '10/31/2023, 8:02',
+    last_modified_by: 'Brown, Tracy (1234)',
+    delay: '1 hour',
+    actions: 'HiPencil',
+  },
+  {
+    id: '3',
+    if: 'Status set to "Subject arrested"',
+    then: 'Email victims in case using "Template C"',
+    last_modified_time: '10/31/2023, 8:02',
+    last_modified_by: 'Brown, Tracy (1234)',
+    delay: '1 hour',
+    actions: 'HiPencil',
+  },
+  {
+    id: '4',
+    if: 'Status set to "Court scheduled"',
+    then: 'Email victims in case using "Template D"',
+    last_modified_time: '10/31/2023, 8:02',
+    last_modified_by: 'Brown, Tracy (1234)',
+    delay: '1 hour',
+    actions: 'HiPencil',
+  },
+  {
+    id: '5',
+    if: 'Status set to "Rejected"',
+    then: 'Email victims in case using "Template E"',
+    last_modified_time: '10/31/2023, 8:02',
+    last_modified_by: 'Brown, Tracy (1234)',
+    delay: '1 hour',
+    actions: 'HiPencil',
+  },
 ];
 
 // RECORDS SECTION - DUMMY DATA

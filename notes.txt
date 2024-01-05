@@ -6,3 +6,4 @@ pnpm run dev
 
 Guide to pass data between parent and child components in React
 https://www.freecodecamp.org/news/pass-data-between-components-in-react/
+

@@ -19,13 +19,17 @@ import {
   ChipProps,
   SortDescriptor,
 } from "@nextui-org/react";
-import { PlusIcon } from "@/components/icons"
-import { VerticalDotsIcon } from "@/components/icons"
-import { ChevronDownIcon } from "@/components/icons"
-import { SearchIcon } from "@/components/icons"
+
+import { 
+  PlusIcon,
+  VerticalDotsIcon,
+  ChevronDownIcon,
+  SearchIcon,
+} from "@/components/icons"
 
 import { columns, records, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
+import Link from "next/link";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -232,8 +236,8 @@ const DataTable = () => {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button color="primary" endContent={<PlusIcon />}>
-              Add New
+            <Button as={Link} href="/create-case" color="primary" endContent={<PlusIcon />}>
+              Create A Case
             </Button>
           </div>
         </div>
