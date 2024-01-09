@@ -102,7 +102,7 @@ const DataTable = () => {
   }, [sortDescriptor, items]);
 
   const renderCell = React.useCallback((record: Records, columnKey: React.Key) => {
-    const cellValue = record[columnKey as keyof Records];
+    const cellValue = record[columnKey as keyof Records] as string;
 
     switch (columnKey) {
       case "case_number":
@@ -124,7 +124,7 @@ const DataTable = () => {
       case "status":
         return (
           <Chip className="capitalize" color={statusColorMap[record.status]} size="sm" variant="flat">
-            {cellValue}
+            {cellValue.split("_").join(" ")}
           </Chip>
         );
       case "actions":
