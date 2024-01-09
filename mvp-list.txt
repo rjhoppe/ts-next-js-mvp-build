@@ -11,3 +11,5 @@ Clean up boilerplate
 
 Auto assignment of case / records / templates IDs
   Templates currently don't have IDs -> this could be problematic
+
+Clean up constants file - standardize variable naming convention

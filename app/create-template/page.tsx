@@ -1,6 +1,28 @@
+'use client'
+
+import TempEdit from "@/components/TempEdit"
+import TempPreview from "@/components/TempPreview"
+import RecordBreadcrumb from "@/components/RecordBreadcrumb"
+import { Divider } from "@nextui-org/divider"
+import { useState } from "react";
+
 const CreateTemplate = () => {
+
+  const [data, setData] = useState('')
+
+	const childToParent = (childdata: string) => {
+		setData(childdata);
+	};
+
   return (
-    <h1>Hello Welcome to Create Template</h1>
+    <>
+      <h1>Send email</h1>
+      <Divider />
+      <RecordBreadcrumb childToParent={childToParent}/>
+      {
+				data === 'preview' ? <TempPreview /> : <TempEdit />
+			}
+    </>
   )
 }
 

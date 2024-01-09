@@ -1,6 +1,12 @@
+'use client'
+
+import AddRule from "@/components/AddRule"
+
 const CreateRule = () => {
   return (
-    <h1>Hello</h1>
+    <div>
+      <AddRule />
+    </div>
   )
 }
 

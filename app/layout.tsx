@@ -8,7 +8,7 @@ import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import Navbar from "@/archive/Navbar";
 import NewNavbar from "@/components/NavBarNew";
-import Breadcrumb from "@/components/Breadcrumbs";
+import Breadcrumb from "@/components/LayoutBreadcrumb";
 import { Divider } from "@nextui-org/divider";
 import { useState } from "react";
 
@@ -29,7 +29,7 @@ export default function RootLayout({
 					<div className="flex flex-row w-screen">
 						<NewNavbar />
 						<div className="flex flex-col mt-8 ml-10 mr-40 w-screen">
-							<h1 className="flex text-2xl border-2 border-green-500">Victim Notifications</h1>
+							<h1 className="flex text-2xl ml-6 border-2 border-green-500">Victim Notifications</h1>
 							<main className="container mx-auto max-w-7xl px-6 flex-grow">
 								{children}
 							</main>

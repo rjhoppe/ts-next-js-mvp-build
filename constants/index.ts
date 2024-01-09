@@ -83,12 +83,25 @@ export const NAV_REDIRECT_LINKS = [
   { href: '/', icon: '', key: 'sign-out', label: 'Sign Out' },
 ];
 
-// BreadCrumbs Component 
-export const BREADCRUMB_ITEMS = [
-  { title: 'Cases', key: 'cases' },
-  { title: 'Rules', key: 'rules' },
-  { title: 'Templates', key: 'templates' },
+// BreadCrumbs Components 
+export const bcLayoutHeaders = [
+  { title: 'Cases', separator:'', size:'lg', key: 'cases', class_name:'' },
+  { title: 'Rules', separator:'', size:'lg', key: 'rules', class_name:'ml-10' },
+  { title: 'Templates', separator:'', size:'lg', key: 'templates', class_name:'ml-10' },
 ];
+
+export const bcFormHeaders = [
+  { title: 'Editor', separator:'', size:'lg', key:'editor', class_name:'' },
+  { title: 'Preview', separator:'', size:'lg',  key:'preview', class_name:'ml-10' },
+];
+
+// Form Component
+
+// export const createCaseInputs = [
+//   {isRequired, type: 'email', label: 'Recipients', defaultValue:'example@axon.com', className:'mt-10 max-w-xs'},
+//   {type: 'email', label: 'Recipients', defaultValue:'example@axon.com', className:'mt-10 max-w-xs'}
+// ]
+
 
 // Icons Component
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
