@@ -243,7 +243,6 @@ export default function App() {
     onClear,
     onSearchChange,
     onRowsPerPageChange,
-    hasSearchFilter,
   ]);
 
   const bottomContent = React.useMemo(() => {
