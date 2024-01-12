@@ -242,10 +242,8 @@ const RulesTable = () => {
     );
   }, [
     selectedKeys, 
-    items.length, 
     page, 
     pages, 
-    hasSearchFilter,
     filteredItems.length,
     onNextPage,
     onPreviousPage,

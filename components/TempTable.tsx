@@ -276,12 +276,10 @@ export default function App() {
   }, [
     selectedKeys, 
     filteredItems.length,
-    items.length,
     onNextPage,
     onPreviousPage,
     page, 
-    pages, 
-    hasSearchFilter
+    pages,
   ]);
 
   return (
