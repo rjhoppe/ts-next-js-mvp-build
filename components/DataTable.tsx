@@ -80,7 +80,7 @@ const DataTable = () => {
     }
 
     return filteredRecords;
-  }, [records, filterValue, statusFilter]);
+  }, [records, filterValue, hasSearchFilter, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -261,6 +261,7 @@ const DataTable = () => {
     filterValue,
     statusFilter,
     visibleColumns,
+    onClear,
     onSearchChange,
     onRowsPerPageChange,
     records.length,
@@ -294,7 +295,16 @@ const DataTable = () => {
         </div>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  }, [
+    selectedKeys,
+    filteredItems.length,
+    onPreviousPage,
+    onNextPage,
+    items.length, 
+    page, 
+    pages, 
+    hasSearchFilter
+  ]);
 
   return (
     <Table
