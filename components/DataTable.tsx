@@ -80,7 +80,7 @@ const DataTable = () => {
     }
 
     return filteredRecords;
-  }, [records, filterValue, statusFilter]);
+  }, [filterValue, hasSearchFilter, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -261,10 +261,9 @@ const DataTable = () => {
     filterValue,
     statusFilter,
     visibleColumns,
+    onClear,
     onSearchChange,
     onRowsPerPageChange,
-    records.length,
-    hasSearchFilter,
   ]);
 
   const bottomContent = React.useMemo(() => {
@@ -294,7 +293,14 @@ const DataTable = () => {
         </div>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  }, [
+    selectedKeys,
+    filteredItems.length,
+    onPreviousPage,
+    onNextPage,
+    page, 
+    pages, 
+  ]);
 
   return (
     <Table

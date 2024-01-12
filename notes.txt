@@ -11,3 +11,15 @@ https://www.freecodecamp.org/news/pass-data-between-components-in-react/
 For Github Pages CI/CD with React and pnpm
 https://github.com/marketplace/actions/setup-pnpm
 https://www.linkedin.com/pulse/automate-react-app-deployment-github-actions-elar-saks-/
+
+
+Might be helpful for saving input from Rich Text Editor
+https://www.youtube.com/watch?v=uwwYE23dq1M
+
+Good ideas for Quill server side rendering
+https://github.com/zenoamaro/react-quill/issues/122
+https://github.com/zenoamaro/react-quill/issues/919
+
+
+Last comment is what finally fixed it for me (it being the Quill webpack errors)
+https://github.com/zenoamaro/react-quill/issues/292

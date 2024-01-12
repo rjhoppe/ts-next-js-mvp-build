@@ -1,50 +1,36 @@
 'use client'
 
 import {  
-  Dropdown,  
-  DropdownTrigger,  
-  DropdownMenu,  
-  DropdownSection,  
-  DropdownItem,
-  Button,
+  Select, 
+  SelectSection, 
+  SelectItem,
+  Divider,
 } from "@nextui-org/react";
 
-import React from "react";
+import { statusOptions } from "@/constants/index";
 
 const AddRule = () => {
-  const [selectedKeys, setSelectedKeys] = React.useState(new Set(["text"]));
-
-  const selectedValue = React.useMemo(
-    () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
-    [selectedKeys]
-  );
 
   return (
     <section className="mt-10">
-      <Dropdown>
-        <DropdownTrigger>
-          <Button 
-            variant="bordered" 
-            className="capitalize"
-          >
-            {selectedValue}
-          </Button>
-        </DropdownTrigger>
-        <DropdownMenu 
-          aria-label="Single selection example"
-          variant="flat"
-          disallowEmptySelection
-          selectionMode="single"
-          selectedKeys={selectedKeys}
-          onSelectionChange={setSelectedKeys}
+      <div>
+        <h1>Add rule</h1>
+        <p>Description on how to add a successful rule</p>
+      </div>
+      <Divider />
+      <h2>If</h2>
+      <div>
+        <Select 
+          label="Select an animal" 
+          className="max-w-xs" 
         >
-          <DropdownItem key="text">Text</DropdownItem>
-          <DropdownItem key="number">Number</DropdownItem>
-          <DropdownItem key="date">Date</DropdownItem>
-          <DropdownItem key="single_date">Single Date</DropdownItem>
-          <DropdownItem key="iteration">Iteration</DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
+          {statusOptions.map((status) => (
+            <SelectItem key={status.uid}>
+              {status.name}
+            </SelectItem>
+          ))}
+        </Select>
+      </div>
     </section>
   );
 }

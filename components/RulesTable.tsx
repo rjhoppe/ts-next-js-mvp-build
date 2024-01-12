@@ -74,7 +74,7 @@ const RulesTable = () => {
     }
 
     return filteredUsers;
-  }, [rules_records, filterValue, statusFilter]);
+  }, [hasSearchFilter, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -209,13 +209,8 @@ const RulesTable = () => {
       </div>
     );
   }, [
-    filterValue,
-    statusFilter,
     visibleColumns,
-    onSearchChange,
-    onRowsPerPageChange,
-    rules_records.length,
-    hasSearchFilter,
+    onRowsPerPageChange
   ]);
 
   const bottomContent = React.useMemo(() => {
@@ -245,7 +240,14 @@ const RulesTable = () => {
         </div>
       </div>
     );
-  }, [selectedKeys, items.length, page, pages, hasSearchFilter]);
+  }, [
+    selectedKeys, 
+    page, 
+    pages, 
+    filteredItems.length,
+    onNextPage,
+    onPreviousPage,
+  ]);
 
   return (
     <Table

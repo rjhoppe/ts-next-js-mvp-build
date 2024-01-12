@@ -1,16 +1,7 @@
 import "@/styles/globals.css";
 import { Metadata } from "next";
-import { siteConfig } from "@/config/site";
-import { fontSans } from "@/config/fonts";
 import { Providers } from "./providers";
-// import { Navbar } from "@/archive/navbar";
-import { Link } from "@nextui-org/link";
-import clsx from "clsx";
-import Navbar from "@/archive/Navbar";
 import NewNavbar from "@/components/NavBarNew";
-import Breadcrumb from "@/components/LayoutBreadcrumb";
-import { Divider } from "@nextui-org/divider";
-import { useState } from "react";
 
 export const metadata: Metadata = {
 	title: 'Victim Notifications v2',
