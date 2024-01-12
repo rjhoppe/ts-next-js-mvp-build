@@ -6,7 +6,7 @@ import { button as buttonStyles } from "@nextui-org/theme";
 import { siteConfig } from "@/config/site";
 import DataTable from "@/components/DataTable";
 import RulesTable from "@/components/RulesTable";
-import TemplatesTable from "@/components/TemplatesTable";
+import TempTable from "@/components/TempTable";
 import LayoutBreadcrumb from "@/components/LayoutBreadcrumb";
 import { Divider } from "@nextui-org/divider";
 import { useState } from "react";
@@ -25,7 +25,7 @@ export default function Home() {
 			<LayoutBreadcrumb childToParent={childToParent}/>
 			<Divider className='my-4'/>
 			{
-				data === 'templates' ? <TemplatesTable /> : data === 'rules' ? <RulesTable />
+				data === 'templates' ? <TempTable /> : data === 'rules' ? <RulesTable />
 				: <DataTable />
 			}
 		</>

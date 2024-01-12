@@ -7,3 +7,7 @@ pnpm run dev
 Guide to pass data between parent and child components in React
 https://www.freecodecamp.org/news/pass-data-between-components-in-react/
 
+
+For Github Pages CI/CD with React and pnpm
+https://github.com/marketplace/actions/setup-pnpm
+https://www.linkedin.com/pulse/automate-react-app-deployment-github-actions-elar-saks-/

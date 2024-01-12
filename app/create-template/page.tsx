@@ -16,7 +16,7 @@ const CreateTemplate = () => {
 
   return (
     <>
-      <h1>Send email</h1>
+      <h1 className="mt-5 text-lg">Send email</h1>
       <Divider />
       <RecordBreadcrumb childToParent={childToParent}/>
       {

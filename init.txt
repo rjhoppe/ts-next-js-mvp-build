@@ -1,0 +1,11 @@
+Ran these cmds to initialize:
+pnpm create next-app
+pnpm add @nextui-org/react framer-motion
+pnpm install next-themes
+pnpm install react-hook-form
+pnpm install @tiptap/react @tiptap/pm @tiptap/starter-kit
+
+Create .nprmc file and paste code below:
+public-hoist-pattern[]=*@nextui-org/*
+Then run:
+pnpm install and select 'Y' when prompted and reload VSCode
