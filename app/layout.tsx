@@ -1,6 +1,8 @@
 import "@/styles/globals.css";
 import { Metadata } from "next";
 import { Providers } from "./providers";
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import NewNavbar from "@/components/NavBarNew";
 
 export const metadata: Metadata = {
@@ -23,6 +25,8 @@ export default function RootLayout({
 							<h1 className="flex text-2xl ml-6 border-2 border-green-500">Victim Notifications</h1>
 							<main className="container mx-auto max-w-7xl px-6 flex-grow">
 								{children}
+								<Analytics />
+								<SpeedInsights />
 							</main>
 						</div>
 					</div>
