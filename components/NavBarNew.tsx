@@ -18,7 +18,7 @@ import { Chela_One } from "next/font/google"
 
 const NewNavbar = () => {
   return (
-    <nav className="border-2 border-red-500 flex flex-col max-w-[25%] h-screen">
+    <nav className="border-2 border-red-500 flex flex-col w-48 md:w-56 lg:w-56 h-dvh">
       <ul className="flex flex-col h-full gap-5 p-5">
         <Button
           as={Link}
@@ -28,12 +28,12 @@ const NewNavbar = () => {
           transition-all hover:font-bold bg-transparent mt-5'
         >My90
         </Button>
-        <Divider className='-my-2'/>
+        <Divider className=''/>
         {NEW_NAV_DASH_LINKS.map((link) => (
           <NavBlock title={link.title} href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}
-        <Divider className='-my-2'/>
-        <div className="flex flex-col gap-5 -my-3">
+        <Divider className=''/>
+        <div className="flex flex-col gap-5">
           <Button
             href='/'
             key='settings'
@@ -44,7 +44,7 @@ const NewNavbar = () => {
               Settings
           </Button>
         </div>
-        <Divider className='-my-1'/>
+        <Divider className=''/>
         {NEW_NAV_DASH_LINKS2.map((link) => (
           <NavBlock href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}
@@ -75,7 +75,7 @@ const NavBlock = ({ title, label, key, href, children } : NavBlockProps) => {
           href={href} 
           key={key}
           className='text-gray-50 flexCenter cursor-pointer pb-1.5 
-          transition-all hover:font-bold bg-transparent'
+          transition-all hover:font-lb bg-transparent'
           >
           {children}
           {label}
