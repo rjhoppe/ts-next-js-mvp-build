@@ -1,6 +1,5 @@
 'use client'
 
-import RecordBreadcrumb from "./RecordBreadcrumb"
 import { Input } from "@nextui-org/input"
 import RichTextEditor from "./RichTextEditor"
 import { Button } from "@nextui-org/button"

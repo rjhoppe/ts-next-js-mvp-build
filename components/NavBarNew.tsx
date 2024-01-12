@@ -18,7 +18,7 @@ import { Chela_One } from "next/font/google"
 
 const NewNavbar = () => {
   return (
-    <nav className="border-2 border-red-500 flex flex-col max-w-[25%] h-screen">
+    <nav className="border-2 border-red-500 flex flex-col w-48 md:w-56 lg:w-56 h-dvh">
       <ul className="flex flex-col h-full gap-5 p-5">
         <Button
           as={Link}
@@ -38,7 +38,7 @@ const NewNavbar = () => {
             href='/'
             key='settings'
             className=' text-gray-50 flexCenter cursor-pointer pb-1.5 
-            transition-all hover:font-bold bg-transparent mt-5'
+            transition-all bg-transparent mt-5'
             >
               <FaGear />
               Settings
@@ -75,7 +75,7 @@ const NavBlock = ({ title, label, key, href, children } : NavBlockProps) => {
           href={href} 
           key={key}
           className='text-gray-50 flexCenter cursor-pointer pb-1.5 
-          transition-all hover:font-bold bg-transparent'
+          transition-all bg-transparent'
           >
           {children}
           {label}
