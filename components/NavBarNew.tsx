@@ -18,7 +18,7 @@ import { Chela_One } from "next/font/google"
 
 const NewNavbar = () => {
   return (
-    <nav className="border-2 border-red-500 flex flex-col w-48 md:w-56 lg:w-56 h-dvh">
+    <nav className="flex flex-col w-48 md:w-56 lg:w-56 h-dvh">
       <ul className="flex flex-col h-full gap-5 p-5">
         <Button
           as={Link}
