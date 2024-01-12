@@ -28,23 +28,23 @@ const NewNavbar = () => {
           transition-all hover:font-bold bg-transparent mt-5'
         >My90
         </Button>
-        <Divider className=''/>
+        <Divider className='-my-2'/>
         {NEW_NAV_DASH_LINKS.map((link) => (
           <NavBlock title={link.title} href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}
-        <Divider className=''/>
-        <div className="flex flex-col gap-5">
+        <Divider className='-my-2'/>
+        <div className="flex flex-col gap-5 -my-3">
           <Button
             href='/'
             key='settings'
             className=' text-gray-50 flexCenter cursor-pointer pb-1.5 
-            transition-all hover:font-bold bg-transparent mt-5'
+            transition-all bg-transparent mt-5'
             >
               <FaGear />
               Settings
           </Button>
         </div>
-        <Divider className=''/>
+        <Divider className='-my-1'/>
         {NEW_NAV_DASH_LINKS2.map((link) => (
           <NavBlock href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}
@@ -75,7 +75,7 @@ const NavBlock = ({ title, label, key, href, children } : NavBlockProps) => {
           href={href} 
           key={key}
           className='text-gray-50 flexCenter cursor-pointer pb-1.5 
-          transition-all hover:font-lb bg-transparent'
+          transition-all bg-transparent'
           >
           {children}
           {label}
