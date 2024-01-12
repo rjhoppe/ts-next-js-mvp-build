@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - deploy-react-app
+  workflow_dispatch:
 
 jobs:
   deploy-react-to-gh-pages:
