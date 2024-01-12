@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+'use client'
+
+import React, { useState, useMemo } from "react";
+import dynamic from "next/dynamic";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { Spinner } from "@nextui-org/react";
+// import QuillNoSSRWrapper from "./QuillNoSSRWrapper";
 
 const RichTextEditor = () => {
+
+  const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), 
+  { ssr: false, loading: () => <Spinner /> }),[]);
+
   const myColors = [
     "black",
     "blue",
