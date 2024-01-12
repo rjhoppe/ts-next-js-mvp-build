@@ -33,8 +33,6 @@ jobs:
           echo BASE_PATH=$BASE_PATH >> .env.local
       - name: Build
         run: pnpm run build
-      - name: Create .nojekyll
-        run: touch ./out/.nojekyll
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
