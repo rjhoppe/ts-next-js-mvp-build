@@ -11,7 +11,7 @@ const LayoutBreadcrumb = ({ childToParent }: any) => {
   // Refactor this to use constants
 
   return (
-    <section className="flex border-2 border-blue-500 mt-10">
+    <section className="flex mt-10">
       <Breadcrumbs underline="active" onAction={(key) => [setCurrentPage(key), childToParent(key)]}>
         {bcLayoutHeaders.map((item) => (
         <BreadcrumbItem
