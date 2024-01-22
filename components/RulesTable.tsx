@@ -108,7 +108,9 @@ const RulesTable = () => {
       case "actions":
         return (
           <div className="relative flex justify-end items-center gap-2">
-            <HiPencil />
+            <Link href='/'>
+              <HiPencil/>
+            </Link>
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
