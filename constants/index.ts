@@ -1,4 +1,5 @@
 import { SVGProps } from "react";
+import { Switch } from "@nextui-org/switch";
 import { 
   IoMdChatboxes,
   IoMdPeople,
@@ -54,7 +55,7 @@ export const NEW_NAV_DASH_LINKS = [
   { href: '/', icon: IoMdChatboxes, key: 'post-contact', label: 'Post-Contact', title: 'Survey Dashboard' },
   { href: '/', icon: IoMdPeople, key: 'community', label: 'Community'},
   { href: '/', icon: IoMdBriefcase, key: 'employee', label: 'Employee'},
-  { href: '/', icon: BiSolidMessageDetail, key: 'automated-messaging', label: 'Automated Messaging', title: 'Messaging'},
+  { href: '/', icon: BiSolidMessageDetail, key: 'automated-messaging', label: 'Messaging', title: 'Messaging'},
   { href: '/', icon: FaShield, key: 'victim-notification', label: 'Victim Notification'},
 ];
 

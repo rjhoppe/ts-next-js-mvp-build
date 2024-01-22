@@ -14,6 +14,7 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  Switch,
   Chip,
   User,
   Pagination,
@@ -45,15 +46,15 @@ const INITIAL_VISIBLE_COLUMNS = ["template", "last_modified_time", "last_modifie
 
 type Template = typeof temp_records[0];
 
-export default function App() {
-  const [filterValue, setFilterValue] = React.useState("");
+const TempTable = () => {
+	const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: "age",
-    direction: "ascending",
+    column: "last_modified_time",
+    direction: "descending",
   });
 
   const [page, setPage] = React.useState(1);
@@ -67,20 +68,20 @@ export default function App() {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...temp_records];
+    let filteredRecords = [...temp_records];
 
     if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
-        user.template.toLowerCase().includes(filterValue.toLowerCase()),
+      filteredRecords = filteredRecords.filter((record) =>
+        record.template.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.active),
+      filteredRecords = filteredRecords.filter((record) =>
+        Array.from(statusFilter).includes(record.active),
       );
     }
 
-    return filteredUsers;
+    return filteredRecords;
   }, [filterValue, hasSearchFilter, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
@@ -102,13 +103,38 @@ export default function App() {
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = React.useCallback((user: Template, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof Template];
+  const renderCell = React.useCallback((record: Template, columnKey: React.Key) => {
+    const cellValue = record[columnKey as keyof Template] as string;
 
     switch (columnKey) {
+      case "case_number":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{cellValue}</p>
+            <p className="text-bold text-tiny capitalize text-default-400">Time: {record.last_modified_time}</p>
+            <p className="text-bold text-tiny capitalize text-default-400">Incident type: {record.template}</p>
+
+          </div>
+        );
+      case "assignee":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{cellValue}</p>
+            <p className="text-bold text-tiny capitalize text-default-400">{record.last_modified_by}</p>
+          </div>
+        );
+      case "status":
+        return (
+          <Chip className="capitalize" color={statusColorMap[record.active]} size="sm" variant="flat">
+            {cellValue.split("_").join(" ")}
+          </Chip>
+        );
       case "actions":
         return (
-          <div className="relative flex justify-end items-center gap-2">
+          <div className="relative flex justify-center items-center gap-2">
+            <Link href='/'>
+              <HiPencil/>
+            </Link>
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
@@ -166,7 +192,7 @@ export default function App() {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by name..."
+            placeholder="Search by assignee..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}
@@ -216,15 +242,15 @@ export default function App() {
               </DropdownMenu>
             </Dropdown>
             <Button as={Link} href="/create-template" color="primary" endContent={<PlusIcon />}>
-              Add Template
+              Create Template
             </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">{temp_records.length} results</span>
+          <span className="text-default-400 text-small">Total records: {temp_records.length}</span>
           <label className="flex items-center text-default-400 text-small">
             Rows per page:
-            <select
+            <select defaultValue={5}
               className="bg-transparent outline-none text-default-400 text-small"
               onChange={onRowsPerPageChange}
             >
@@ -273,12 +299,12 @@ export default function App() {
       </div>
     );
   }, [
-    selectedKeys, 
+    selectedKeys,
     filteredItems.length,
-    onNextPage,
     onPreviousPage,
+    onNextPage,
     page, 
-    pages,
+    pages, 
   ]);
 
   return (
@@ -288,7 +314,7 @@ export default function App() {
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
       classNames={{
-        wrapper: "max-h-[382px]",
+        wrapper: "max-h-[1000px]",
       }}
       selectedKeys={selectedKeys}
       selectionMode="multiple"
@@ -309,9 +335,9 @@ export default function App() {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No users found"} items={sortedItems}>
+      <TableBody emptyContent={"No records found"} items={sortedItems}>
         {(item) => (
-          <TableRow key={item.active}>
+          <TableRow key={item.template}>
             {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
           </TableRow>
         )}
@@ -319,3 +345,5 @@ export default function App() {
     </Table>
   );
 }
+
+export default TempTable
