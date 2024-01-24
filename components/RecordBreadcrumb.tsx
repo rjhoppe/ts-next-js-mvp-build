@@ -11,7 +11,7 @@ const RecordBreadcrumb = ({ childToParent }: any) => {
   // Refactor this to use constants
 
   return (
-    <section className="flex border-2 border-blue-500 mt-5">
+    <section className="flex mt-5">
       <Breadcrumbs underline="active" onAction={(key) => [setCurrentPage(key), childToParent(key)]}>
         {bcFormHeaders.map((item) => (
         <BreadcrumbItem
