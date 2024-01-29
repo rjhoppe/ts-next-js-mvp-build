@@ -8,12 +8,14 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Link,
   Input,
   Button,
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
   DropdownItem,
+  Tooltip,
   Switch,
   Chip,
   User,
@@ -23,7 +25,10 @@ import {
   SortDescriptor
 } from "@nextui-org/react";
 
+import TempTestModal from "./TempTestModal";
+
 import { HiPencil } from "react-icons/hi";
+import { RiTestTubeFill } from "react-icons/ri";
 
 import { 
   PlusIcon,
@@ -34,7 +39,6 @@ import {
 
 import { temp_columns, temp_records, statusOptions} from "@/constants/index";
 import { capitalize } from "@/app/utils";
-import Link from "next/link";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -131,10 +135,21 @@ const TempTable = () => {
         );
       case "actions":
         return (
-          <div className="relative flex justify-center items-center gap-2">
-            <Link href='/'>
-              <HiPencil/>
-            </Link>
+          <div className="flex items-center gap-2">
+            <div className="flex gap-4">
+            <Tooltip content="Test">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <TempTestModal />
+              </span>
+            </Tooltip>
+            <Tooltip content="Edit">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <Link href='/'>
+                  <HiPencil/>
+                </Link>
+              </span>
+            </Tooltip>
+            </div>
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
@@ -143,7 +158,6 @@ const TempTable = () => {
               </DropdownTrigger>
               <DropdownMenu>
                 <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
                 <DropdownItem>Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -192,7 +206,7 @@ const TempTable = () => {
           <Input
             isClearable
             className="w-full sm:max-w-[44%]"
-            placeholder="Search by assignee..."
+            placeholder="Search by template name..."
             startContent={<SearchIcon />}
             value={filterValue}
             onClear={() => onClear()}

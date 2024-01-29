@@ -10,6 +10,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Tooltip,
   Button,
   DropdownTrigger,
   Dropdown,
@@ -108,9 +109,13 @@ const RulesTable = () => {
       case "actions":
         return (
           <div className="relative flex justify-end items-center gap-2">
-            <Link href='/'>
-              <HiPencil/>
-            </Link>
+            <Tooltip content="Edit">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <Link href='/'>
+                  <HiPencil/>
+                </Link>
+              </span>
+            </Tooltip>
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
@@ -119,7 +124,6 @@ const RulesTable = () => {
               </DropdownTrigger>
               <DropdownMenu>
                 <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
                 <DropdownItem>Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>

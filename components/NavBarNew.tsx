@@ -49,12 +49,6 @@ const NewNavbar = () => {
           <NavBlock href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}
       </ul>
-      <div className="flex justify-center mb-3 gap-3">
-        <FaUser />
-        <p className="flex text-gray-50 -translate-y-0.5 cursor-pointer
-        transition-all hover:font-bold bg-transparent"
-        >Rick Hoppe</p>
-      </div>
     </nav>
   )
 }

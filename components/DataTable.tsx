@@ -7,6 +7,7 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Tooltip,
   Input,
   Button,
   DropdownTrigger,
@@ -20,9 +21,10 @@ import {
   SortDescriptor,
 } from "@nextui-org/react";
 
+import { MdRemoveRedEye } from "react-icons/md";
+
 import { 
   PlusIcon,
-  VerticalDotsIcon,
   ChevronDownIcon,
   SearchIcon,
 } from "@/components/icons"
@@ -130,18 +132,13 @@ const DataTable = () => {
       case "actions":
         return (
           <div className="relative flex justify-center items-center gap-2">
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Edit</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+            <Tooltip content="View">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <Link href='/'>
+                <MdRemoveRedEye />
+                </Link>
+              </span>
+            </Tooltip>
           </div>
         );
       default:
@@ -236,9 +233,6 @@ const DataTable = () => {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button as={Link} href="/create-case" color="primary" endContent={<PlusIcon />}>
-              Create A Case
-            </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
