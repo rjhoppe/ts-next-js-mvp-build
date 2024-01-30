@@ -35,7 +35,8 @@ const NewNavbar = () => {
         <Divider className='-my-2'/>
         <div className="flex flex-col gap-5 -my-3">
           <Button
-            href='/'
+            as={Link}
+            href='/settings'
             key='settings'
             className=' text-gray-50 flexCenter cursor-pointer pb-1.5 
             transition-all bg-transparent mt-5'
@@ -66,7 +67,8 @@ const NavBlock = ({ title, label, key, href, children } : NavBlockProps) => {
     <div className="flex flex-col">
       <div className="flex flex-col gap-3">
         <Button
-          href={href} 
+          as={Link}
+          href={href}
           key={key}
           className='text-gray-50 flexCenter cursor-pointer pb-1.5 
           transition-all bg-transparent'

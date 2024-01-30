@@ -26,9 +26,7 @@ import {
 } from "@nextui-org/react";
 
 import TempTestModal from "./TempTestModal";
-
-import { HiPencil } from "react-icons/hi";
-import { RiTestTubeFill } from "react-icons/ri";
+import EditRecord from "./EditRecordModal";
 
 import { 
   PlusIcon,
@@ -135,20 +133,18 @@ const TempTable = () => {
         );
       case "actions":
         return (
-          <div className="flex items-center gap-2">
-            <div className="flex gap-4">
-            <Tooltip content="Test">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <TempTestModal />
-              </span>
-            </Tooltip>
-            <Tooltip content="Edit">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <Link href='/'>
-                  <HiPencil/>
-                </Link>
-              </span>
-            </Tooltip>
+          <div className="flex justify-center items-center">
+            <div className="flex">
+              <Tooltip content="Test">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <TempTestModal />
+                </span>
+              </Tooltip>
+              <Tooltip content="Edit">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <EditRecord />
+                </span>
+              </Tooltip>
             </div>
             <Dropdown>
               <DropdownTrigger>
@@ -341,6 +337,7 @@ const TempTable = () => {
       <TableHeader columns={headerColumns}>
         {(column) => (
           <TableColumn
+            className={column.uid === "actions" ? "text-center" : ""}
             key={column.uid}
             align={column.uid === "actions" ? "center" : "start"}
             allowsSorting={column.sortable}

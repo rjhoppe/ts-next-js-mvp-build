@@ -1,4 +1,5 @@
 import React from 'react'
+
 import {  
   Button,
   Textarea,
@@ -13,15 +14,15 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
-import { RiTestTubeFill } from "react-icons/ri";
+import { HiPencil } from "react-icons/hi";
 
-const TempTestModal = () => {
+const EditRecord = () => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
     <>
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
-        <RiTestTubeFill />
+        <HiPencil />
       </Button>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
@@ -29,7 +30,7 @@ const TempTestModal = () => {
             <>
               <ModalHeader className="flex justify-between">
                 Configure Template Test
-                <Switch isReadOnly className='mr-5'>
+                <Switch className='mr-5'>
                   SMS
                 </Switch>
               </ModalHeader>
@@ -61,4 +62,4 @@ const TempTestModal = () => {
   );
 }
 
-export default TempTestModal
+export default EditRecord
