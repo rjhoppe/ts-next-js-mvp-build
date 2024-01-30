@@ -28,22 +28,14 @@ const LayoutBreadcrumb = ({ childToParent }: any) => {
         </BreadcrumbItem>
         ))}
       </Breadcrumbs>
-      <div className="flex justify-center mt-1 mr-1 gap-5">
-        <div className="flex mt-1 mr-1 gap-3">
-          <Link
-            href="/"
-            ><FaUser />
-          </Link>
-          <p className="flex text-gray-50 -translate-y-0.5 cursor-pointer
-          transition-all bg-transparent"
-          >Rick Hoppe</p>
-        </div>
-        <div className="flex justify-center -mt-3">
-          <Button color="secondary">
-            <Link
-              href="/"
-            >Sign Out
-            </Link>
+      <div className="flex justify-center gap-5">
+        <div className="flex">
+          <Button
+            as={Link}
+            href="/settings"
+          >
+            <FaUser />
+            Rick Hoppe
           </Button>
         </div>
       </div>

@@ -1,8 +1,6 @@
 const MessagingLog = () => {
   return (
-    <div>
-      Placeholder
-    </div>
+    <h1>Placeholder</h1>
   )
 }
 
