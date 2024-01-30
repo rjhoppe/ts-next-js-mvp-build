@@ -1,7 +1,7 @@
 const CreateCase = () => {
   return (
     <div>
-      Test
+      No longer needed - OBE
     </div>
   )
 }

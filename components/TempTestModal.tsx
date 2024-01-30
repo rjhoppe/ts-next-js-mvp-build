@@ -1,6 +1,10 @@
 import React from 'react'
 import {  
   Button,
+  Textarea,
+  Switch,
+  Select,
+  Input,
   Modal,
   ModalContent,
   ModalHeader,
@@ -23,32 +27,30 @@ const TempTestModal = () => {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-col gap-1">Modal Title</ModalHeader>
+              <ModalHeader className="flex justify-between">
+                Configure Template Test
+                <Switch className='mr-5'>
+                  SMS
+                </Switch>
+              </ModalHeader>
               <ModalBody>
-                <p> 
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Nullam pulvinar risus non risus hendrerit venenatis.
-                  Pellentesque sit amet hendrerit risus, sed porttitor quam.
-                </p>
-                <p>
-                  Magna exercitation reprehenderit magna aute tempor cupidatat consequat elit
-                  dolor adipisicing. Mollit dolor eiusmod sunt ex incididunt cillum quis. 
-                  Velit duis sit officia eiusmod Lorem aliqua enim laboris do dolor eiusmod. 
-                  Et mollit incididunt nisi consectetur esse laborum eiusmod pariatur 
-                  proident Lorem eiusmod et. Culpa deserunt nostrud ad veniam.
-                </p>
+                <div className='flex flex-col gap-5'>
+                  <Input isReadOnly label='Template' placeholder='Template Name'></Input>
+                  <Input isRequired type='email' label='Email'></Input>
+                  <Input isReadOnly label='Subject' placeholder='Victim Notification'></Input>
+                  <Textarea isReadOnly label='Message' placeholder='Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nullam pulvinar risus non risus hendrerit venenatis.
+                    Pellentesque sit amet hendrerit risus, sed porttitor quam.'
+                  >
+                  </Textarea>
+                </div>
               </ModalBody>
               <ModalFooter>
                 <Button color="danger" variant="light" onPress={onClose}>
-                  Close
+                  Cancel
                 </Button>
                 <Button color="primary" onPress={onClose}>
-                  Action
+                  Send
                 </Button>
               </ModalFooter>
             </>
