@@ -319,6 +319,7 @@ const TempTable = () => {
 
   return (
     <Table
+      isStriped
       aria-label="Example table with custom cells, pagination and sorting"
       isHeaderSticky
       bottomContent={bottomContent}

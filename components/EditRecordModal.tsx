@@ -24,7 +24,7 @@ const EditRecord = () => {
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
         <HiPencil />
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal disableAnimation isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>

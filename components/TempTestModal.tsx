@@ -23,7 +23,7 @@ const TempTestModal = () => {
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
         <RiTestTubeFill />
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal disableAnimation isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
