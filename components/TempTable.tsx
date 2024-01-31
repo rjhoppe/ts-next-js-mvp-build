@@ -148,7 +148,13 @@ const TempTable = () => {
               </Tooltip>
               <Tooltip content="Edit">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EditRecord />
+                  <EditRecord 
+                    template={record.template}
+                    type={record.type}
+                    subject={record.subject}
+                    body={record.body}
+                    active={record.active}
+                  />
                 </span>
               </Tooltip>
             </div>

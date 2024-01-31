@@ -56,7 +56,7 @@ const TempTestModal = ({ template, type, subject, body }: TempTestModalProps) =>
   );
 };
 
-type TempTestModalProps = {
+export type TempTestModalProps = {
   template: string;
   type: string;
   subject?: string;
