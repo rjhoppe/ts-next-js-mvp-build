@@ -113,12 +113,12 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 
 // TEMPLATES SECTION
 export const temp_columns = [
-  {name: "ID", uid: "id"},
+  {name: "ID", uid: "id", sortable: true},
   {name: "TEMPLATE", uid: "template", sortable: true},
-  {name: "LAST MODIFIED DATE", uid: "last_modified_time"},
+  {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
-  {name: "ACTIVE", uid: "active"},
-  {name: "TYPE", uid: "type"},
+  {name: "ACTIVE", uid: "active", sortable: true},
+  {name: "TYPE", uid: "type", sortable: true},
   {name: "ACTIONS", uid: "actions"},
 ];
 
@@ -188,12 +188,12 @@ export const temp_records = [
 
 // RULES SECTION
 export const rules_columns = [
-  {name: "ID", uid: "id"},
-  {name: "IF", uid: "if", sortable: true},
+  {name: "ID", uid: "id", sortable: true},
+  {name: "IF", uid: "if"},
   {name: "THEN", uid: "then"},
-  {name: "LAST MODIFIED DATE", uid: "last_modified_time"},
+  {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
-  {name: "DELAY", uid: "delay"},
+  {name: "DELAY", uid: "delay", sortable: true},
   {name: "ACTIONS", uid: "actions"},
 ];
 
@@ -249,7 +249,7 @@ export const rules_records = [
 export const columns = [
   {name: "ID", uid: "id", sortable: true},
   {name: "EMAILS", uid: "emails"},
-  {name: "CASE NUMBER", uid: "case_number"},
+  {name: "CASE NUMBER", uid: "case_number", sortable: true},
   {name: "CASE TIME", uid: "case_time"},
   {name: "CASE TYPE", uid: "case_type"},
   {name: "ASSIGNEE", uid: "assignee"},
@@ -258,7 +258,7 @@ export const columns = [
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
   {name: "PHONE NUMBERS", uid: "phone_numbers"},
   {name: "STATUS", uid: "status", sortable: true},
-  {name: "LAST MODIFIED DATE", uid: "last_modified_time"},
+  {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
   {name: "ACTIONS", uid: "actions"},
 ];
 
