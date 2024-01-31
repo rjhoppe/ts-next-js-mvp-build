@@ -113,48 +113,75 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 
 // TEMPLATES SECTION
 export const temp_columns = [
+  {name: "ID", uid: "id"},
   {name: "TEMPLATE", uid: "template", sortable: true},
   {name: "LAST MODIFIED DATE", uid: "last_modified_time"},
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
   {name: "ACTIVE", uid: "active"},
+  {name: "TYPE", uid: "type"},
   {name: "ACTIONS", uid: "actions"},
 ];
 
 export const temp_records = [
   {
-    template: 'Template A',
+    id: 'T2387503',
+    template: 'Investigator Assigned (SMS)',
     last_modified_time: '08/06/2023, 14:35',
     last_modified_by: 'Brown, Tracy (1234)',
     active: 'True',
-    actions: 'HiPencil',
+    type: 'SMS',
+    actions: '',
+    subject: '',
+    body: 'Your case status has been updated to "Investigator Assigned." Please visit our ' +
+    'website for more information. Please respond "CANCEL" to opt out of future case notifications.'
   },
   {
-    template: 'Template B',
+    id: 'T2387547',
+    template: 'Investigator Assigned',
     last_modified_time: '08/06/2023, 14:35',
     last_modified_by: 'Brown, Tracy (1234)',
     active: 'False',
-    actions: 'HiPencil',
+    type: 'Email',
+    actions: '',
+    subject: 'An Update On Your Case Status',
+    body: 'Your case status has been updated to "Investigator Assigned." Please visit our ' +
+    'website for more information.'
   },
   {
-    template: 'Template C',
+    id: 'T2387501',
+    template: 'Court Scheduled',
     last_modified_time: '08/06/2023, 14:35',
     last_modified_by: 'Brown, Tracy (1234)',
     active: 'False',
-    actions: 'HiPencil',
+    type: 'Email',
+    actions: '',
+    subject: 'An Update On Your Case Status',
+    body: 'Your case status has been updated to "Court Scheduled." Please visit our ' +
+    'website for more information.'
   },
   {
-    template: 'Template D',
+    id: 'T2387524',
+    template: 'Court Scheduled (SMS)',
     last_modified_time: '08/06/2023, 14:35',
     last_modified_by: 'Brown, Tracy (1234)',
     active: 'True',
-    actions: 'HiPencil',
+    type: 'SMS',
+    actions: '',
+    subject: '',
+    body: 'Your case status has been updated to "Court Scheduled." Please visit our ' +
+    'website for more information. Please respond "CANCEL" to opt out of future case notifications.'
   },
   {
-    template: 'Template E',
+    id: 'T2387511',
+    template: 'Closed',
     last_modified_time: '08/06/2023, 14:35',
     last_modified_by: 'Brown, Tracy (1234)',
     active: 'True',
-    actions: 'HiPencil',
+    type: 'Email',
+    actions: '',
+    subject: 'An Update On Your Case Status',
+    body: 'Your case status has been closed." Please visit our website for more information or ' +
+    'reach out to the police department with any additional questions. Thank you.'
   },
 ];
 
