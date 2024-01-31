@@ -44,7 +44,8 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["template", "last_modified_time", "last_modified_by", "active", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["id", "template", "last_modified_time", "last_modified_by", "active", 
+"type", "actions"];
 
 type Template = typeof temp_records[0];
 
@@ -137,12 +138,23 @@ const TempTable = () => {
             <div className="flex">
               <Tooltip content="Test">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <TempTestModal />
+                  <TempTestModal
+                    template={record.template}
+                    type={record.type}
+                    subject={record.subject}
+                    body={record.body}
+                  />
                 </span>
               </Tooltip>
               <Tooltip content="Edit">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EditRecord />
+                  <EditRecord 
+                    template={record.template}
+                    type={record.type}
+                    subject={record.subject}
+                    body={record.body}
+                    active={record.active}
+                  />
                 </span>
               </Tooltip>
             </div>
@@ -319,6 +331,7 @@ const TempTable = () => {
 
   return (
     <Table
+      isStriped
       aria-label="Example table with custom cells, pagination and sorting"
       isHeaderSticky
       bottomContent={bottomContent}

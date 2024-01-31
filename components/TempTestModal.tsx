@@ -15,7 +15,7 @@ import {
 
 import { RiTestTubeFill } from "react-icons/ri";
 
-const TempTestModal = () => {
+const TempTestModal = ({ template, type, subject, body }: TempTestModalProps) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
@@ -23,26 +23,21 @@ const TempTestModal = () => {
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
         <RiTestTubeFill />
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal disableAnimation isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex justify-between">
+              <ModalHeader>
                 Configure Template Test
-                <Switch isReadOnly className='mr-5'>
-                  SMS
-                </Switch>
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>
-                  <Input isReadOnly label='Template' placeholder='Template Name'></Input>
-                  <Input isRequired type='email' label='Email'></Input>
-                  <Input isReadOnly label='Subject' placeholder='Victim Notification'></Input>
-                  <Textarea isReadOnly label='Message' placeholder='Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam pulvinar risus non risus hendrerit venenatis.
-                    Pellentesque sit amet hendrerit risus, sed porttitor quam.'
-                  >
-                  </Textarea>
+                  <Input isReadOnly label='Template' placeholder={template}></Input>
+                  <Input isRequired label={`Recipient ${type}`}></Input>
+                  {
+                    type === 'Email' ? <Input isReadOnly label='Subject' placeholder={subject}></Input> : null
+			            }
+                  <Textarea isReadOnly label='Message' placeholder={body}></Textarea>
                 </div>
               </ModalBody>
               <ModalFooter>
@@ -59,6 +54,14 @@ const TempTestModal = () => {
       </Modal>
     </>
   );
+};
+
+export type TempTestModalProps = {
+  template: string;
+  type: string;
+  subject?: string;
+  body: string;
 }
+
 
 export default TempTestModal

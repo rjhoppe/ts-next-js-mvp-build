@@ -2,9 +2,10 @@ import React from 'react'
 
 import {  
   Button,
+  Select,
+  SelectItem,
   Textarea,
   Switch,
-  Select,
   Input,
   Modal,
   ModalContent,
@@ -15,8 +16,9 @@ import {
 } from "@nextui-org/react";
 
 import { HiPencil } from "react-icons/hi";
+import { TempTestModalProps } from './TempTestModal';
 
-const EditRecord = () => {
+const EditRecord = ({ template, type, subject, body, active }: EditRecordProps ) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
@@ -24,35 +26,45 @@ const EditRecord = () => {
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
         <HiPencil />
       </Button>
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal disableAnimation isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex justify-between">
-                Configure Template Test
-                <Switch className='mr-5'>
-                  SMS
-                </Switch>
+              <ModalHeader>
+                Edit {template}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>
-                  <Input isReadOnly label='Template' placeholder='Template Name'></Input>
-                  <Input isRequired type='email' label='Email'></Input>
-                  <Input isReadOnly label='Subject' placeholder='Victim Notification'></Input>
-                  <Textarea isReadOnly label='Message' placeholder='Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam pulvinar risus non risus hendrerit venenatis.
-                    Pellentesque sit amet hendrerit risus, sed porttitor quam.'
+                  <Input label='Template Name' defaultValue={template}></Input>
+                  <Select
+                    label="Active"
+                    defaultSelectedKeys={[active]}
                   >
-                  </Textarea>
+                    <SelectItem key="True" value="True">True</SelectItem>
+                    <SelectItem key="False" value="False">False</SelectItem>
+                  </Select>
+                  {
+                    type === 'Email' ? <Input label='Subject' defaultValue={subject}></Input> : null
+                  }
+                  <Textarea label='Message' readOnly placeholder={body}></Textarea>
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
-                  Cancel
-                </Button>
-                <Button color="primary" onPress={onClose}>
-                  Send
-                </Button>
+                <div className='flex gap-5'>
+                  <div className='flex mr-20'>
+                    <Button color="secondary" variant="ghost">
+                      Edit Message
+                    </Button>
+                  </div>
+                  <div className='flex gap-5'>
+                    <Button color="danger" variant="ghost" onPress={onClose}>
+                      Cancel
+                    </Button>
+                    <Button color="primary" onPress={onClose}>
+                      Save
+                    </Button>
+                  </div>
+                </div>
               </ModalFooter>
             </>
           )}
@@ -60,6 +72,10 @@ const EditRecord = () => {
       </Modal>
     </>
   );
-}
+};
+
+export type EditRecordProps = TempTestModalProps & {
+  active: string
+};
 
 export default EditRecord
