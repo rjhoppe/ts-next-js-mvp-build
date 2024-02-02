@@ -30,7 +30,7 @@ const EditRuleRecord = ({ id, if_logic, then_logic, delay }: EditRuleRecordProps
           {(onClose) => (
             <>
               <ModalHeader>
-                Edit Rule ID: {id}
+                Edit Rule: {id}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>

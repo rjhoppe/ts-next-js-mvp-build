@@ -31,7 +31,7 @@ const EditTempRecord = ({ template, type, subject, body, active }: EditTempRecor
           {(onClose) => (
             <>
               <ModalHeader>
-                Edit {template}
+                Edit: {template}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>

@@ -66,13 +66,13 @@ const RulesTable = () => {
     let filteredUsers = [...rules_records];
 
     if (hasSearchFilter) {
-      filteredUsers = filteredUsers.filter((user) =>
-        user.if_logic.toLowerCase().includes(filterValue.toLowerCase()),
+      filteredUsers = filteredUsers.filter((record) =>
+        record.if_logic.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.if_logic),
+      filteredUsers = filteredUsers.filter((record) =>
+        Array.from(statusFilter).includes(record.if_logic),
       );
     }
 
@@ -98,8 +98,8 @@ const RulesTable = () => {
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = React.useCallback((user: Rules, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof Rules];
+  const renderCell = React.useCallback((record: Rules, columnKey: React.Key) => {
+    const cellValue = record[columnKey as keyof Rules];
 
     switch (columnKey) {
       case "id":
@@ -114,10 +114,10 @@ const RulesTable = () => {
             <Tooltip content="Edit">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                 <EditRuleRecord 
-                  id={user.id}
-                  if_logic={user.if_logic}
-                  then_logic={user.then_logic}
-                  delay={user.delay}
+                  id={record.id}
+                  if_logic={record.if_logic}
+                  then_logic={record.then_logic}
+                  delay={record.delay}
                 />
               </span>
             </Tooltip>
@@ -130,12 +130,12 @@ const RulesTable = () => {
               <DropdownMenu>
                 <DropdownItem isReadOnly>
                   <ViewRuleRecord 
-                    id={user.id}
-                    if_logic={user.if_logic}
-                    then_logic={user.then_logic}
-                    delay={user.delay}
-                    last_modified_by={user.last_modified_by}
-                    last_modified_time={user.last_modified_time}
+                    id={record.id}
+                    if_logic={record.if_logic}
+                    then_logic={record.then_logic}
+                    delay={record.delay}
+                    last_modified_by={record.last_modified_by}
+                    last_modified_time={record.last_modified_time}
                   />
                 </DropdownItem>
                 <DropdownItem>Delete</DropdownItem>
