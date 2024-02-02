@@ -16,7 +16,7 @@ const TempEdit = () => {
         isRequired
         type="email"
         label="Recipients"
-        defaultValue="example@axon.com"
+        placeholder="example@axon.com"
         className="mt-5 max-w-xl"
       />
       <Input 

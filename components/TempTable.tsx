@@ -22,11 +22,14 @@ import {
   Pagination,
   Selection,
   ChipProps,
-  SortDescriptor
+  SortDescriptor,
+  DropdownSection
 } from "@nextui-org/react";
 
 import TempTestModal from "./TempTestModal";
 import EditRecord from "./EditRecordModal";
+import ViewTempRecord from "./ViewTempRecord";
+import { MdRemoveRedEye } from "react-icons/md";
 
 import { 
   PlusIcon,
@@ -109,6 +112,21 @@ const TempTable = () => {
   const renderCell = React.useCallback((record: Template, columnKey: React.Key) => {
     const cellValue = record[columnKey as keyof Template] as string;
 
+  const renderViewTemp = () => {
+    return (
+      <ViewTempRecord
+        id={record.id}
+        last_modified_time={record.last_modified_time}
+        last_modified_by={record.last_modified_by}
+        template={record.template}
+        type={record.type}
+        subject={record.subject}
+        body={record.body}
+        active={record.active}
+      />
+    )
+  }
+
     switch (columnKey) {
       case "case_number":
         return (
@@ -165,8 +183,21 @@ const TempTable = () => {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
+                <DropdownSection>
+                  <DropdownItem isReadOnly key='view_temp' >
+                    <ViewTempRecord
+                      id={record.id}
+                      last_modified_time={record.last_modified_time}
+                      last_modified_by={record.last_modified_by}
+                      template={record.template}
+                      type={record.type}
+                      subject={record.subject}
+                      body={record.body}
+                      active={record.active}
+                    />
+                  </DropdownItem>
+                  <DropdownItem isReadOnly key='delete_temp'>Delete</DropdownItem>
+                </DropdownSection>
               </DropdownMenu>
             </Dropdown>
           </div>
