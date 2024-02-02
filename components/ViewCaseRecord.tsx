@@ -29,8 +29,11 @@ const ViewCaseRecord = ({ id, emails, case_number, case_time, case_type, assigne
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader>
-                View {case_number}
+              <ModalHeader className="flex justify-between">
+                {case_number}
+                <Switch className="mr-5" id="notification_trigger" size="sm" defaultSelected>
+                  Notifications
+                </Switch>
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>

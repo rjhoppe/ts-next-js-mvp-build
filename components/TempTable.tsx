@@ -27,7 +27,7 @@ import {
 } from "@nextui-org/react";
 
 import TempTestModal from "./TempTestModal";
-import EditRecord from "./EditRecordModal";
+import EditTempRecord from "./EditTempRecord";
 import ViewTempRecord from "./ViewTempRecord";
 import { MdRemoveRedEye } from "react-icons/md";
 
@@ -151,7 +151,7 @@ const TempTable = () => {
               </Tooltip>
               <Tooltip content="Edit">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EditRecord 
+                  <EditTempRecord 
                     template={record.template}
                     type={record.type}
                     subject={record.subject}
