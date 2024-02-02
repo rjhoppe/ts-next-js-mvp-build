@@ -248,7 +248,6 @@ export const rules_records = [
 // RECORDS SECTION - DUMMY DATA
 export const columns = [
   {name: "ID", uid: "id", sortable: true},
-  {name: "EMAILS", uid: "emails"},
   {name: "CASE NUMBER", uid: "case_number", sortable: true},
   {name: "CASE TIME", uid: "case_time"},
   {name: "CASE TYPE", uid: "case_type"},
@@ -256,6 +255,7 @@ export const columns = [
   {name: "VICTIMS", uid: "victims"},
   // Make below validate for UTC time
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
+  {name: "EMAILS", uid: "emails"},
   {name: "PHONE NUMBERS", uid: "phone_numbers"},
   {name: "STATUS", uid: "status", sortable: true},
   {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},

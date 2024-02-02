@@ -112,21 +112,6 @@ const TempTable = () => {
   const renderCell = React.useCallback((record: Template, columnKey: React.Key) => {
     const cellValue = record[columnKey as keyof Template] as string;
 
-  const renderViewTemp = () => {
-    return (
-      <ViewTempRecord
-        id={record.id}
-        last_modified_time={record.last_modified_time}
-        last_modified_by={record.last_modified_by}
-        template={record.template}
-        type={record.type}
-        subject={record.subject}
-        body={record.body}
-        active={record.active}
-      />
-    )
-  }
-
     switch (columnKey) {
       case "case_number":
         return (
@@ -183,21 +168,19 @@ const TempTable = () => {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownSection>
-                  <DropdownItem isReadOnly key='view_temp' >
-                    <ViewTempRecord
-                      id={record.id}
-                      last_modified_time={record.last_modified_time}
-                      last_modified_by={record.last_modified_by}
-                      template={record.template}
-                      type={record.type}
-                      subject={record.subject}
-                      body={record.body}
-                      active={record.active}
-                    />
-                  </DropdownItem>
-                  <DropdownItem isReadOnly key='delete_temp'>Delete</DropdownItem>
-                </DropdownSection>
+                <DropdownItem isReadOnly key='view_temp' >
+                  <ViewTempRecord
+                    id={record.id}
+                    last_modified_time={record.last_modified_time}
+                    last_modified_by={record.last_modified_by}
+                    template={record.template}
+                    type={record.type}
+                    subject={record.subject}
+                    body={record.body}
+                    active={record.active}
+                  />
+                </DropdownItem>
+                <DropdownItem isReadOnly key='delete_temp'>Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
