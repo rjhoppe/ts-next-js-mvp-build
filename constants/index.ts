@@ -189,8 +189,8 @@ export const temp_records = [
 // RULES SECTION
 export const rules_columns = [
   {name: "ID", uid: "id", sortable: true},
-  {name: "IF", uid: "if"},
-  {name: "THEN", uid: "then"},
+  {name: "IF", uid: "if_logic"},
+  {name: "THEN", uid: "then_logic"},
   {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
   {name: "DELAY", uid: "delay", sortable: true},
@@ -200,8 +200,8 @@ export const rules_columns = [
 export const rules_records = [
   {
     id: '1',
-    if: 'Status set to "Investigator assigned"',
-    then: 'Email victims in case using "Template A"',
+    if_logic: 'Status set to "Investigator assigned"',
+    then_logic: 'Email victims in case using "Template A"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
@@ -209,8 +209,8 @@ export const rules_records = [
   },
   {
     id: '2',
-    if: 'Status set to "Closed"',
-    then: 'Email victims in case using "Template B"',
+    if_logic: 'Status set to "Closed"',
+    then_logic: 'Email victims in case using "Template B"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
@@ -218,8 +218,8 @@ export const rules_records = [
   },
   {
     id: '3',
-    if: 'Status set to "Subject arrested"',
-    then: 'Email victims in case using "Template C"',
+    if_logic: 'Status set to "Subject arrested"',
+    then_logic: 'Email victims in case using "Template C"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
@@ -227,8 +227,8 @@ export const rules_records = [
   },
   {
     id: '4',
-    if: 'Status set to "Court scheduled"',
-    then: 'Email victims in case using "Template D"',
+    if_logic: 'Status set to "Court scheduled"',
+    then_logic: 'Email victims in case using "Template D"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
@@ -236,8 +236,8 @@ export const rules_records = [
   },
   {
     id: '5',
-    if: 'Status set to "Rejected"',
-    then: 'Email victims in case using "Template E"',
+    if_logic: 'Status set to "Rejected"',
+    then_logic: 'Email victims in case using "Template E"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
@@ -255,8 +255,8 @@ export const columns = [
   {name: "VICTIMS", uid: "victims"},
   // Make below validate for UTC time
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
-  {name: "EMAILS", uid: "emails"},
   {name: "PHONE NUMBERS", uid: "phone_numbers"},
+  {name: "EMAILS", uid: "emails"},
   {name: "STATUS", uid: "status", sortable: true},
   {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
   {name: "ACTIONS", uid: "actions"},

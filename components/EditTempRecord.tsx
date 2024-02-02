@@ -18,7 +18,7 @@ import {
 import { HiPencil } from "react-icons/hi";
 import { TempTestModalProps } from './TempTestModal';
 
-const EditRecord = ({ template, type, subject, body, active }: EditRecordProps ) => {
+const EditTempRecord = ({ template, type, subject, body, active }: EditTempRecordProps ) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
@@ -74,8 +74,8 @@ const EditRecord = ({ template, type, subject, body, active }: EditRecordProps )
   );
 };
 
-export type EditRecordProps = TempTestModalProps & {
+export type EditTempRecordProps = TempTestModalProps & {
   active: string;
 };
 
-export default EditRecord
+export default EditTempRecord

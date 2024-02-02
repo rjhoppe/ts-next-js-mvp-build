@@ -1,6 +1,5 @@
 "use client"
 import React from "react";
-import { HiPencil } from "react-icons/hi";
 import { rules_columns, rules_records, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
 import {
@@ -29,13 +28,16 @@ import {
 } from "@/components/icons"
 import Link from "next/link";
 
+import EditRuleRecord from "./EditRuleRecord";
+import ViewRuleRecord from "./ViewRuleRecord";
+
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
   paused: "danger",
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["id", "if", "then", "last_modified_time", "last_modified_by", "delay", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["id", "if_logic", "then_logic", "last_modified_time", "last_modified_by", "delay", "actions"];
 
 type Rules = typeof rules_records[0];
 
@@ -65,12 +67,12 @@ const RulesTable = () => {
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((user) =>
-        user.if.toLowerCase().includes(filterValue.toLowerCase()),
+        user.if_logic.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
       filteredUsers = filteredUsers.filter((user) =>
-        Array.from(statusFilter).includes(user.if),
+        Array.from(statusFilter).includes(user.if_logic),
       );
     }
 
@@ -111,9 +113,12 @@ const RulesTable = () => {
           <div className="relative flex justify-end items-center gap-2">
             <Tooltip content="Edit">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <Link href='/'>
-                  <HiPencil/>
-                </Link>
+                <EditRuleRecord 
+                  id={user.id}
+                  if_logic={user.if_logic}
+                  then_logic={user.then_logic}
+                  delay={user.delay}
+                />
               </span>
             </Tooltip>
             <Dropdown>
@@ -123,7 +128,16 @@ const RulesTable = () => {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
+                <DropdownItem isReadOnly>
+                  <ViewRuleRecord 
+                    id={user.id}
+                    if_logic={user.if_logic}
+                    then_logic={user.then_logic}
+                    delay={user.delay}
+                    last_modified_by={user.last_modified_by}
+                    last_modified_time={user.last_modified_time}
+                  />
+                </DropdownItem>
                 <DropdownItem>Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>

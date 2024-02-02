@@ -31,7 +31,7 @@ const ViewCaseRecord = ({ id, emails, case_number, case_time, case_type, assigne
             <>
               <ModalHeader className="flex justify-between">
                 {case_number}
-                <Switch className="mr-5" id="notification_trigger" size="sm" defaultSelected>
+                <Switch className="mr-5" id="notification_flag" size="sm" defaultSelected>
                   Notifications
                 </Switch>
               </ModalHeader>
