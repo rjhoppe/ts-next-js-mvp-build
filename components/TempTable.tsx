@@ -22,11 +22,14 @@ import {
   Pagination,
   Selection,
   ChipProps,
-  SortDescriptor
+  SortDescriptor,
+  DropdownSection
 } from "@nextui-org/react";
 
 import TempTestModal from "./TempTestModal";
-import EditRecord from "./EditRecordModal";
+import EditTempRecord from "./EditTempRecord";
+import ViewTempRecord from "./ViewTempRecord";
+import { MdRemoveRedEye } from "react-icons/md";
 
 import { 
   PlusIcon,
@@ -148,7 +151,7 @@ const TempTable = () => {
               </Tooltip>
               <Tooltip content="Edit">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EditRecord 
+                  <EditTempRecord 
                     template={record.template}
                     type={record.type}
                     subject={record.subject}
@@ -165,8 +168,19 @@ const TempTable = () => {
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
-                <DropdownItem>View</DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
+                <DropdownItem isReadOnly key='view_temp' >
+                  <ViewTempRecord
+                    id={record.id}
+                    last_modified_time={record.last_modified_time}
+                    last_modified_by={record.last_modified_by}
+                    template={record.template}
+                    type={record.type}
+                    subject={record.subject}
+                    body={record.body}
+                    active={record.active}
+                  />
+                </DropdownItem>
+                <DropdownItem isReadOnly key='delete_temp'>Delete</DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>

@@ -15,7 +15,7 @@ import {
 
 import { RiTestTubeFill } from "react-icons/ri";
 
-const TempTestModal = ({ template, type, subject, body }: TempTestModalProps) => {
+const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
@@ -28,7 +28,7 @@ const TempTestModal = ({ template, type, subject, body }: TempTestModalProps) =>
           {(onClose) => (
             <>
               <ModalHeader>
-                Configure Template Test
+                Test {template}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>
@@ -41,7 +41,7 @@ const TempTestModal = ({ template, type, subject, body }: TempTestModalProps) =>
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="light" onPress={onClose}>
+                <Button color="danger" variant="ghost" onPress={onClose}>
                   Cancel
                 </Button>
                 <Button color="primary" onPress={onClose}>

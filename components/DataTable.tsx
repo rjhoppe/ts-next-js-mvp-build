@@ -22,6 +22,7 @@ import {
 } from "@nextui-org/react";
 
 import { MdRemoveRedEye } from "react-icons/md";
+import ViewCaseRecord from "./ViewCaseRecord";
 
 import { 
   PlusIcon,
@@ -123,6 +124,42 @@ const DataTable = () => {
             <p className="text-bold text-tiny capitalize text-default-400">{record.assignee}</p>
           </div>
         );
+      case "victims":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">
+              {
+                typeof(record.victims) === 'object' 
+                ? record.victims.join(", ") 
+                : record.victims
+              }
+            </p>
+          </div>
+        );
+      case "emails":
+        return(
+          <div className="flex flex-col">
+            <p className="text-bold text-small">
+              {
+                typeof(record.emails) === 'object' 
+                ? record.emails.join(", ")
+                : record.emails
+              }
+            </p>
+          </div>
+        );
+      case "phone_numbers":
+        return(
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">
+              {
+                typeof(record.phone_numbers) === 'object' 
+                ? record.phone_numbers.join(", ") 
+                : record.phone_numbers
+              }
+            </p>
+          </div>
+        );
       case "status":
         return (
           <Chip className="capitalize" color={statusColorMap[record.status]} size="sm" variant="flat">
@@ -134,9 +171,19 @@ const DataTable = () => {
           <div className="relative flex justify-center items-center gap-2">
             <Tooltip content="View">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <Link href='/'>
-                <MdRemoveRedEye />
-                </Link>
+                <ViewCaseRecord
+                  id={record.id}
+                  emails={record.emails}
+                  case_number={record.case_number}
+                  case_time={record.case_time}
+                  case_type={record.case_type}
+                  assignee={record.assignee}
+                  victims={record.victims}
+                  last_modified_by={record.last_modified_by}
+                  last_modified_time={record.last_modified_time}
+                  phone_numbers={record.phone_numbers}
+                  status={record.status}
+                />
               </span>
             </Tooltip>
           </div>

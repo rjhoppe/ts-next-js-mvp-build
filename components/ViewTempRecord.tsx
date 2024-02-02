@@ -1,5 +1,3 @@
-import React from 'react'
-
 import {  
   Button,
   Select,
@@ -15,38 +13,35 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
-import { HiPencil } from "react-icons/hi";
 import { TempTestModalProps } from './TempTestModal';
 
-const EditRecord = ({ template, type, subject, body, active }: EditRecordProps ) => {
+const ViewTempRecord = ({ id, active, last_modified_time, last_modified_by,
+template, type, subject, body } : TempViewRecordProps) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
   return (
     <>
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
-        <HiPencil />
+        View
       </Button>
       <Modal disableAnimation isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader>
-                Edit {template}
+                View {template}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>
-                  <Input label='Template Name' defaultValue={template}></Input>
-                  <Select
-                    label="Active"
-                    defaultSelectedKeys={[active]}
-                  >
-                    <SelectItem key="True" value="True">True</SelectItem>
-                    <SelectItem key="False" value="False">False</SelectItem>
-                  </Select>
+                  <Input readOnly label='Template ID' defaultValue={id}></Input>
+                  <Input readOnly label='Template Name' defaultValue={template}></Input>
+                  <Input readOnly label='Last Modified Date' defaultValue={last_modified_time}></Input>
+                  <Input readOnly label='Last Modified By' defaultValue={last_modified_by}></Input>
+                  <Input readOnly label='Active' defaultValue={active}></Input>
                   {
-                    type === 'Email' ? <Input label='Subject' defaultValue={subject}></Input> : null
+                    type === 'Email' ? <Input readOnly label='Subject' defaultValue={subject}></Input> : null
                   }
-                  <Textarea label='Message' readOnly placeholder={body}></Textarea>
+                  <Textarea label='Message' readOnly value={body}></Textarea>
                 </div>
               </ModalBody>
               <ModalFooter>
@@ -74,8 +69,11 @@ const EditRecord = ({ template, type, subject, body, active }: EditRecordProps )
   );
 };
 
-export type EditRecordProps = TempTestModalProps & {
-  active: string
+export type TempViewRecordProps = TempTestModalProps & {
+  id: string;
+  active: string;
+  last_modified_time: string;
+  last_modified_by: string;
 };
 
-export default EditRecord
+export default ViewTempRecord
