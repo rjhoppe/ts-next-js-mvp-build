@@ -16,20 +16,16 @@ import {
   DropdownMenu,
   DropdownItem,
   Tooltip,
-  Switch,
   Chip,
-  User,
   Pagination,
   Selection,
   ChipProps,
   SortDescriptor,
-  DropdownSection
 } from "@nextui-org/react";
 
 import TempTestModal from "./TempTestModal";
 import EditTempRecord from "./EditTempRecord";
 import ViewTempRecord from "./ViewTempRecord";
-import { MdRemoveRedEye } from "react-icons/md";
 
 import { 
   PlusIcon,
@@ -41,10 +37,9 @@ import {
 import { temp_columns, temp_records, statusOptions} from "@/constants/index";
 import { capitalize } from "@/app/utils";
 
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
+const activeColorMap: Record<string, ChipProps["color"]> = {
+  "True": "success",
+  "False": "danger",
 };
 
 const INITIAL_VISIBLE_COLUMNS = ["id", "template", "last_modified_time", "last_modified_by", "active", 
@@ -129,10 +124,10 @@ const TempTable = () => {
             <p className="text-bold text-tiny capitalize text-default-400">{record.last_modified_by}</p>
           </div>
         );
-      case "status":
+      case "active":
         return (
-          <Chip className="capitalize" color={statusColorMap[record.active]} size="sm" variant="flat">
-            {cellValue.split("_").join(" ")}
+          <Chip className="capitalize" color={activeColorMap[record.active]} size="sm" variant="flat">
+            {cellValue}
           </Chip>
         );
       case "actions":

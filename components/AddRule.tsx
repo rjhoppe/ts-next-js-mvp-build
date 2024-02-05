@@ -2,17 +2,15 @@
 
 import {  
   Select, 
-  SelectSection,
   Button,
   Link,
   SelectItem,
   Divider,
   Switch,
-  Textarea,
-  Input,
+  Input
 } from "@nextui-org/react";
 
-import { columns } from "@/constants/index";
+import { statusOptions, columns } from "@/constants/index";
 import RichTextEditor from "./RichTextEditor";
 
 const AddRule = () => {
@@ -27,12 +25,13 @@ const AddRule = () => {
       <h3 className="text-lg my-4">If</h3>
       <div className="my-6">
         <Select 
-          label="Case Info Type" 
-          className="max-w-xs" 
+          label="Case Status" 
+          className="max-w-xl"
+          isRequired
         >
-          {columns.map((column) => (
-            <SelectItem key={column.name}>
-              {column.name}
+          {statusOptions.map((status) => (
+            <SelectItem key={status.name}>
+              {status.name}
             </SelectItem>
           ))}
         </Select>
@@ -40,19 +39,24 @@ const AddRule = () => {
       <div className="my-6">
         <Select 
           label="Action" 
-          className="max-w-xs" 
+          className="max-w-xl"
+          isRequired
         >
-          {columns.map((column) => (
-            <SelectItem key={column.name}>
-              {column.name}
-            </SelectItem>
-          ))}
+          <SelectItem key="send-sms">
+            Changes to Active
+          </SelectItem>
+          <SelectItem key="send-email">
+            Changes to Rejected
+          </SelectItem>
+          <SelectItem key="send-email-sms">
+            Placeholder
+          </SelectItem>
         </Select>
       </div>
       <div className="my-6">
         <Select 
           label="Values" 
-          className="max-w-xs" 
+          className="max-w-xl"
         >
           {columns.map((column) => (
             <SelectItem key={column.name}>
@@ -65,20 +69,27 @@ const AddRule = () => {
       <h3 className="text-lg my-4">Then</h3>
       <div className="my-6">
         <Select 
-          label="Action" 
-          className="max-w-xs" 
+          label="Action"
+          id="action-select"
+          className="max-w-xl"
+          isRequired 
         >
-          {columns.map((column) => (
-            <SelectItem key={column.name}>
-              {column.name}
-            </SelectItem>
-          ))}
+          <SelectItem key="send-sms">
+            Send SMS
+          </SelectItem>
+          <SelectItem key="send-email">
+            Send Email
+          </SelectItem>
+          <SelectItem key="send-email-sms">
+            Send SMS and Email
+          </SelectItem>
         </Select>
       </div>
-      <div className="flex my-6 gap-5">
+      <div className="flex items-center my-6 gap-5">
         <Select 
           label="Template" 
-          className="max-w-xs" 
+          className="w-72"
+          isRequired
         >
           {columns.map((column) => (
             <SelectItem key={column.name}>
@@ -86,13 +97,14 @@ const AddRule = () => {
             </SelectItem>
           ))}
         </Select>
-        <Switch>
-          Edit content
-        </Switch>
+        <Button href="/" as={Link} color="secondary">
+          Edit Template
+        </Button>
+        <Button href="/create-template" as={Link} color="secondary"> 
+          Create Template
+        </Button>
       </div>
-      <Input className="my-6 max-w-xl" isReadOnly label='Subject'>
-
-      </Input>
+      <Input className="my-6 max-w-xl" isReadOnly label='Subject'></Input>
       <div className="flex flex-col justify-center mt-5 max-w-xl">
         <RichTextEditor />
       </div>

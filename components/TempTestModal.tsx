@@ -2,8 +2,6 @@ import React from 'react'
 import {  
   Button,
   Textarea,
-  Switch,
-  Select,
   Input,
   Modal,
   ModalContent,

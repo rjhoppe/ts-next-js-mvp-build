@@ -1,9 +1,6 @@
 import {  
   Button,
-  Select,
-  SelectItem,
   Textarea,
-  Switch,
   Input,
   Modal,
   ModalContent,
@@ -29,7 +26,7 @@ template, type, subject, body } : TempViewRecordProps) => {
           {(onClose) => (
             <>
               <ModalHeader>
-                View {template}
+                View: {template}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>
