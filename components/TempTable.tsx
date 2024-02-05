@@ -16,20 +16,16 @@ import {
   DropdownMenu,
   DropdownItem,
   Tooltip,
-  Switch,
   Chip,
-  User,
   Pagination,
   Selection,
   ChipProps,
   SortDescriptor,
-  DropdownSection
 } from "@nextui-org/react";
 
 import TempTestModal from "./TempTestModal";
 import EditTempRecord from "./EditTempRecord";
 import ViewTempRecord from "./ViewTempRecord";
-import { MdRemoveRedEye } from "react-icons/md";
 
 import { 
   PlusIcon,

@@ -1,7 +1,5 @@
 import {  
   Button,
-  Select,
-  SelectItem,
   Textarea,
   Switch,
   Input,
@@ -12,6 +10,8 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@nextui-org/react";
+
+import AddVictim from "./AddVictim";
 
 import { MdRemoveRedEye } from "react-icons/md";
 
@@ -68,12 +68,17 @@ const ViewCaseRecord = ({ id, emails, case_number, case_time, case_type, assigne
               </ModalBody>
               <ModalFooter>
                 <div className='flex gap-5'>
-                  <Button color="danger" variant="ghost" onPress={onClose}>
-                    Cancel
-                  </Button>
-                  <Button color="primary" onPress={onClose}>
-                    Save
-                  </Button>
+                  <div className='flex mr-24'>
+                    <AddVictim />
+                  </div>
+                  <div className='flex gap-5'>
+                    <Button color="danger" variant="ghost" onPress={onClose}>
+                      Cancel
+                    </Button>
+                    <Button color="primary" onPress={onClose}>
+                      Save
+                    </Button>
+                  </div>
                 </div>
               </ModalFooter>
             </>

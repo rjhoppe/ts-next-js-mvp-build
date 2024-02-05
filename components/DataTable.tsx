@@ -21,18 +21,15 @@ import {
   SortDescriptor,
 } from "@nextui-org/react";
 
-import { MdRemoveRedEye } from "react-icons/md";
 import ViewCaseRecord from "./ViewCaseRecord";
 
 import { 
-  PlusIcon,
   ChevronDownIcon,
   SearchIcon,
 } from "@/components/icons"
 
 import { columns, records, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
-import Link from "next/link";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",

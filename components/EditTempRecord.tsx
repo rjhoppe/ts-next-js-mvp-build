@@ -5,7 +5,6 @@ import {
   Select,
   SelectItem,
   Textarea,
-  Switch,
   Input,
   Modal,
   ModalContent,
