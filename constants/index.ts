@@ -117,8 +117,8 @@ export const temp_columns = [
   {name: "TEMPLATE", uid: "template", sortable: true},
   {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
-  {name: "ACTIVE", uid: "active", sortable: true},
   {name: "TYPE", uid: "type", sortable: true},
+  {name: "ACTIVE", uid: "active", sortable: true},
   {name: "ACTIONS", uid: "actions"},
 ];
 
