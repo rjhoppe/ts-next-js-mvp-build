@@ -3,22 +3,13 @@ import React from "react"
 import { NEW_NAV_DASH_LINKS } from "@/constants"
 import { NEW_NAV_DASH_LINKS2 } from "@/constants"
 import { FaGear } from "react-icons/fa6";
-import { FaUser } from "react-icons/fa";
-
-import { NAV_MES_LINKS } from "@/constants"
-import { NAV_SET_LINKS } from "@/constants"
-import { NAV_REDIRECT_LINKS } from "@/constants"
 import Link from "next/link"
 import { Button } from "@nextui-org/button"
 import { Divider } from "@nextui-org/divider"
-import { IoMdChatbubbles } from "react-icons/io";
-import type { IconType } from 'react-icons';
-import { ReactNode } from "react"
-import { Chela_One } from "next/font/google"
 
 const NewNavbar = () => {
   return (
-    <nav className="flex flex-col w-48 md:w-56 lg:w-56 h-dvh">
+    <nav className="flex flex-col w-48 md:w-56 lg:w-56 h-dvh bg-stone-800">
       <ul className="flex flex-col h-full gap-5 p-5">
         <Button
           as={Link}
@@ -28,11 +19,11 @@ const NewNavbar = () => {
           transition-all hover:font-bold bg-transparent mt-5'
         >My90
         </Button>
-        <Divider className='-my-2'/>
+        <Divider className='-my-2 bg-white'/>
         {NEW_NAV_DASH_LINKS.map((link) => (
           <NavBlock title={link.title} href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}
-        <Divider className='-my-2'/>
+        <Divider className='-my-2 bg-white'/>
         <div className="flex flex-col gap-5 -my-3">
           <Button
             as={Link}
@@ -45,7 +36,7 @@ const NewNavbar = () => {
               Settings
           </Button>
         </div>
-        <Divider className='-my-1'/>
+        <Divider className='-my-1 bg-white'/>
         {NEW_NAV_DASH_LINKS2.map((link) => (
           <NavBlock href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>
         ))}

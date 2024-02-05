@@ -19,6 +19,7 @@ import {
   Selection,
   ChipProps,
   SortDescriptor,
+  Divider,
 } from "@nextui-org/react";
 
 import ViewCaseRecord from "./ViewCaseRecord";
@@ -159,7 +160,7 @@ const DataTable = () => {
         );
       case "status":
         return (
-          <Chip className="capitalize" color={statusColorMap[record.status]} size="sm" variant="flat">
+          <Chip className="capitalize" color={statusColorMap[record.status]} radius="sm" size="sm" variant="flat">
             {cellValue.split("_").join(" ")}
           </Chip>
         );
@@ -307,7 +308,7 @@ const DataTable = () => {
   const bottomContent = React.useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-default-400">
+        <span className="w-[30%] text-small text-black-400">
           {selectedKeys === "all"
             ? "All items selected"
             : `${selectedKeys.size} of ${filteredItems.length} selected`}
@@ -320,12 +321,15 @@ const DataTable = () => {
           page={page}
           total={pages}
           onChange={setPage}
+          className="dark text-foreground"
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
+          <Button className="text-white bg-stone-800" isDisabled={pages === 1} 
+          size="sm" variant="flat" onPress={onPreviousPage}>
             Previous
           </Button>
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
+          <Button className="text-white bg-stone-800" isDisabled={pages === 1} 
+          size="sm" variant="flat" onPress={onNextPage}>
             Next
           </Button>
         </div>
@@ -342,13 +346,14 @@ const DataTable = () => {
 
   return (
     <Table
-      isStriped
       aria-label="Example table with custom cells, pagination and sorting"
       isHeaderSticky
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
       classNames={{
         wrapper: "max-h-[1000px]",
+        th: "text-white bg-stone-800",
+        tr: "divide-y divide-solid"
       }}
       selectedKeys={selectedKeys}
       selectionMode="multiple"

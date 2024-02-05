@@ -42,8 +42,8 @@ const activeColorMap: Record<string, ChipProps["color"]> = {
   "False": "danger",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["id", "template", "last_modified_time", "last_modified_by", "active", 
-"type", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["id", "template", "last_modified_time", "last_modified_by", 
+"active", "type", "actions"];
 
 type Template = typeof temp_records[0];
 
