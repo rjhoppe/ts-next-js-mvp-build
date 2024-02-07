@@ -124,7 +124,7 @@ const RulesTable = () => {
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
+                  <VerticalDotsIcon className="light text-foreground" />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
@@ -184,12 +184,16 @@ const RulesTable = () => {
       <div className="flex flex-col gap-4">
         <div className="flex justify-between gap-3 items-end">
           <div className="flex">
-            <span className="text-default-400 text-small">{rules_records.length} Rules</span>
+            <span className="text-small">{rules_records.length} Rules</span>
           </div>
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button 
+                  className="bg-stone-800 text-white"  
+                  endContent={<ChevronDownIcon className="text-small" />} 
+                  variant="flat"
+                >
                   Columns
                 </Button>
               </DropdownTrigger>
@@ -208,16 +212,17 @@ const RulesTable = () => {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button as={Link} href="/create-rule" color="primary" endContent={<PlusIcon />}>
+            <Button className="text-white bg-stone-800" as={Link} href="/create-rule" color="primary" 
+            endContent={<PlusIcon />}>
               Add New Rule
             </Button>
           </div>
         </div>
         <div className="flex justify-end items-center">
-          <label className="flex items-center text-default-400 text-small">
+          <label className="flex items-center text-small">
             Rows per page:
             <select
-              className="bg-transparent outline-none text-default-400 text-small"
+              className="bg-transparent outline-none text-small"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -235,8 +240,8 @@ const RulesTable = () => {
 
   const bottomContent = React.useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-default-400">
+      <div className="py-2 px-2 flex justify-between items-center ">
+        <span className="w-[30%] text-small text-black-400 ">
           {selectedKeys === "all"
             ? "All items selected"
             : `${selectedKeys.size} of ${filteredItems.length} selected`}
@@ -249,12 +254,15 @@ const RulesTable = () => {
           page={page}
           total={pages}
           onChange={setPage}
+          className="dark text-foreground"
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
+          <Button className="text-white bg-stone-800"
+          size="sm" variant="flat" onPress={onPreviousPage}>
             Previous
           </Button>
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
+          <Button className="text-white bg-stone-800"
+          size="sm" variant="flat" onPress={onNextPage}>
             Next
           </Button>
         </div>
@@ -271,13 +279,14 @@ const RulesTable = () => {
 
   return (
     <Table
-      isStriped
-      aria-label="Example table with custom cells, pagination and sorting"
+      aria-label="Data table for user created rule logic"
       isHeaderSticky
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
       classNames={{
-        wrapper: "max-h-[382px]",
+        wrapper: "max-h-[1000px]",
+        th: "text-white bg-stone-800",
+        tr: "divide-y divide-solid"
       }}
       sortDescriptor={sortDescriptor}
       topContent={topContent}
