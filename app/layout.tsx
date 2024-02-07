@@ -16,12 +16,12 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html className="overflow-hidden" lang="en" suppressHydrationWarning>
 			<body>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
 					<div className="flex flex-row w-screen">
 						<NewNavbar />
-						<div className="flex flex-col mt-8 ml-10 mr-40 w-screen">
+						<div className="flex flex-col mt-2 ml-10 mr-40 w-screen">
 							<h1 className="flex font-semibold text-2xl ml-6">Victim Notifications</h1>
 							<main className="container mx-auto max-w-7xl px-6 flex-grow">
 								{children}

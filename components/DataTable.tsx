@@ -19,7 +19,7 @@ import {
   Selection,
   ChipProps,
   SortDescriptor,
-  Divider,
+  Link,
 } from "@nextui-org/react";
 
 import ViewCaseRecord from "./ViewCaseRecord";
@@ -109,9 +109,9 @@ const DataTable = () => {
       case "case_number":
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">Time: {record.case_time}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">Incident type: {record.case_type}</p>
+            <Link href="/" underline="always" className="text-bold text-small capitalize">{cellValue}</Link>
+            <p className="text-bold text-tiny capitalize">Time: {record.case_time}</p>
+            <p className="text-bold text-tiny capitalize">Incident type: {record.case_type}</p>
 
           </div>
         );
@@ -119,7 +119,6 @@ const DataTable = () => {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">{record.assignee}</p>
           </div>
         );
       case "victims":
@@ -238,7 +237,11 @@ const DataTable = () => {
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button 
+                  className="bg-stone-800 text-white" 
+                  endContent={<ChevronDownIcon className="text-small" />} 
+                  variant="flat"
+                >
                   Status
                 </Button>
               </DropdownTrigger>
@@ -259,7 +262,11 @@ const DataTable = () => {
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button 
+                  className="bg-stone-800 text-white" 
+                  endContent={<ChevronDownIcon className="text-small" />} 
+                  variant="flat"
+                >
                   Columns
                 </Button>
               </DropdownTrigger>
@@ -281,11 +288,11 @@ const DataTable = () => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total records: {records.length}</span>
-          <label className="flex items-center text-default-400 text-small">
+          <span className="text-small">Total records: {records.length}</span>
+          <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}
-              className="bg-transparent outline-none text-default-400 text-small"
+              className="bg-transparent outline-none text-small"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -307,7 +314,7 @@ const DataTable = () => {
 
   const bottomContent = React.useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center">
+      <div className="px-2 flex justify-between items-center">
         <span className="w-[30%] text-small text-black-400">
           {selectedKeys === "all"
             ? "All items selected"

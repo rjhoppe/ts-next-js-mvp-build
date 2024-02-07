@@ -9,7 +9,7 @@ import { Divider } from "@nextui-org/divider"
 
 const NewNavbar = () => {
   return (
-    <nav className="flex flex-col w-48 md:w-56 lg:w-56 h-dvh bg-stone-800">
+    <nav className="flex flex-col w-48 md:w-56 lg:w-56 h-screen bg-stone-800">
       <ul className="flex flex-col h-full gap-5 p-5">
         <Button
           as={Link}
