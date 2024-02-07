@@ -369,6 +369,7 @@ const TempTable = () => {
       topContentPlacement="outside"
       onSelectionChange={setSelectedKeys}
       onSortChange={setSortDescriptor}
+      className="h-screen"
     >
       <TableHeader columns={headerColumns}>
         {(column) => (
