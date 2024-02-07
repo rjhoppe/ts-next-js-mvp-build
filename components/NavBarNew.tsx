@@ -12,8 +12,8 @@ import NextImage from "next/image";
 
 const NewNavbar = () => {
   return (
-    <nav className="flex flex-col w-48 md:w-56 lg:w-56 h-screen bg-stone-800">
-      <ul className="flex flex-col h-full gap-5 p-5">
+    <nav className="flex flex-col w-48 md:w-56 lg:w-56 h-dvh bg-stone-800">
+      <ul className="flex flex-col gap-5 p-5">
         <div>
           <Button
             as={Link}
@@ -28,8 +28,7 @@ const NewNavbar = () => {
                 width={25}
                 height={25}
                 className=""
-              />
-             My90
+              />My90
           </Button>
         </div>
         <Divider className='-my-2 bg-white'/>
