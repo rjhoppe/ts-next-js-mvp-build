@@ -6,19 +6,32 @@ import { FaGear } from "react-icons/fa6";
 import Link from "next/link"
 import { Button } from "@nextui-org/button"
 import { Divider } from "@nextui-org/divider"
+import { Image } from "@nextui-org/react"
+import NextImage from "next/image";
+// import AxonLogo from '*.png'
 
 const NewNavbar = () => {
   return (
     <nav className="flex flex-col w-48 md:w-56 lg:w-56 h-screen bg-stone-800">
       <ul className="flex flex-col h-full gap-5 p-5">
-        <Button
-          as={Link}
-          href='/'
-          key='My90'
-          className='text-xl text-gray-50 flexCenter cursor-pointer pb-1.5 
-          transition-all hover:font-bold bg-transparent mt-5'
-        >My90
-        </Button>
+        <div>
+          <Button
+            as={Link}
+            href='/'
+            key='My90'
+            className='text-xl text-gray-50 flexCenter cursor-pointer pb-1.5 
+            transition-all hover:font-bold bg-transparent mt-5'
+            ><Image
+                as={NextImage}
+                src="/axon-logo.png"
+                alt="axon logo"
+                width={25}
+                height={25}
+                className=""
+              />
+             My90
+          </Button>
+        </div>
         <Divider className='-my-2 bg-white'/>
         {NEW_NAV_DASH_LINKS.map((link) => (
           <NavBlock title={link.title} href={link.href} label={link.label} key={link.key}>{React.createElement(link.icon)}</NavBlock>

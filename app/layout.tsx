@@ -7,7 +7,10 @@ import NewNavbar from "@/components/NavBarNew";
 
 export const metadata: Metadata = {
 	title: 'Victim Notifications v2',
-	description: 'MVP for Victim Notifications'
+	description: 'MVP for Victim Notifications',
+	icons: {
+		icon:'/icon.png'
+	},
 }
 
 export default function RootLayout({

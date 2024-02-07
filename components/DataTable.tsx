@@ -109,7 +109,7 @@ const DataTable = () => {
       case "case_number":
         return (
           <div className="flex flex-col">
-            <Link href="/" underline="always" className="text-bold text-small capitalize">{cellValue}</Link>
+            <Link href="/" className="text-bold text-small text-blue-600 capitalize">{cellValue}</Link>
             <p className="text-bold text-tiny capitalize">Time: {record.case_time}</p>
             <p className="text-bold text-tiny capitalize">Incident type: {record.case_type}</p>
 
@@ -233,6 +233,7 @@ const DataTable = () => {
             value={filterValue}
             onClear={() => onClear()}
             onValueChange={onSearchChange}
+            variant="faded"
           />
           <div className="flex gap-3">
             <Dropdown>
