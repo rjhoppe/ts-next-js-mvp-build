@@ -288,7 +288,7 @@ const TempTable = () => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-small">Total records: {temp_records.length}</span>
+          <span className="text-small">Total templates: {temp_records.length}</span>
           <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}

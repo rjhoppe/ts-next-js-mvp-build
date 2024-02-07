@@ -289,7 +289,7 @@ const DataTable = () => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-small">Total records: {records.length}</span>
+          <span className="text-small">Total cases: {records.length}</span>
           <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}
