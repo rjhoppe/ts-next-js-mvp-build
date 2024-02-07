@@ -19,6 +19,7 @@ import {
   Selection,
   ChipProps,
   SortDescriptor,
+  Link,
 } from "@nextui-org/react";
 
 import ViewCaseRecord from "./ViewCaseRecord";
@@ -108,9 +109,9 @@ const DataTable = () => {
       case "case_number":
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">Time: {record.case_time}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">Incident type: {record.case_type}</p>
+            <Link href="/" className="text-bold text-small text-blue-600 capitalize">{cellValue}</Link>
+            <p className="text-bold text-tiny capitalize">Time: {record.case_time}</p>
+            <p className="text-bold text-tiny capitalize">Incident type: {record.case_type}</p>
 
           </div>
         );
@@ -118,7 +119,6 @@ const DataTable = () => {
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">{record.assignee}</p>
           </div>
         );
       case "victims":
@@ -159,7 +159,7 @@ const DataTable = () => {
         );
       case "status":
         return (
-          <Chip className="capitalize" color={statusColorMap[record.status]} size="sm" variant="flat">
+          <Chip className="capitalize" color={statusColorMap[record.status]} radius="sm" size="sm" variant="flat">
             {cellValue.split("_").join(" ")}
           </Chip>
         );
@@ -233,11 +233,16 @@ const DataTable = () => {
             value={filterValue}
             onClear={() => onClear()}
             onValueChange={onSearchChange}
+            variant="faded"
           />
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button 
+                  className="bg-stone-800 text-white" 
+                  endContent={<ChevronDownIcon className="text-small" />} 
+                  variant="flat"
+                >
                   Status
                 </Button>
               </DropdownTrigger>
@@ -258,7 +263,11 @@ const DataTable = () => {
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button 
+                  className="bg-stone-800 text-white" 
+                  endContent={<ChevronDownIcon className="text-small" />} 
+                  variant="flat"
+                >
                   Columns
                 </Button>
               </DropdownTrigger>
@@ -280,11 +289,11 @@ const DataTable = () => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total records: {records.length}</span>
-          <label className="flex items-center text-default-400 text-small">
+          <span className="text-small">Total cases: {records.length}</span>
+          <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}
-              className="bg-transparent outline-none text-default-400 text-small"
+              className="bg-transparent outline-none text-small"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -306,8 +315,8 @@ const DataTable = () => {
 
   const bottomContent = React.useMemo(() => {
     return (
-      <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-default-400">
+      <div className="px-2 flex justify-between items-center">
+        <span className="w-[30%] text-small text-black-400">
           {selectedKeys === "all"
             ? "All items selected"
             : `${selectedKeys.size} of ${filteredItems.length} selected`}
@@ -320,12 +329,15 @@ const DataTable = () => {
           page={page}
           total={pages}
           onChange={setPage}
+          className="dark text-foreground"
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
+          <Button className="text-white bg-stone-800" isDisabled={pages === 1} 
+          size="sm" variant="flat" onPress={onPreviousPage}>
             Previous
           </Button>
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
+          <Button className="text-white bg-stone-800" isDisabled={pages === 1} 
+          size="sm" variant="flat" onPress={onNextPage}>
             Next
           </Button>
         </div>
@@ -342,13 +354,14 @@ const DataTable = () => {
 
   return (
     <Table
-      isStriped
-      aria-label="Example table with custom cells, pagination and sorting"
+      aria-label="Data table for a user's case data"
       isHeaderSticky
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
       classNames={{
         wrapper: "max-h-[1000px]",
+        th: "text-white bg-stone-800",
+        tr: "divide-y divide-solid"
       }}
       selectedKeys={selectedKeys}
       selectionMode="multiple"

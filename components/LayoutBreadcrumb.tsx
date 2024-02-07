@@ -14,7 +14,7 @@ const LayoutBreadcrumb = ({ childToParent }: any) => {
   // Refactor this to use constants
 
   return (
-    <section className="flex justify-between mt-10">
+    <section className="flex items-end justify-between">
       <Breadcrumbs underline="active" onAction={(key) => [setCurrentPage(key), childToParent(key)]}>
         {bcLayoutHeaders.map((item) => (
         <BreadcrumbItem
@@ -31,11 +31,13 @@ const LayoutBreadcrumb = ({ childToParent }: any) => {
       <div className="flex justify-center gap-5">
         <div className="flex">
           <Button
+            isIconOnly
+            aria-label="User settings"
             as={Link}
             href="/settings"
+            className="bg-stone-800 text-white"
           >
             <FaUser />
-            Rick Hoppe
           </Button>
         </div>
       </div>
