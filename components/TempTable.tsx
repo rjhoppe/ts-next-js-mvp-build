@@ -159,7 +159,7 @@ const TempTable = () => {
             <Dropdown>
               <DropdownTrigger>
                 <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon className="text-default-300" />
+                  <VerticalDotsIcon className="light text-foreground" />
                 </Button>
               </DropdownTrigger>
               <DropdownMenu>
@@ -228,11 +228,16 @@ const TempTable = () => {
             value={filterValue}
             onClear={() => onClear()}
             onValueChange={onSearchChange}
+            variant="faded"
           />
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button 
+                  className="bg-stone-800 text-white"
+                  endContent={<ChevronDownIcon className="text-small" />} 
+                  variant="flat"
+                >
                   Status
                 </Button>
               </DropdownTrigger>
@@ -253,7 +258,11 @@ const TempTable = () => {
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button endContent={<ChevronDownIcon className="text-small" />} variant="flat">
+                <Button 
+                  className="bg-stone-800 text-white"
+                  endContent={<ChevronDownIcon className="text-small" />} 
+                  variant="flat"
+                >
                   Columns
                 </Button>
               </DropdownTrigger>
@@ -272,17 +281,18 @@ const TempTable = () => {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button as={Link} href="/create-template" color="primary" endContent={<PlusIcon />}>
+            <Button as={Link} href="/create-template" color="primary" 
+            className="bg-stone-800 text-white" endContent={<PlusIcon />}>
               Create Template
             </Button>
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-default-400 text-small">Total records: {temp_records.length}</span>
-          <label className="flex items-center text-default-400 text-small">
+          <span className="text-small">Total records: {temp_records.length}</span>
+          <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}
-              className="bg-transparent outline-none text-default-400 text-small"
+              className="bg-transparent outline-none text-small"
               onChange={onRowsPerPageChange}
             >
               <option value="5">5</option>
@@ -305,7 +315,7 @@ const TempTable = () => {
   const bottomContent = React.useMemo(() => {
     return (
       <div className="py-2 px-2 flex justify-between items-center">
-        <span className="w-[30%] text-small text-default-400">
+        <span className="w-[30%] text-small text-black-400">
           {selectedKeys === "all"
             ? "All items selected"
             : `${selectedKeys.size} of ${filteredItems.length} selected`}
@@ -318,12 +328,15 @@ const TempTable = () => {
           page={page}
           total={pages}
           onChange={setPage}
+          className="dark text-foreground"
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onPreviousPage}>
+          <Button className="bg-stone-800 text-white" size="sm" 
+          variant="flat" onPress={onPreviousPage}>
             Previous
           </Button>
-          <Button isDisabled={pages === 1} size="sm" variant="flat" onPress={onNextPage}>
+          <Button className="bg-stone-800 text-white" size="sm" 
+          variant="flat" onPress={onNextPage}>
             Next
           </Button>
         </div>
@@ -340,13 +353,14 @@ const TempTable = () => {
 
   return (
     <Table
-      isStriped
-      aria-label="Example table with custom cells, pagination and sorting"
+      aria-label="Data table for user created templates"
       isHeaderSticky
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
       classNames={{
         wrapper: "max-h-[1000px]",
+        th: "text-white bg-stone-800",
+        tr: "divide-y divide-solid"
       }}
       selectedKeys={selectedKeys}
       selectionMode="multiple"

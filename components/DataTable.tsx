@@ -354,7 +354,7 @@ const DataTable = () => {
 
   return (
     <Table
-      aria-label="Example table with custom cells, pagination and sorting"
+      aria-label="Data table for a user's case data"
       isHeaderSticky
       bottomContent={bottomContent}
       bottomContentPlacement="outside"
