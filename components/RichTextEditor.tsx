@@ -10,7 +10,7 @@ import { Spinner } from "@nextui-org/react";
 const RichTextEditor = () => {
 
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), 
-  { ssr: false, loading: () => <Spinner /> }),[]);
+  { ssr: false, loading: () => <Spinner /> }), []);
 
   const myColors = [
     "black",
@@ -64,7 +64,7 @@ const RichTextEditor = () => {
         modules={modules}
         formats={formats}
         onChange={handleTextChange}
-        className="h-40"
+        className="h-44 pb-12"
       />
     </>
   );

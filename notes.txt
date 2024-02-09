@@ -23,3 +23,6 @@ https://github.com/zenoamaro/react-quill/issues/919
 
 Last comment is what finally fixed it for me (it being the Quill webpack errors)
 https://github.com/zenoamaro/react-quill/issues/292
+
+Infinite load issue seems to be stemming from the non-mapped Select components in the 
+AddRule component

@@ -55,3 +55,20 @@
   scrollbar-width: none; /* Firefox */
 }
 
+.ql-container {
+  font-family: 'Arial, sans-serif';
+  font-size: 14px !important;
+  border-radius: 15px;
+  border-style: none !important;
+  background-color: #f4f4f5;
+}
+
+.ql-toolbar {
+  margin-bottom: -20px;
+  height: 50px;
+  background-color: #f4f4f5;
+  color: #8c8c93;
+  border-radius: 15px;
+  border-width: 2px;
+  border-style: none !important;
+}
