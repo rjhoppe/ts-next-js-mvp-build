@@ -27,6 +27,7 @@ const NewNavbar = () => {
                 alt="axon logo"
                 width={25}
                 height={25}
+                radius="md"
                 className=""
               />My90
           </Button>
