@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { 
   Input,
@@ -42,7 +42,7 @@ const TempEdit = () => {
         <RichTextEditor />
       </div>
       <div className="flex mt-20 justify-end gap-5 max-w-xl">
-        <Button href="/" as={Link} className="flex" color="danger" variant="ghost">
+        <Button href="/" as={Link} className="flex" color="danger">
           Cancel
         </Button>
         <Button href="/" as={Link} className="flex" color="primary">

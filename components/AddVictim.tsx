@@ -10,7 +10,7 @@ const AddVictim = () => {
   return (
     <Popover placement="top" showArrow offset={10}>
       <PopoverTrigger>
-        <Button color="secondary" variant="ghost">Add Victim</Button>
+        <Button color="secondary">Add Victim</Button>
       </PopoverTrigger>
       <PopoverContent className="w-[240px]">
         {(titleProps) => (

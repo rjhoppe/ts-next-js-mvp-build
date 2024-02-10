@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import {  
   Select, 
@@ -6,15 +6,14 @@ import {
   Link,
   SelectItem,
   Divider,
-  Switch,
   Input
 } from "@nextui-org/react";
 
 import { statusOptions, columns } from "@/constants/index";
 import RichTextEditor from "./RichTextEditor";
+import { capitalize } from "@/app/utils";
 
 const AddRule = () => {
-
   return (
     <section className="mt-10">
       <div>
@@ -24,8 +23,26 @@ const AddRule = () => {
       <Divider className="my-2" />
       <h3 className="text-lg my-4">If</h3>
       <div className="my-6">
+        <Input className="my-6 max-w-xl" isReadOnly placeholder="Status" 
+        label='Case Info Type'>
+          Status
+        </Input>
+      </div>
+      <div className="my-6">
+      <Select 
+          label="Action" 
+          className="max-w-xl"
+        >
+          {columns.map((column) => (
+            <SelectItem key={column.name}>
+              {capitalize(column.name.toLowerCase())}
+            </SelectItem>
+          ))}
+        </Select>
+      </div>
+      <div className="my-6">
         <Select 
-          label="Case Status" 
+          label="Values" 
           className="max-w-xl"
           isRequired
         >
@@ -36,53 +53,19 @@ const AddRule = () => {
           ))}
         </Select>
       </div>
+      <Divider className="my-2" />
+      <h3 className="text-lg my-4">Then</h3>
       <div className="my-6">
         <Select 
           label="Action" 
           className="max-w-xl"
           isRequired
         >
-          <SelectItem key="send-sms">
-            Changes to Active
-          </SelectItem>
-          <SelectItem key="send-email">
-            Changes to Rejected
-          </SelectItem>
-          <SelectItem key="send-email-sms">
-            Placeholder
-          </SelectItem>
-        </Select>
-      </div>
-      <div className="my-6">
-        <Select 
-          label="Values" 
-          className="max-w-xl"
-        >
           {columns.map((column) => (
             <SelectItem key={column.name}>
-              {column.name}
+              {capitalize(column.name.toLowerCase())}
             </SelectItem>
           ))}
-        </Select>
-      </div>
-      <Divider className="my-2" />
-      <h3 className="text-lg my-4">Then</h3>
-      <div className="my-6">
-        <Select 
-          label="Action"
-          id="action-select"
-          className="max-w-xl"
-          isRequired 
-        >
-          <SelectItem key="send-sms">
-            Send SMS
-          </SelectItem>
-          <SelectItem key="send-email">
-            Send Email
-          </SelectItem>
-          <SelectItem key="send-email-sms">
-            Send SMS and Email
-          </SelectItem>
         </Select>
       </div>
       <div className="flex items-center my-6 gap-5">
@@ -97,10 +80,10 @@ const AddRule = () => {
             </SelectItem>
           ))}
         </Select>
-        <Button href="/" as={Link} color="secondary">
+        <Button href="/" as={Link} color="primary">
           Edit Template
         </Button>
-        <Button href="/create-template" as={Link} color="secondary"> 
+        <Button href="/create-template" as={Link} color="primary"> 
           Create Template
         </Button>
       </div>
@@ -108,8 +91,8 @@ const AddRule = () => {
       <div className="flex flex-col justify-center mt-5 max-w-xl">
         <RichTextEditor />
       </div>
-      <div className="flex mt-20 justify-start gap-5 max-w-xl">
-        <Button href="/" as={Link} className="flex" color="secondary">
+      <div className="flex justify-start gap-5 max-w-xl">
+        <Button href="/" as={Link} className="flex" color="danger">
           Cancel
         </Button>
         <Button href="/" as={Link} className="flex" color="primary">
