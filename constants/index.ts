@@ -180,8 +180,32 @@ export const temp_records = [
     type: 'Email',
     actions: '',
     subject: 'An Update On Your Case Status',
-    body: 'Your case status has been closed." Please visit our website for more information or ' +
+    body: 'Your case status has been closed. Please visit our website for more information or ' +
     'reach out to the police department with any additional questions. Thank you.'
+  },
+  {
+    id: 'T2387533',
+    template: 'Rejected',
+    last_modified_time: '08/06/2023, 14:35',
+    last_modified_by: 'Brown, Tracy (1234)',
+    active: 'True',
+    type: 'Email',
+    actions: '',
+    subject: 'An Update On Your Case Status',
+    body: 'Your case status has been rejected. Please visit our website for more information or ' +
+    'reach out to the police department with any additional questions. Thank you.'
+  },
+  {
+    id: 'T2387498',
+    template: 'Subject Arrested (SMS)',
+    last_modified_time: '08/06/2023, 14:35',
+    last_modified_by: 'Brown, Tracy (1234)',
+    active: 'True',
+    type: 'SMS',
+    actions: '',
+    subject: 'An Update On Your Case Status',
+    body: 'Your case status has been updated to "Subject Arrested." Please visit our ' +
+    'website for more information.'
   },
 ];
 
@@ -201,7 +225,7 @@ export const rules_records = [
   {
     id: '1',
     if_logic: 'Status set to "Investigator assigned"',
-    then_logic: 'Email victims in case using "Template A"',
+    then_logic: 'Send SMS to victims in case using "Investigator Assigned (SMS)"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
@@ -210,7 +234,7 @@ export const rules_records = [
   {
     id: '2',
     if_logic: 'Status set to "Closed"',
-    then_logic: 'Email victims in case using "Template B"',
+    then_logic: 'Email victims in case using "Closed"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
@@ -219,7 +243,7 @@ export const rules_records = [
   {
     id: '3',
     if_logic: 'Status set to "Subject arrested"',
-    then_logic: 'Email victims in case using "Template C"',
+    then_logic: 'Send SMS to victims in case using "Subject Arrested (SMS)"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
@@ -228,7 +252,7 @@ export const rules_records = [
   {
     id: '4',
     if_logic: 'Status set to "Court scheduled"',
-    then_logic: 'Email victims in case using "Template D"',
+    then_logic: 'Send SMS to victims in case using "Court Scheduled (SMS)"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
@@ -237,7 +261,7 @@ export const rules_records = [
   {
     id: '5',
     if_logic: 'Status set to "Rejected"',
-    then_logic: 'Email victims in case using "Template E"',
+    then_logic: 'Email victims in case using "Rejected"',
     last_modified_time: '10/31/2023, 8:02',
     last_modified_by: 'Brown, Tracy (1234)',
     delay: '1 hour',
