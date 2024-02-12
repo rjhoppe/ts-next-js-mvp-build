@@ -24,6 +24,13 @@ const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) =
     setTestData(e.target.value);
   };
 
+  const smsApiCall = async () => {
+    await fetch('api/test', {
+      method: 'POST',
+      body: JSON.stringify({ phone_number: testData, message: body }),
+    })
+  }
+
   return (
     <>
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
@@ -50,7 +57,7 @@ const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) =
                 <Button color="danger" onPress={onClose}>
                   Cancel
                 </Button>
-                <Button color="primary">
+                <Button color="primary" onPress={smsApiCall}>
                   Send
                 </Button>
               </ModalFooter>
