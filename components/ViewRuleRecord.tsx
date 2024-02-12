@@ -39,7 +39,7 @@ last_modified_by, last_modified_time  } : ViewRuleRecordProps ) => {
               </ModalBody>
               <ModalFooter>
                 <div className='flex gap-5'>
-                  <Button color="danger" variant="ghost" onPress={onClose}>
+                  <Button color="danger" onPress={onClose}>
                     Cancel
                   </Button>
                   <Button color="primary" onPress={onClose}>

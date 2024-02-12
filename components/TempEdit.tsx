@@ -41,7 +41,7 @@ const TempEdit = () => {
       <div className="flex flex-col justify-center mt-5 max-w-xl">
         <RichTextEditor />
       </div>
-      <div className="flex mt-20 justify-end gap-5 max-w-xl">
+      <div className="flex mt-5 gap-5 max-w-xl">
         <Button href="/" as={Link} className="flex" color="danger">
           Cancel
         </Button>
