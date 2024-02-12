@@ -4,12 +4,15 @@ import {
   Input,
   Select,
   SelectItem,
+  Textarea,
 } from "@nextui-org/react"
 import RichTextEditor from "./RichTextEditor"
 import { Button } from "@nextui-org/button"
 import Link from "next/link"
+import { useState } from "react";
 
-const TempEdit = () => {
+const TempEdit = ({ parentToChild }: any) => {
+
   return (
     <section>
       <Input 
@@ -32,14 +35,16 @@ const TempEdit = () => {
         <SelectItem key="True" value="True">True</SelectItem>
         <SelectItem key="False" value="False">False</SelectItem>
       </Select>
-      <Input 
-        type="string"
-        label="Subject"
-        className="mt-5 max-w-xl"
-      />
+      {
+        parentToChild === "email" ? <Input type="string" label="Subject" className="mt-5 max-w-xl"/> : ''
+      }
       <p className="mt-5">Message</p>
       <div className="flex flex-col justify-center mt-5 max-w-xl">
-        <RichTextEditor />
+        {
+          parentToChild === "email" 
+          ? <RichTextEditor /> 
+          : <Textarea label="SMS Message" placeholder="Enter message text" minRows={5} className="h-40"/>
+        }
       </div>
       <div className="flex mt-5 gap-5 max-w-xl">
         <Button href="/" as={Link} className="flex" color="danger">
