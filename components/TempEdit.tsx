@@ -17,9 +17,9 @@ const TempEdit = ({ parentToChild }: any) => {
     <section>
       <Input 
         isRequired
-        type="email"
+        {... parentToChild === "email" ? {type:"email"} : {type:""}}
         label="Recipients"
-        placeholder="example@axon.com"
+        {... parentToChild === "email" ? {placeholder:"example@axon.com"} : {placeholder:"123-456-7890"}}
         className="mt-5 max-w-xl"
       />
       <Input 
