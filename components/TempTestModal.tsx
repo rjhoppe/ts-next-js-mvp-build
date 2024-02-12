@@ -39,7 +39,7 @@ const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) =
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button color="danger" variant="ghost" onPress={onClose}>
+                <Button color="danger" onPress={onClose}>
                   Cancel
                 </Button>
                 <Button color="primary" onPress={onClose}>

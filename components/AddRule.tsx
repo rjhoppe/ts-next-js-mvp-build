@@ -80,10 +80,10 @@ const AddRule = () => {
             </SelectItem>
           ))}
         </Select>
-        <Button href="/" as={Link} color="primary">
+        <Button href="/" as={Link} color="secondary">
           Edit Template
         </Button>
-        <Button href="/create-template" as={Link} color="primary"> 
+        <Button href="/create-template" as={Link} color="secondary"> 
           Create Template
         </Button>
       </div>
