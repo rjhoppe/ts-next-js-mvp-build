@@ -11,11 +11,15 @@ export default function handler(
     const phoneNumber = req.body['phone_number']
     const messageBody = req.body['message']
 
-    console.log(twloNumber)
-
     if (twloToken && twloSid && twloNumber) {
       const client = require('twilio')(twloSid, twloToken);
-  
+
+      console.log(twloToken)
+      console.log(twloSid)
+      console.log(twloNumber)
+      console.log(messageBody)
+      console.log(phoneNumber)
+
       client.messages
       .create({
          body: `${messageBody}`,
