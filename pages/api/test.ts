@@ -13,30 +13,25 @@ export default function handler(
     const twloToken = process.env.TWLO_TOKEN;
     const twloSid = process.env.TWLO_SID;
     const twloNumber = process.env.TWLO_NUMBER;
-    const data: ResponseData = req.body as ResponseData
-    const messageBody = data.message
-    const phoneNumber = data.phone_number
+    const phoneNumber = req.body['phone_number']
+    const messageBody = req.body['message']
 
-    // console.log(data)
-    console.log(typeof(req.body))
-    console.log(phoneNumber)
-
-  //   if (twloToken && twloSid && twloNumber) {
-  //     const client = require('twilio')(twloSid, twloToken);
+    if (twloToken && twloSid && twloNumber) {
+      const client = require('twilio')(twloSid, twloToken);
   
-  //     client.messages
-  //     .create({
-  //        body: `${messageBody}`,
-  //        from: `${twloNumber}`,
-  //        to: `${phoneNumber}`,
-  //      })
-  //   } else {
-  //     console.log('Failed to parse request body or data')
-  //     return
-  //   }
+      client.messages
+      .create({
+         body: `${messageBody}`,
+         from: `${twloNumber}`,
+         to: `${phoneNumber}`,
+       })
+    } else {
+      console.log('Failed to parse request body or data')
+      res.status(200).json({ message: 'Response' })
+    }
   } catch(error) {
     console.log(`Error: ${error}`)
-    return
+    res.status(404).json({ message: 'Response' })
   }
   console.log('Job complete!')
   return

@@ -27,6 +27,9 @@ const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) =
   const smsApiCall = async () => {
     await fetch('api/test', {
       method: 'POST',
+      headers: new Headers ({
+        "content-type": "application/json",
+      }),
       body: JSON.stringify({ phone_number: testData, message: body }),
     })
   }
