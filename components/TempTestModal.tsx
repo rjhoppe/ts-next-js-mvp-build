@@ -63,7 +63,7 @@ const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) =
                 <Button color="danger" onPress={onClose}>
                   Cancel
                 </Button>
-                <Button color="primary" onPress={smsApiCall}>
+                <Button color="primary" onPress={() => {smsApiCall(); onClose()}}>
                   Send
                 </Button>
               </ModalFooter>

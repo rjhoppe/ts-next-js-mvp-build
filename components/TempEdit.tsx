@@ -19,7 +19,7 @@ const TempEdit = ({ parentToChild }: any) => {
         isRequired
         {... parentToChild === "email" ? {type:"email"} : {type:""}}
         label="Recipients"
-        {... parentToChild === "email" ? {placeholder:"example@axon.com"} : {placeholder:"123-456-7890"}}
+        {... parentToChild === "email" ? {placeholder:"example@axon.com"} : {placeholder:"+12345678901"}}
         className="mt-5 max-w-xl"
       />
       <Input 
