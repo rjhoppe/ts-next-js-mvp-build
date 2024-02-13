@@ -49,7 +49,10 @@ const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) =
               <ModalBody>
                 <div className='flex flex-col gap-5'>
                   <Input isReadOnly label='Template' placeholder={template}></Input>
-                  <Input isRequired onChange={handleInputChange} label={`Recipient ${type}`}></Input>
+                  <Input isRequired onChange={handleInputChange} label={`Recipient ${type}`}
+                  {... type === "Email" ? {placeholder:"example@axon.com"} : {placeholder:"+12345678901"}}>
+
+                  </Input>
                   {
                     type === 'Email' ? <Input isReadOnly label='Subject' placeholder={subject}></Input> : null
 			            }

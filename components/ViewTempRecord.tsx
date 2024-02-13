@@ -44,12 +44,12 @@ template, type, subject, body } : TempViewRecordProps) => {
               <ModalFooter>
                 <div className='flex gap-5'>
                   <div className='flex mr-20'>
-                    <Button color="secondary" variant="ghost">
+                    <Button color="secondary">
                       Edit Message
                     </Button>
                   </div>
                   <div className='flex gap-5'>
-                    <Button color="danger" variant="ghost" onPress={onClose}>
+                    <Button color="danger" onPress={onClose}>
                       Cancel
                     </Button>
                     <Button color="primary" onPress={onClose}>
