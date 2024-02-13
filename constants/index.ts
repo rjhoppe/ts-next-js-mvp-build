@@ -132,8 +132,8 @@ export const temp_records = [
     type: 'SMS',
     actions: '',
     subject: '',
-    body: 'Your case status has been updated to "Investigator Assigned." Please visit our ' +
-    'website for more information. Please respond "CANCEL" to opt out of future case notifications.'
+    body: 'Your case status has been updated to Investigator Assigned. Please visit our ' +
+    'website for more information. Please respond CANCEL to opt out of future case notifications.'
   },
   {
     id: 'T2387547',
@@ -144,7 +144,7 @@ export const temp_records = [
     type: 'Email',
     actions: '',
     subject: 'An Update On Your Case Status',
-    body: 'Your case status has been updated to "Investigator Assigned." Please visit our ' +
+    body: 'Your case status has been updated to Investigator Assigned. Please visit our ' +
     'website for more information.'
   },
   {
@@ -156,7 +156,7 @@ export const temp_records = [
     type: 'Email',
     actions: '',
     subject: 'An Update On Your Case Status',
-    body: 'Your case status has been updated to "Court Scheduled." Please visit our ' +
+    body: 'Your case status has been updated to Court Scheduled. Please visit our ' +
     'website for more information.'
   },
   {
@@ -168,8 +168,8 @@ export const temp_records = [
     type: 'SMS',
     actions: '',
     subject: '',
-    body: 'Your case status has been updated to "Court Scheduled." Please visit our ' +
-    'website for more information. Please respond "CANCEL" to opt out of future case notifications.'
+    body: 'Your case status has been updated to Court Scheduled. Please visit our ' +
+    'website for more information. Please respond CANCEL to opt out of future case notifications.'
   },
   {
     id: 'T2387511',
@@ -204,7 +204,7 @@ export const temp_records = [
     type: 'SMS',
     actions: '',
     subject: 'An Update On Your Case Status',
-    body: 'Your case status has been updated to "Subject Arrested." Please visit our ' +
+    body: 'Your case status has been updated to Subject Arrested. Please visit our ' +
     'website for more information.'
   },
 ];

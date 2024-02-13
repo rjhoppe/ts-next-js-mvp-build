@@ -36,5 +36,6 @@ next-env.d.ts
 
 components/dummy.tsx
 
-/archive/
+/archive
 .env
+notes/*
