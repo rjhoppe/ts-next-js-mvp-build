@@ -14,11 +14,7 @@ export default function handler(
     if (twloToken && twloSid && twloNumber) {
       const client = require('twilio')(twloSid, twloToken);
 
-      console.log(twloToken)
-      console.log(twloSid)
-      console.log(twloNumber)
-      console.log(messageBody)
-      console.log(phoneNumber)
+      // all env values coming through in Vercel
 
       client.messages
       .create({
@@ -26,6 +22,8 @@ export default function handler(
          from: `${twloNumber}`,
          to: `${phoneNumber}`,
        })
+       console.log('Job complete!')
+       return res.status(200).json({ message: 'Success' });
     } else {
       console.log('Failed to parse request body or data')
       return res.status(500).json({ message: 'Internal Server Error' })
@@ -34,6 +32,4 @@ export default function handler(
     console.log(`Error: ${error}`)
     return res.status(404).json({ message: 'Failed to send text' })
   }
-  console.log('Job complete!')
-  return res.status(200).json({ message: 'Success' });
 }
