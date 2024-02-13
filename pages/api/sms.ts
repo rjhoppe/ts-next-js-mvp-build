@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
  
-export default function handler(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
@@ -16,12 +16,13 @@ export default function handler(
 
       // all env values coming through in Vercel
 
-      client.messages
+      await client.messages
       .create({
          body: `${messageBody}`,
          from: `${twloNumber}`,
          to: `${phoneNumber}`,
        })
+       .then((message: any) => console.log(message.sid))
        console.log('Job complete!')
        return res.status(200).json({ message: 'Success' });
     } else {
@@ -31,5 +32,5 @@ export default function handler(
   } catch(error) {
     console.log(`Error: ${error}`)
     return res.status(404).json({ message: 'Failed to send text' })
-  }
-}
+  };
+};
