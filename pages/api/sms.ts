@@ -28,15 +28,12 @@ export default function handler(
        })
     } else {
       console.log('Failed to parse request body or data')
-      res.status(500).json({ message: 'Internal Server Error' })
-      return
+      return res.status(500).json({ message: 'Internal Server Error' })
     }
   } catch(error) {
     console.log(`Error: ${error}`)
-    res.status(404).json({ message: 'Response' })
-    return
+    return res.status(404).json({ message: 'Failed to send text' })
   }
   console.log('Job complete!')
-  res.status(200).json({ message: 'Response' })
-  return
+  return res.status(200).json({ message: 'Success' });
 }
