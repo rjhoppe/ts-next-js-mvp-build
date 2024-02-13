@@ -5,6 +5,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   try {
+    // all env values coming through in Vercel
     const twloToken = process.env.TWLO_TOKEN;
     const twloSid = process.env.TWLO_SID;
     const twloNumber = process.env.TWLO_NUMBER;
@@ -14,8 +15,7 @@ export default async function handler(
     if (twloToken && twloSid && twloNumber) {
       const client = require('twilio')(twloSid, twloToken);
 
-      // all env values coming through in Vercel
-
+      // this needs to be await
       await client.messages
       .create({
          body: `${messageBody}`,
