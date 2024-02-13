@@ -36,13 +36,13 @@ const EditRuleRecord = ({ id, if_logic, then_logic, delay }: EditRuleRecordProps
                   <Input label='Then Logic' defaultValue={then_logic}></Input>
                   <Select 
                     label="Delay"
-                    selectedKeys={[delay]}
+                    defaultSelectedKeys={[delay]}
                   >
                     <SelectItem key="1 hour" value="1 hour">1 hour</SelectItem>
-                    <SelectItem key="2 hour" value="2 hours">2 hours</SelectItem>
-                    <SelectItem key="3 hour" value="3 hours">3 hours</SelectItem>
-                    <SelectItem key="12 hour" value="12 hours">12 hours</SelectItem>
-                    <SelectItem key="24 hour" value="24 hours">24 hours</SelectItem>
+                    <SelectItem key="2 hours" value="2 hours">2 hours</SelectItem>
+                    <SelectItem key="3 hours" value="3 hours">3 hours</SelectItem>
+                    <SelectItem key="12 hours" value="12 hours">12 hours</SelectItem>
+                    <SelectItem key="24 hours" value="24 hours">24 hours</SelectItem>
                   </Select>
                 </div>
               </ModalBody>
