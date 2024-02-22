@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "gen-types": "pnpm supabase gen types typescript --linked > types/supabase.ts"
   },
   "dependencies": {
     "@nextui-org/breadcrumbs": "^2.0.4",
@@ -24,6 +25,8 @@
     "@nextui-org/theme": "2.1.17",
     "@react-aria/ssr": "^3.8.0",
     "@react-aria/visually-hidden": "^3.8.6",
+    "@supabase/ssr": "^0.1.0",
+    "@supabase/supabase-js": "^2.39.4",
     "@types/node": "20.5.7",
     "@types/react": "18.2.21",
     "@types/react-dom": "18.2.7",
@@ -46,5 +49,8 @@
     "tailwindcss": "3.3.5",
     "twilio": "^4.22.0",
     "typescript": "5.0.4"
+  },
+  "devDependencies": {
+    "supabase": "^1.145.4"
   }
 }

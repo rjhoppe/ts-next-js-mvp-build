@@ -39,3 +39,4 @@ components/dummy.tsx
 /archive
 .env
 notes/*
+/app/auth-page/

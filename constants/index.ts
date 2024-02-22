@@ -17,39 +17,6 @@ import { HiPencil } from "react-icons/hi";
  import { MdSignpost } from "react-icons/md";
  import { BiSolidMessageDetail } from "react-icons/bi";
 
-
-// Nav Component
-
-// export const NAV_LINKS = [
-//   { href: '/', icon: '', key: 'post-contact', label: 'Post-Contact' },
-//   { href: '/', icon: '', key: 'community', label: 'Community' },
-//   { href: '/', icon: '', key: 'employee', label: 'Employee' },
-//   { href: '/', icon: '', key: 'automated-messaging', label: 'Automated Messaging' },
-//   { href: '/', icon: '', key: 'victim-notifications', label: 'Victim Notifications' },
-//   { href: '/', icon: '', key: 'settings', label: 'Settings' },
-//   { href: '/', icon: '', key: 'evidence', label: 'Evidence.com' },
-//   { href: '/', icon: '', key: 'sign-out', label: 'Sign Out' },
-// ];
-
-// export const NAV_APP_LINKS = [
-//   {
-//     title: 'Survey Dashboard',
-//     links: [
-//       { key: 'post-contact', label: 'Post-Contact' , href: '/', icon: '' },
-//       { key: 'community', label: 'Community', href: '/', icon: '' },
-//       { key: 'employee', label: 'Employee', href: '/', icon: '' },
-//     ],
-//   },
-//   {
-//     title: 'Messaging',
-//     links: [
-//       { key: 'automated-messaging', label: 'Automated Messaging', href: '/', icon: '' },
-//       { key: 'victim-notifications', label: 'Victim Notifications', href: '/', icon: '' },
-//     ],
-//   },
-// ];
-
-
 // Constants for Navbar props
 export const NEW_NAV_DASH_LINKS = [
   { href: '/', icon: IoMdChatboxes, key: 'post-contact', label: 'Post-Contact', title: 'Survey Dashboard' },
@@ -96,20 +63,31 @@ export const bcFormHeaders = [
   { title: 'Preview', separator:'', size:'lg',  key:'preview', class_name:'ml-10' },
 ];
 
-// Form Component
-
-// export const createCaseInputs = [
-//   {isRequired, type: 'email', label: 'Recipients', defaultValue:'example@axon.com', className:'mt-10 max-w-xs'},
-//   {type: 'email', label: 'Recipients', defaultValue:'example@axon.com', className:'mt-10 max-w-xs'}
-// ]
-
-
 // Icons Component
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
-// DataTable Component
+// DEV-PAGE SECTION
+export const dev_columns = [
+  {name: "ID", uid: "id", sortable: true},
+  {name: "CREATED AT", uid: "created_at"},
+  {name: "CASE ID", uid: "case_id"},
+  {name: "CASE NUMBER", uid: "case_number"},
+  {name: "CLIENT CODE", uid: "client_code"},
+  {name: "POLICE DEPARTMENT", uid: "police_dpt"},
+  {name: "ASSIGNEE", uid: "assignee"},
+  // {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
+  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
+  {name: "VICTIM NAMES", uid: "victim_names"},
+  {name: "VICTIM EMAILS", uid: "victim_emails"},
+  {name: "VICTIM PHONE NUMBERS", uid: "victim_phone_numbers"},
+  {name: "VICTIM IDS", uid: "victim_ids"},
+  // {name: "NOTIFICATION", uid: "notification"},
+  // {name: "OPT OUT VICTIM NAMES", uid: "opt_out_victim_names"},
+  // {name: "OPT OUT VICTIM IDS", uid: "opt_out_victim_ids"},
+  {name: "CASE STATUS", uid: "case_status"},
+]
 
 // TEMPLATES SECTION
 export const temp_columns = [
