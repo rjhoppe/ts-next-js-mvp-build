@@ -35,6 +35,8 @@ import {
   SearchIcon,
 } from "@/components/icons"
 
+// Remove records -> don't need static data
+// Replace records with rows
 import { columns, records, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
 
@@ -48,7 +50,7 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
 
 const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victims", "status", "last_modified_time", "actions"];
 
-type Records = DevPageTypes[];
+type records = DevPageTypes[];
 
 const DevPage = () => {
   const [rows, setRows] = useState<DevPageTypes[]>([]);
@@ -115,82 +117,82 @@ const DevPage = () => {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: Records, b: Records) => {
-      const first = a[sortDescriptor.column as keyof Records] as number;
-      const second = b[sortDescriptor.column as keyof Records] as number;
+    return [...items].sort((a: records | any, b: records | any) => {
+      const first = a[sortDescriptor.column as keyof records] as number;
+      const second = b[sortDescriptor.column as keyof records] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = React.useCallback((record: Records, columnKey: React.Key) => {
-    const cellValue = record[columnKey as keyof Records] as any;
+  const renderCell = React.useCallback((record: DevPageTypes, columnKey: React.Key) => {
+    const cellValue = record[columnKey as keyof DevPageTypes] as string;
 
-  switch (columnKey) {
-    case "case_number":
-      return (
-        <div className="flex flex-col">
-          <Link href="/" className="text-bold text-small text-blue-600 capitalize">{cellValue}</Link>
-          <p className="text-bold text-tiny capitalize">Time: {record[0].created_at}</p>
-          <p className="text-bold text-tiny capitalize">Incident type: {record[0].police_dpt}</p>
+    switch (columnKey) {
+      case "case_number":
+        return (
+          <div className="flex flex-col">
+            <Link href="/" className="text-bold text-small text-blue-600 capitalize">{cellValue}</Link>
+            <p className="text-bold text-tiny capitalize">Time: {record.case_time}</p>
+            <p className="text-bold text-tiny capitalize">Incident type: {record.case_type}</p>
 
-        </div>
-      );
-    case "assignee":
-      return (
-        <div className="flex flex-col">
-          <p className="text-bold text-small capitalize">{cellValue}</p>
-        </div>
-      );
-    case "victims":
-      return (
-        <div className="flex flex-col">
-          <p className="text-bold text-small capitalize">{record[0].victim_names}</p>
-        </div>
-      );
-    case "emails":
-      return(
-        <div className="flex flex-col">
-          <p className="text-bold text-small">{record[0].victim_emails}</p>
-        </div>
-      );
-    case "phone_numbers":
-      return(
-        <div className="flex flex-col">
-          <p className="text-bold text-small capitalize">{records[0].phone_numbers}</p>
-        </div>
-      );
-    case "status":
-      return (
-        <Chip className="capitalize" color={statusColorMap[record[0].case_status]} radius="sm" size="sm" variant="flat">
-          {cellValue.split("_").join(" ")}
-        </Chip>
-      );
-    case "actions":
-      return (
-        <div className="relative flex justify-center items-center gap-2">
-          <Tooltip content="View">
-            <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-              <ViewCaseRecord
-                id={record[0].id}
-                emails={record[0].victim_emails}
-                case_number={record[0].case_number}
-                case_time={record[0].created_at}
-                case_type={record[0].case_type}
-                assignee={record[0].assignee}
-                victims={record[0].victim_names}
-                last_modified_by={record[0].last_modified_by}
-                last_modified_time={record[0].last_date_modified}
-                phone_numbers={record[0].victim_phone_numbers}
-                status={record[0].case_status}
-              />
-            </span>
-          </Tooltip>
-        </div>
-      );
-    default:
-      return cellValue;
+          </div>
+        );
+      case "assignee":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{cellValue}</p>
+          </div>
+        );
+      case "victims":
+        return (
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{record.victim_names}</p>
+          </div>
+        );
+      case "emails":
+        return(
+          <div className="flex flex-col">
+            <p className="text-bold text-small">{record.victim_emails}</p>
+          </div>
+        );
+      case "phone_numbers":
+        return(
+          <div className="flex flex-col">
+            <p className="text-bold text-small capitalize">{record.victim_phone_numbers}</p>
+          </div>
+        );
+      case "status":
+        return (
+          <Chip className="capitalize" color={statusColorMap[record.case_status]} radius="sm" size="sm" variant="flat">
+            {cellValue}
+          </Chip>
+        );
+      case "actions":
+        return (
+          <div className="relative flex justify-center items-center gap-2">
+            <Tooltip content="View">
+              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <ViewCaseRecord
+                  id={record.id}
+                  emails={record.victim_emails}
+                  case_number={record.case_number}
+                  case_time={'test value cannot be null'}
+                  case_type={record.case_type}
+                  assignee={record.assignee}
+                  victims={record.victim_names}
+                  last_modified_by={record.last_modified_by}
+                  last_modified_time={record.last_date_modified}
+                  phone_numbers={record.victim_phone_numbers}
+                  status={record.case_status}
+                />
+              </span>
+            </Tooltip>
+          </div>
+        );
+      default:
+        return cellValue;
     }
   }, []);
 
@@ -293,7 +295,7 @@ const DevPage = () => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-small">Total cases: {records.length}</span>
+          <span className="text-small">Total cases: {rows.length}</span>
           <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}
@@ -388,9 +390,9 @@ const DevPage = () => {
         )}
       </TableHeader>
       <TableBody emptyContent={"No records found"} items={sortedItems}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{renderCell(rows, columnKey)}</TableCell>}
+        {rows.map((row) =>
+          <TableRow key={row.id}>
+            {(columnKey) => <TableCell>{renderCell(row, columnKey)}</TableCell>}
           </TableRow>
         )}
       </TableBody>
