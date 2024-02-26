@@ -36,8 +36,6 @@ import {
   SearchIcon,
 } from "@/components/icons"
 
-// Remove records -> don't need static data
-// Replace records with rows
 import { columns, records, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
 
