@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import {
   Table,
@@ -20,12 +21,12 @@ import {
   ChipProps,
   SortDescriptor,
   Link,
+  Spinner,
 } from "@nextui-org/react";
 
-import supabase from "@/lib/supabase"
+import supabase from "@/lib/supabase";
 import { dev_columns } from "@/constants/index";
-import { DevPageTypes } from "@/types/collection"
-import { createClient } from '@supabase/supabase-js'
+import { DevPageTypes } from "@/types/collection";
 import { useState, useEffect, useCallback } from "react";
 
 import ViewCaseRecord from "@/components/ViewCaseRecord";
@@ -41,27 +42,31 @@ import { columns, records, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  invest_assigned: "primary",
-  court_scheduled: "primary",
-  rejected: "danger",
-  closed: "danger",
+  "Active": "success",
+  "Investigator Assigned": "primary",
+  "Court Scheduled": "primary",
+  "Rejected": "danger",
+  "Closed": "danger",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victims", "status", "last_modified_time", "actions"];
-
-type records = DevPageTypes[];
+const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victim_names", "case_status", "last_date_modified", "actions"];
 
 const DevPage = () => {
   const [rows, setRows] = useState<DevPageTypes[]>([]);
+  const [isLoading, setIsLoading] = React.useState(true);
   const fetchRows = useCallback(async () => {
     const { data, error } = await supabase
     .from('cases_test_upload')
     .select(`*`)
     .returns<DevPageTypes[]>();
-    if (error) {
+
+    if (!data && !error) {
+      console.log('Data is loading...')
+    } else if (error) {
       console.log("error", error);
+      setIsLoading(false);
     } else {
+      setIsLoading(false);
       setRows(data);
     }
   }, []);
@@ -76,7 +81,7 @@ const DevPage = () => {
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: "last_modified_time",
+    column: "last_date_modified",
     direction: "descending",
   });
 
@@ -85,13 +90,14 @@ const DevPage = () => {
   const hasSearchFilter = Boolean(filterValue);
 
   const headerColumns = React.useMemo(() => {
-    if (visibleColumns === "all") return columns;
+    if (visibleColumns === "all") return dev_columns;
 
-    return columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
+    return dev_columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredRecords = [...records];
+    let filteredRecords = [...rows];
+    console.log(rows)
 
     if (hasSearchFilter) {
       filteredRecords = filteredRecords.filter((record) =>
@@ -100,7 +106,7 @@ const DevPage = () => {
     }
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
       filteredRecords = filteredRecords.filter((record) =>
-        Array.from(statusFilter).includes(record.status),
+        Array.from(statusFilter).includes(record.case_status),
       );
     }
 
@@ -117,9 +123,9 @@ const DevPage = () => {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: records | any, b: records | any) => {
-      const first = a[sortDescriptor.column as keyof records] as number;
-      const second = b[sortDescriptor.column as keyof records] as number;
+    return [...items].sort((a: DevPageTypes, b: DevPageTypes) => {
+      const first = a[sortDescriptor.column as keyof DevPageTypes] as number;
+      const second = b[sortDescriptor.column as keyof DevPageTypes] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
@@ -145,28 +151,28 @@ const DevPage = () => {
             <p className="text-bold text-small capitalize">{cellValue}</p>
           </div>
         );
-      case "victims":
+      case "victim_names":
         return (
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{record.victim_names}</p>
           </div>
         );
-      case "emails":
+      case "victim_emails":
         return(
           <div className="flex flex-col">
             <p className="text-bold text-small">{record.victim_emails}</p>
           </div>
         );
-      case "phone_numbers":
+      case "victim_phone_numbers":
         return(
           <div className="flex flex-col">
             <p className="text-bold text-small capitalize">{record.victim_phone_numbers}</p>
           </div>
         );
-      case "status":
+      case "case_status":
         return (
           <Chip className="capitalize" color={statusColorMap[record.case_status]} radius="sm" size="sm" variant="flat">
-            {cellValue}
+            {record.case_status}
           </Chip>
         );
       case "actions":
@@ -178,7 +184,7 @@ const DevPage = () => {
                   id={record.id}
                   emails={record.victim_emails}
                   case_number={record.case_number}
-                  case_time={'test value cannot be null'}
+                  case_time={record.case_time}
                   case_type={record.case_type}
                   assignee={record.assignee}
                   victims={record.victim_names}
@@ -285,7 +291,7 @@ const DevPage = () => {
                 selectionMode="multiple"
                 onSelectionChange={setVisibleColumns}
               >
-                {columns.map((column) => (
+                {dev_columns.map((column) => (
                   <DropdownItem key={column.uid} className="capitalize">
                     {capitalize(column.name)}
                   </DropdownItem>
@@ -389,7 +395,9 @@ const DevPage = () => {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No records found"} items={sortedItems}>
+      <TableBody emptyContent={"No records found"} items={sortedItems} 
+      isLoading={isLoading} loadingContent={<Spinner label="Loading..." />}
+      >
         {rows.map((row) =>
           <TableRow key={row.id}>
             {(columnKey) => <TableCell>{renderCell(row, columnKey)}</TableCell>}

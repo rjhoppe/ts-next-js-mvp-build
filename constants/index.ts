@@ -77,7 +77,7 @@ export const dev_columns = [
   {name: "CLIENT CODE", uid: "client_code"},
   {name: "POLICE DEPARTMENT", uid: "police_dpt"},
   {name: "ASSIGNEE", uid: "assignee"},
-  // {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
+  {name: "LAST DATE MODIFIED", uid: "last_date_modified", sortable: true},
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
   {name: "VICTIM NAMES", uid: "victim_names"},
   {name: "VICTIM EMAILS", uid: "victim_emails"},
@@ -87,6 +87,7 @@ export const dev_columns = [
   // {name: "OPT OUT VICTIM NAMES", uid: "opt_out_victim_names"},
   // {name: "OPT OUT VICTIM IDS", uid: "opt_out_victim_ids"},
   {name: "CASE STATUS", uid: "case_status"},
+  {name: "ACTIONS", uid: "actions"}
 ]
 
 // TEMPLATES SECTION
