@@ -102,6 +102,8 @@ const DataTable = () => {
     });
   }, [sortDescriptor, items]);
 
+  console.log(items)
+
   const renderCell = React.useCallback((record: Records, columnKey: React.Key) => {
     const cellValue = record[columnKey as keyof Records] as string;
 

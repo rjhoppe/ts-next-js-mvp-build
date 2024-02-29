@@ -38,6 +38,7 @@ import {
 
 import { columns, records, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
+// import { data } from "autoprefixer";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   "Active": "success",
@@ -66,6 +67,7 @@ const DevPage = () => {
     } else {
       setIsLoading(false);
       setRows(data);
+      // console.log(rows)
     }
   }, []);
   
@@ -95,19 +97,22 @@ const DevPage = () => {
 
   const filteredItems = React.useMemo(() => {
     let filteredRecords = [...rows];
-    console.log(rows)
+    // console.log(`Number of rows: ${rows.length}`)
 
     if (hasSearchFilter) {
-      filteredRecords = filteredRecords.filter((record) =>
-        record.assignee.toLowerCase().includes(filterValue.toLowerCase()),
+      filteredRecords = filteredRecords.filter((row) =>
+        row.assignee.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
+    
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredRecords = filteredRecords.filter((record) =>
-        Array.from(statusFilter).includes(record.case_status),
+      filteredRecords = filteredRecords.filter((row) =>
+        Array.from(statusFilter).includes(row.case_status_id),
+        // console.log(filteredRecords)
+        // console.log(rows)
       );
     }
-
+    console.log(filteredRecords)
     return filteredRecords;
   }, [filterValue, hasSearchFilter, statusFilter]);
 
@@ -120,12 +125,15 @@ const DevPage = () => {
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
 
+  // console.log(filteredItems)
+  // console.log(rowsPerPage)
+  // console.log(pages)
+
   const sortedItems = React.useMemo(() => {
     return [...items].sort((a: DevPageTypes, b: DevPageTypes) => {
       const first = a[sortDescriptor.column as keyof DevPageTypes] as number;
       const second = b[sortDescriptor.column as keyof DevPageTypes] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
-
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
@@ -221,6 +229,7 @@ const DevPage = () => {
     if (value) {
       setFilterValue(value);
       setPage(1);
+      console.log(value);
     } else {
       setFilterValue("");
     }
@@ -299,7 +308,7 @@ const DevPage = () => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-small">Total cases: {rows.length}</span>
+          <span className="text-small">Total cases: {filteredItems.length }</span>
           <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}
@@ -396,7 +405,7 @@ const DevPage = () => {
       <TableBody emptyContent={"No records found"} items={sortedItems} 
       isLoading={isLoading} loadingContent={<Spinner label="Loading..." />}
       >
-        {rows.map((row) =>
+        {filteredItems.map((row) =>
           <TableRow key={row.id}>
             {(columnKey) => <TableCell>{renderCell(row, columnKey)}</TableCell>}
           </TableRow>
