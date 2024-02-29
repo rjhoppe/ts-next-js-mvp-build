@@ -52,30 +52,31 @@ const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victim_names", "cas
 
 // type DevPageProps = ReturnType<DevPageTypes[]>;
 
-const DevPage = () => {
-  const [rows, setRows] = useState<DevPageTypes[]>([]);
-  const [isLoading, setIsLoading] = React.useState(true);
-  const fetchRows = useCallback(async () => {
-    const { data, error } = await supabase
-    .from('cases_test_upload')
-    .select()
-    .order('last_date_modified', { ascending: false })
-    .returns<DevPageTypes[]>();
+const DevPage2 = ({rows}: any) => {
+  console.log({rows})
+  // const [rows, setRows] = useState<DevPageTypes[]>([]);
+  // const [isLoading, setIsLoading] = React.useState(true);
+  // const fetchRows = useCallback(async () => {
+  //   const { data, error } = await supabase
+  //   .from('cases_test_upload')
+  //   .select()
+  //   .order('last_date_modified', { ascending: false })
+  //   .returns<DevPageTypes[]>();
 
-    if (!data && !error) {
-      console.log('Data is loading...')
-    } else if (error) {
-      console.log("error", error);
-      setIsLoading(false);
-    } else {
-      setIsLoading(false);
-      setRows(data);
-    }
-  }, []);
+  //   if (!data && !error) {
+  //     console.log('Data is loading...')
+  //   } else if (error) {
+  //     console.log("error", error);
+  //     setIsLoading(false);
+  //   } else {
+  //     setIsLoading(false);
+  //     setRows(data);
+  //   }
+  // }, []);
   
-  useEffect(() => {
-    fetchRows();
-  }, [fetchRows]);
+  // useEffect(() => {
+  //   fetchRows();
+  // }, [fetchRows]);
 
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
@@ -310,12 +311,7 @@ const DevPage = () => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-small">Total cases:
-          {
-            filteredItems.length > 0
-            ? filteredItems.length 
-            : rows.length
-          }
+          <span className="text-small">Total cases: {rows.length}
           </span>
           <label className="flex items-center text-small">
             Rows per page:
@@ -412,21 +408,14 @@ const DevPage = () => {
       </TableHeader>
       <TableBody emptyContent={"No records found"} items={sortedItems} 
       >
-        {filteredItems.length > 0
-          ? 
-          filteredItems.map((row) =>
+        {(row) => (
           <TableRow key={row.id}>
             {(columnKey) => <TableCell>{renderCell(row, columnKey)}</TableCell>}
-          </TableRow>)
-          : 
-          filteredItems.map((row) =>
-          <TableRow key={row.id}>
-            {(columnKey) => <TableCell>{renderCell(row, columnKey)}</TableCell>}
-          </TableRow>)
-        }
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   );
 }
 
-export default DevPage
+export default DevPage2
