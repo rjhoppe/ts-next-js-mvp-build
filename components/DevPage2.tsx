@@ -25,7 +25,7 @@ import {
 } from "@nextui-org/react";
 
 import supabase from "@/lib/supabase";
-import { dev_columns } from "@/constants/index";
+import { data_columns } from "@/constants/index";
 import { DevPageTypes } from "@/types/collection";
 import { useState, useEffect, useCallback } from "react";
 
@@ -36,7 +36,7 @@ import {
   SearchIcon,
 } from "@/components/icons"
 
-import { columns, records, statusOptions } from "@/constants/index";
+import { statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
 // import { data } from "autoprefixer";
 
@@ -50,34 +50,11 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
 
 const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victim_names", "case_status", "last_date_modified", "actions"];
 
-// type DevPageProps = ReturnType<DevPageTypes[]>;
+type DevPage2Props = {
+  rows: DevPageTypes[]
+}
 
-const DevPage2 = ({rows}: any) => {
-  console.log({rows})
-  // const [rows, setRows] = useState<DevPageTypes[]>([]);
-  // const [isLoading, setIsLoading] = React.useState(true);
-  // const fetchRows = useCallback(async () => {
-  //   const { data, error } = await supabase
-  //   .from('cases_test_upload')
-  //   .select()
-  //   .order('last_date_modified', { ascending: false })
-  //   .returns<DevPageTypes[]>();
-
-  //   if (!data && !error) {
-  //     console.log('Data is loading...')
-  //   } else if (error) {
-  //     console.log("error", error);
-  //     setIsLoading(false);
-  //   } else {
-  //     setIsLoading(false);
-  //     setRows(data);
-  //   }
-  // }, []);
-  
-  // useEffect(() => {
-  //   fetchRows();
-  // }, [fetchRows]);
-
+const DevPage2 = ({ rows }: DevPage2Props ) => {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
@@ -93,9 +70,9 @@ const DevPage2 = ({rows}: any) => {
   const hasSearchFilter = Boolean(filterValue);
 
   const headerColumns = React.useMemo(() => {
-    if (visibleColumns === "all") return dev_columns;
+    if (visibleColumns === "all") return data_columns;
 
-    return dev_columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
+    return data_columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
@@ -301,7 +278,7 @@ const DevPage2 = ({rows}: any) => {
                 selectionMode="multiple"
                 onSelectionChange={setVisibleColumns}
               >
-                {dev_columns.map((column) => (
+                {data_columns.map((column) => (
                   <DropdownItem key={column.uid} className="capitalize">
                     {capitalize(column.name)}
                   </DropdownItem>

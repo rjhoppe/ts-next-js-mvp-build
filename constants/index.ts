@@ -69,7 +69,7 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 // DEV-PAGE SECTION
-export const dev_columns = [
+export const data_columns = [
   {name: "ID", uid: "id", sortable: true},
   {name: "CREATED AT", uid: "created_at"},
   {name: "CASE ID", uid: "case_id"},
@@ -249,7 +249,7 @@ export const rules_records = [
 ];
 
 // RECORDS SECTION - DUMMY DATA
-export const columns = [
+export const dummy_columns = [
   {name: "ID", uid: "id", sortable: true},
   {name: "CASE NUMBER", uid: "case_number", sortable: true},
   {name: "CASE TIME", uid: "case_time"},
@@ -273,7 +273,7 @@ export const statusOptions = [
   {name: "Closed", uid: "closed"},
 ];
 
-export const records = [
+export const dummy_records = [
   {
     id: 1,
     victims: "Tony Reichert",

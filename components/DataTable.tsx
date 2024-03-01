@@ -29,8 +29,9 @@ import {
   SearchIcon,
 } from "@/components/icons"
 
-import { columns, records, statusOptions } from "@/constants/index";
+import { data_columns, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
+import { DataTableTypes } from "@/types/collection";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -40,12 +41,13 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   closed: "danger",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victims", "status", "last_modified_time", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victim_names", "case_status", "last_date_modified", "actions"];
 
-type Records = typeof records[0];
+type DataTableProps = {
+  rows: DataTableTypes[]
+}
 
-const DataTable = () => {
-  
+const DataTable = ({ rows }: DataTableProps) => {
 	const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
@@ -61,13 +63,13 @@ const DataTable = () => {
   const hasSearchFilter = Boolean(filterValue);
 
   const headerColumns = React.useMemo(() => {
-    if (visibleColumns === "all") return columns;
+    if (visibleColumns === "all") return data_columns;
 
-    return columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
+    return data_columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredRecords = [...records];
+    let filteredRecords = [...rows];
 
     if (hasSearchFilter) {
       filteredRecords = filteredRecords.filter((record) =>
@@ -75,8 +77,8 @@ const DataTable = () => {
       );
     }
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
-      filteredRecords = filteredRecords.filter((record) =>
-        Array.from(statusFilter).includes(record.status),
+      filteredRecords = filteredRecords.filter((row) =>
+        Array.from(statusFilter).includes(row.case_status),
       );
     }
 
@@ -93,9 +95,9 @@ const DataTable = () => {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: Records, b: Records) => {
-      const first = a[sortDescriptor.column as keyof Records] as number;
-      const second = b[sortDescriptor.column as keyof Records] as number;
+    return [...items].sort((a: DataTableTypes, b: DataTableTypes) => {
+      const first = a[sortDescriptor.column as keyof DataTableTypes] as number;
+      const second = b[sortDescriptor.column as keyof DataTableTypes] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
@@ -104,8 +106,8 @@ const DataTable = () => {
 
   console.log(items)
 
-  const renderCell = React.useCallback((record: Records, columnKey: React.Key) => {
-    const cellValue = record[columnKey as keyof Records] as string;
+  const renderCell = React.useCallback((record: DataTableTypes, columnKey: React.Key) => {
+    const cellValue = record[columnKey as keyof DataTableTypes] as string;
 
     switch (columnKey) {
       case "case_number":
@@ -123,46 +125,28 @@ const DataTable = () => {
             <p className="text-bold text-small capitalize">{cellValue}</p>
           </div>
         );
-      case "victims":
+      case "victim_names":
         return (
           <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">
-              {
-                typeof(record.victims) === 'object' 
-                ? record.victims.join(", ") 
-                : record.victims
-              }
-            </p>
+            <p className="text-bold text-small capitalize">{record.victim_names}</p>
           </div>
         );
-      case "emails":
+      case "victim_emails":
         return(
           <div className="flex flex-col">
-            <p className="text-bold text-small">
-              {
-                typeof(record.emails) === 'object' 
-                ? record.emails.join(", ")
-                : record.emails
-              }
-            </p>
+            <p className="text-bold text-small">{record.victim_emails}</p>
           </div>
         );
-      case "phone_numbers":
+      case "victim_phone_numbers":
         return(
           <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">
-              {
-                typeof(record.phone_numbers) === 'object' 
-                ? record.phone_numbers.join(", ") 
-                : record.phone_numbers
-              }
-            </p>
+            <p className="text-bold text-small capitalize">{record.victim_phone_numbers}</p>
           </div>
         );
-      case "status":
+      case "case_status":
         return (
-          <Chip className="capitalize" color={statusColorMap[record.status]} radius="sm" size="sm" variant="flat">
-            {cellValue.split("_").join(" ")}
+          <Chip className="capitalize" color={statusColorMap[record.case_status]} radius="sm" size="sm" variant="flat">
+            {record.case_status}
           </Chip>
         );
       case "actions":
@@ -172,16 +156,16 @@ const DataTable = () => {
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                 <ViewCaseRecord
                   id={record.id}
-                  emails={record.emails}
+                  emails={record.victim_emails}
                   case_number={record.case_number}
                   case_time={record.case_time}
                   case_type={record.case_type}
                   assignee={record.assignee}
-                  victims={record.victims}
+                  victims={record.victim_names}
                   last_modified_by={record.last_modified_by}
-                  last_modified_time={record.last_modified_time}
-                  phone_numbers={record.phone_numbers}
-                  status={record.status}
+                  last_modified_time={record.last_date_modified}
+                  phone_numbers={record.victim_phone_numbers}
+                  status={record.case_status}
                 />
               </span>
             </Tooltip>
@@ -281,7 +265,7 @@ const DataTable = () => {
                 selectionMode="multiple"
                 onSelectionChange={setVisibleColumns}
               >
-                {columns.map((column) => (
+                {data_columns.map((column) => (
                   <DropdownItem key={column.uid} className="capitalize">
                     {capitalize(column.name)}
                   </DropdownItem>
@@ -291,7 +275,7 @@ const DataTable = () => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-small">Total cases: {records.length}</span>
+          <span className="text-small">Total cases: {rows.length}</span>
           <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}
@@ -386,9 +370,9 @@ const DataTable = () => {
         )}
       </TableHeader>
       <TableBody emptyContent={"No records found"} items={sortedItems}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+        {(row) => (
+          <TableRow key={row.id}>
+            {(columnKey) => <TableCell>{renderCell(row, columnKey)}</TableCell>}
           </TableRow>
         )}
       </TableBody>

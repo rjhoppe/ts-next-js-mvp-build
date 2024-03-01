@@ -10,6 +10,7 @@ import TempTable from "@/components/TempTable";
 import LayoutBreadcrumb from "@/components/LayoutBreadcrumb";
 import { Divider } from "@nextui-org/divider";
 import { useState } from "react";
+import DataTableFetch from "@/components/DataTableFetch";
 // import { title, subtitle } from "@/components/primitives";
 
 export default function Home() {
@@ -26,7 +27,7 @@ export default function Home() {
 			<Divider className='my-4'/>
 			{
 				data === 'templates' ? <TempTable /> : data === 'rules' ? <RulesTable />
-				: <DataTable />
+				: <DataTableFetch />
 			}
 		</>
 	)

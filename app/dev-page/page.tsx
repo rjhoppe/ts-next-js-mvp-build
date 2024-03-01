@@ -25,7 +25,6 @@ import {
 } from "@nextui-org/react";
 
 import supabase from "@/lib/supabase";
-import { dev_columns } from "@/constants/index";
 import { DevPageTypes } from "@/types/collection";
 import { useState, useEffect, useCallback } from "react";
 
@@ -36,7 +35,7 @@ import {
   SearchIcon,
 } from "@/components/icons"
 
-import { columns, records, statusOptions } from "@/constants/index";
+import { data_columns, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
 // import { data } from "autoprefixer";
 
@@ -92,9 +91,9 @@ const DevPage = () => {
   const hasSearchFilter = Boolean(filterValue);
 
   const headerColumns = React.useMemo(() => {
-    if (visibleColumns === "all") return dev_columns;
+    if (visibleColumns === "all") return data_columns;
 
-    return dev_columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
+    return data_columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
@@ -300,7 +299,7 @@ const DevPage = () => {
                 selectionMode="multiple"
                 onSelectionChange={setVisibleColumns}
               >
-                {dev_columns.map((column) => (
+                {data_columns.map((column) => (
                   <DropdownItem key={column.uid} className="capitalize">
                     {capitalize(column.name)}
                   </DropdownItem>
