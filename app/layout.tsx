@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { Providers } from "./providers";
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import QueryProvider from "@/components/QueryProvider";
 import NewNavbar from "@/components/NavBarNew";
 
 export const metadata: Metadata = {
@@ -21,6 +22,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body>
+				<QueryProvider>
 				<Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
 					<div className="flex flex-row w-screen">
 						<NewNavbar />
@@ -36,6 +38,7 @@ export default function RootLayout({
 					<footer className="w-full flex items-center justify-center py-3">
 					</footer>
 				</Providers>
+				</QueryProvider>
 			</body>
 		</html>
 	);
