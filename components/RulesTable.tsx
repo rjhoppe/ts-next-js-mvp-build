@@ -1,6 +1,6 @@
 "use client"
 import React from "react";
-import { rules_columns, rules_records, statusOptions } from "@/constants/index";
+import { rules_columns, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
 import {
   Table,
@@ -30,6 +30,7 @@ import Link from "next/link";
 
 import EditRuleRecord from "./EditRuleRecord";
 import ViewRuleRecord from "./ViewRuleRecord";
+import { RulesTableTypes } from "@/types/collection";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -37,11 +38,13 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["id", "if_logic", "then_logic", "last_modified_time", "last_modified_by", "delay", "actions"];
+const INITIAL_VISIBLE_COLUMNS = ["id", "if_logic", "then_logic", "last_date_modified", "last_modified_by", "delay", "actions"];
 
-type Rules = typeof rules_records[0];
+type RulesTableProps = {
+  rows: RulesTableTypes[]
+}
 
-const RulesTable = () => {
+const RulesTable = ({ rows }: RulesTableProps) => {
   const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
@@ -63,7 +66,7 @@ const RulesTable = () => {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredUsers = [...rules_records];
+    let filteredUsers = [...rows];
 
     if (hasSearchFilter) {
       filteredUsers = filteredUsers.filter((record) =>
@@ -89,17 +92,17 @@ const RulesTable = () => {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: Rules, b: Rules) => {
-      const first = a[sortDescriptor.column as keyof Rules] as any;
-      const second = b[sortDescriptor.column as keyof Rules] as any;
+    return [...items].sort((a: RulesTableTypes, b: RulesTableTypes) => {
+      const first = a[sortDescriptor.column as keyof RulesTableTypes] as number;
+      const second = b[sortDescriptor.column as keyof RulesTableTypes] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = React.useCallback((record: Rules, columnKey: React.Key) => {
-    const cellValue = record[columnKey as keyof Rules];
+  const renderCell = React.useCallback((record: RulesTableTypes, columnKey: React.Key) => {
+    const cellValue = record[columnKey as keyof RulesTableTypes];
 
     switch (columnKey) {
       case "id":
@@ -114,7 +117,7 @@ const RulesTable = () => {
             <Tooltip content="Edit">
               <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                 <EditRuleRecord 
-                  id={record.id}
+                  id={record.rule_id}
                   if_logic={record.if_logic}
                   then_logic={record.then_logic}
                   delay={record.delay}
@@ -130,12 +133,12 @@ const RulesTable = () => {
               <DropdownMenu>
                 <DropdownItem isReadOnly>
                   <ViewRuleRecord 
-                    id={record.id}
+                    id={record.rule_id}
                     if_logic={record.if_logic}
                     then_logic={record.then_logic}
                     delay={record.delay}
                     last_modified_by={record.last_modified_by}
-                    last_modified_time={record.last_modified_time}
+                    last_modified_time={record.last_date_modified}
                   />
                 </DropdownItem>
                 <DropdownItem>Delete</DropdownItem>
@@ -184,7 +187,7 @@ const RulesTable = () => {
       <div className="flex flex-col gap-4">
         <div className="flex justify-between gap-3 items-end">
           <div className="flex">
-            <span className="text-small">Total rules: {rules_records.length}</span>
+            <span className="text-small">Total rules: {rows.length}</span>
           </div>
           <div className="flex gap-3">
             <Dropdown>
@@ -307,9 +310,9 @@ const RulesTable = () => {
         )}
       </TableHeader>
       <TableBody emptyContent={"No users found"} items={sortedItems}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+        {(row) => (
+          <TableRow key={row.id}>
+            {(columnKey) => <TableCell>{renderCell(row, columnKey)}</TableCell>}
           </TableRow>
         )}
       </TableBody>

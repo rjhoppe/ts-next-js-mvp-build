@@ -1,5 +1,4 @@
 "use client"
-
 import React from "react";
 import {
   Table,
@@ -34,20 +33,23 @@ import {
   SearchIcon,
 } from "@/components/icons"
 
-import { temp_columns, temp_records, statusOptions} from "@/constants/index";
+import { temp_columns, statusOptions} from "@/constants/index";
 import { capitalize } from "@/app/utils";
+import { TempTableTypes } from "@/types/collection";
 
 const activeColorMap: Record<string, ChipProps["color"]> = {
   "True": "success",
   "False": "danger",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["id", "template", "last_modified_time", "last_modified_by", 
+const INITIAL_VISIBLE_COLUMNS = ["id", "template_name", "last_date_modified", "last_modified_by", 
 "active", "type", "actions"];
 
-type Template = typeof temp_records[0];
+type TempTableProps = {
+  rows: TempTableTypes[]
+}
 
-const TempTable = () => {
+const TempTable = ({ rows }: TempTableProps) => {
 	const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
@@ -69,11 +71,11 @@ const TempTable = () => {
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
-    let filteredRecords = [...temp_records];
+    let filteredRecords = [...rows];
 
     if (hasSearchFilter) {
       filteredRecords = filteredRecords.filter((record) =>
-        record.template.toLowerCase().includes(filterValue.toLowerCase()),
+        record.template_name.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
@@ -95,35 +97,19 @@ const TempTable = () => {
   }, [page, filteredItems, rowsPerPage]);
 
   const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: Template, b: Template) => {
-      const first = a[sortDescriptor.column as keyof Template] as any;
-      const second = b[sortDescriptor.column as keyof Template] as any;
+    return [...items].sort((a: TempTableTypes, b: TempTableTypes) => {
+      const first = a[sortDescriptor.column as keyof TempTableTypes] as number;
+      const second = b[sortDescriptor.column as keyof TempTableTypes] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = React.useCallback((record: Template, columnKey: React.Key) => {
-    const cellValue = record[columnKey as keyof Template] as string;
+  const renderCell = React.useCallback((record: TempTableTypes, columnKey: React.Key) => {
+    const cellValue = record[columnKey as keyof TempTableTypes] as string;
 
     switch (columnKey) {
-      case "case_number":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">Time: {record.last_modified_time}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">Incident type: {record.template}</p>
-
-          </div>
-        );
-      case "assignee":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-            <p className="text-bold text-tiny capitalize text-default-400">{record.last_modified_by}</p>
-          </div>
-        );
       case "active":
         return (
           <Chip className="capitalize" color={activeColorMap[record.active]} size="sm" variant="flat">
@@ -137,20 +123,20 @@ const TempTable = () => {
               <Tooltip content="Test">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                   <TempTestModal
-                    template={record.template}
+                    template={record.template_name}
                     type={record.type}
                     subject={record.subject}
-                    body={record.body}
+                    body={record.message}
                   />
                 </span>
               </Tooltip>
               <Tooltip content="Edit">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                   <EditTempRecord 
-                    template={record.template}
+                    template={record.template_name}
                     type={record.type}
                     subject={record.subject}
-                    body={record.body}
+                    body={record.message}
                     active={record.active}
                   />
                 </span>
@@ -165,13 +151,13 @@ const TempTable = () => {
               <DropdownMenu>
                 <DropdownItem isReadOnly key='view_temp' >
                   <ViewTempRecord
-                    id={record.id}
-                    last_modified_time={record.last_modified_time}
+                    id={record.template_id}
+                    last_modified_time={record.last_date_modified}
                     last_modified_by={record.last_modified_by}
-                    template={record.template}
+                    template={record.template_name}
                     type={record.type}
                     subject={record.subject}
-                    body={record.body}
+                    body={record.message}
                     active={record.active}
                   />
                 </DropdownItem>
@@ -288,7 +274,7 @@ const TempTable = () => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-small">Total templates: {temp_records.length}</span>
+          <span className="text-small">Total templates: {rows.length}</span>
           <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}
@@ -384,9 +370,9 @@ const TempTable = () => {
         )}
       </TableHeader>
       <TableBody emptyContent={"No records found"} items={sortedItems}>
-        {(item) => (
-          <TableRow key={item.template}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+        {(row) => (
+          <TableRow key={row.id}>
+            {(columnKey) => <TableCell>{renderCell(row, columnKey)}</TableCell>}
           </TableRow>
         )}
       </TableBody>

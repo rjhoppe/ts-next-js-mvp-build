@@ -1,4 +1,5 @@
-"use client"
+"use client";
+
 import React from "react";
 import {
   Table,
@@ -20,41 +21,47 @@ import {
   ChipProps,
   SortDescriptor,
   Link,
+  Spinner,
 } from "@nextui-org/react";
 
-import ViewCaseRecord from "./ViewCaseRecord";
+import supabase from "@/lib/supabase";
+import { data_columns } from "@/constants/index";
+import { DevPageTypes } from "@/types/collection";
+import { useState, useEffect, useCallback } from "react";
+
+import ViewCaseRecord from "@/components/ViewCaseRecord";
 
 import { 
   ChevronDownIcon,
   SearchIcon,
 } from "@/components/icons"
 
-import { data_columns, statusOptions } from "@/constants/index";
+import { statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
-import { DataTableTypes } from "@/types/collection";
+// import { data } from "autoprefixer";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  invest_assigned: "primary",
-  court_scheduled: "primary",
-  rejected: "danger",
-  closed: "danger",
+  "Active": "success",
+  "Investigator Assigned": "primary",
+  "Court Scheduled": "primary",
+  "Rejected": "danger",
+  "Closed": "danger",
 };
 
 const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victim_names", "case_status", "last_date_modified", "actions"];
 
-type DataTableProps = {
-  rows: DataTableTypes[]
+type DevPage2Props = {
+  rows: DevPageTypes[]
 }
 
-const DataTable = ({ rows }: DataTableProps) => {
-	const [filterValue, setFilterValue] = React.useState("");
+const DevPage2 = ({ rows }: DevPage2Props ) => {
+  const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
-    column: "last_modified_time",
+    column: "last_date_modified",
     direction: "descending",
   });
 
@@ -70,18 +77,22 @@ const DataTable = ({ rows }: DataTableProps) => {
 
   const filteredItems = React.useMemo(() => {
     let filteredRecords = [...rows];
+    // console.log(`Number of rows: ${rows.length}`)
 
     if (hasSearchFilter) {
-      filteredRecords = filteredRecords.filter((record) =>
-        record.assignee.toLowerCase().includes(filterValue.toLowerCase()),
+      filteredRecords = filteredRecords.filter((row) =>
+        row.assignee.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
+    
     if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
       filteredRecords = filteredRecords.filter((row) =>
-        Array.from(statusFilter).includes(row.case_status),
+        Array.from(statusFilter).includes(row.case_status_id),
+        // console.log(filteredRecords)
+        // console.log(rows)
       );
     }
-
+    // console.log(filteredRecords)
     return filteredRecords;
   }, [filterValue, hasSearchFilter, statusFilter]);
 
@@ -94,20 +105,21 @@ const DataTable = ({ rows }: DataTableProps) => {
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
 
-  const sortedItems = React.useMemo(() => {
-    return [...items].sort((a: DataTableTypes, b: DataTableTypes) => {
-      const first = a[sortDescriptor.column as keyof DataTableTypes] as number;
-      const second = b[sortDescriptor.column as keyof DataTableTypes] as number;
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
+  // console.log(filteredItems)
+  // console.log(rowsPerPage)
+  // console.log(pages)
 
+  const sortedItems = React.useMemo(() => {
+    return [...items].sort((a: DevPageTypes, b: DevPageTypes) => {
+      const first = a[sortDescriptor.column as keyof DevPageTypes] as number;
+      const second = b[sortDescriptor.column as keyof DevPageTypes] as number;
+      const cmp = first < second ? -1 : first > second ? 1 : 0;
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
 
-  console.log(items)
-
-  const renderCell = React.useCallback((record: DataTableTypes, columnKey: React.Key) => {
-    const cellValue = record[columnKey as keyof DataTableTypes] as string;
+  const renderCell = React.useCallback((record: DevPageTypes, columnKey: React.Key) => {
+    const cellValue = record[columnKey as keyof DevPageTypes] as string;
 
     switch (columnKey) {
       case "case_number":
@@ -197,6 +209,7 @@ const DataTable = ({ rows }: DataTableProps) => {
     if (value) {
       setFilterValue(value);
       setPage(1);
+      // console.log(value);
     } else {
       setFilterValue("");
     }
@@ -275,7 +288,8 @@ const DataTable = ({ rows }: DataTableProps) => {
           </div>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-small">Total cases: {rows.length}</span>
+          <span className="text-small">Total cases: {rows.length}
+          </span>
           <label className="flex items-center text-small">
             Rows per page:
             <select defaultValue={5}
@@ -369,7 +383,8 @@ const DataTable = ({ rows }: DataTableProps) => {
           </TableColumn>
         )}
       </TableHeader>
-      <TableBody emptyContent={"No records found"} items={sortedItems}>
+      <TableBody emptyContent={"No records found"} items={sortedItems} 
+      >
         {(row) => (
           <TableRow key={row.id}>
             {(columnKey) => <TableCell>{renderCell(row, columnKey)}</TableCell>}
@@ -380,4 +395,4 @@ const DataTable = ({ rows }: DataTableProps) => {
   );
 }
 
-export default DataTable
+export default DevPage2

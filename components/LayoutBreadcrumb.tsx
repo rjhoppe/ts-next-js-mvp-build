@@ -10,7 +10,7 @@ import { Button } from "@nextui-org/button";
 const LayoutBreadcrumb = ({ childToParent }: any) => {
   const [currentPage, setCurrentPage] = React.useState<React.Key>("cases");
 
-  const data = currentPage
+  // const data = currentPage
   // Refactor this to use constants
 
   return (

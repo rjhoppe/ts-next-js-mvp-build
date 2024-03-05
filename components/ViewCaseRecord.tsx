@@ -50,12 +50,12 @@ const ViewCaseRecord = ({ id, emails, case_number, case_time, case_type, assigne
                   {
                     typeof(emails) === 'object' 
                     ? <Textarea className="text-sm" label="Victim Emails" startContent={emails.join(", ")} />
-                    : <Input readOnly label='Case Victims' defaultValue={emails}></Input> 
+                    : <Input readOnly label='Victim Emails' defaultValue={emails}></Input> 
                   }
                                     {
                     typeof(phone_numbers) === 'object' 
                     ? <Textarea className="text-sm" label="Victim Phone Numbers" startContent={phone_numbers.join(", ")} />
-                    : <Input readOnly label='Case Victims' defaultValue={phone_numbers}></Input> 
+                    : <Input readOnly label='Victim Phone Numbers' defaultValue={phone_numbers}></Input> 
                   }
                   <Input readOnly label='Assignee' defaultValue={assignee}></Input>
                   <Input readOnly label='Last Modified By' defaultValue={last_modified_by}></Input>

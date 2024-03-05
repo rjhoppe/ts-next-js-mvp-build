@@ -12,7 +12,6 @@ import Link from "next/link"
 import { useState } from "react";
 
 const TempEdit = ({ parentToChild }: any) => {
-
   return (
     <section>
       <Input 
