@@ -1,5 +1,5 @@
 import React from 'react'
-import TableDataFetch from '@/components/DataTableFetch'
+import TableDataFetch from '@/archive/DataTableFetchTest'
 
 const page = () => {
   return (

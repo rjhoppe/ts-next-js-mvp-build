@@ -1,15 +1,15 @@
 'use client';
 
 import React from 'react'
-import DataTable from '@/components/DevPage2'
+import RulesTable from '@/components/RulesTable'
 import { Spinner } from '@nextui-org/react';
 import useSupabaseBrowser from '@/utils/supabase-browser'
-import { getUserCases } from '@/queries/get-user-cases'
+import { getUserRules } from '@/queries/get-user-rules'
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query'
 
-export default function DataTableFetch() {
+export default function RulesTableFetch() {
   const supabase = useSupabaseBrowser()
-  const { data: rows, isLoading, isError } = useQuery(getUserCases(supabase))
+  const { data: rows, isLoading, isError } = useQuery(getUserRules(supabase))
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -20,7 +20,7 @@ export default function DataTableFetch() {
   }
   
   if (rows.length > 0) {
-    return <DataTable rows={rows}/>
+    return <RulesTable rows={rows}/>
   } else {
     return <Spinner label='Data loading...'/>;
   }

@@ -1,20 +1,15 @@
 'use client';
 
 import React from 'react'
-import { DataTableTypes } from "@/types/collection";
-import { useState, useEffect, useCallback } from "react";
-import supabase from "@/lib/supabase";
-import DataTable from '@/components/DevPage2'
+import TempTable from '@/components/TempTable'
 import { Spinner } from '@nextui-org/react';
 import useSupabaseBrowser from '@/utils/supabase-browser'
-import { getUserCases } from '@/queries/get-user-cases'
+import { getUserTemps } from '@/queries/get-user-temps'
 import { useQuery } from '@supabase-cache-helpers/postgrest-react-query'
 
-export default function DataTableFetch2() {
+export default function TempTableFetch() {
   const supabase = useSupabaseBrowser()
-  const { data: rows, isLoading, isError } = useQuery(getUserCases(supabase))
-
-  console.log()
+  const { data: rows, isLoading, isError } = useQuery(getUserTemps(supabase))
 
   if (isLoading) {
     return <div>Loading...</div>
@@ -25,7 +20,7 @@ export default function DataTableFetch2() {
   }
   
   if (rows.length > 0) {
-    return <DataTable rows={rows}/>
+    return <TempTable rows={rows}/>
   } else {
     return <Spinner label='Data loading...'/>;
   }

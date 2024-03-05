@@ -93,8 +93,8 @@ export const data_columns = [
 // TEMPLATES SECTION
 export const temp_columns = [
   {name: "ID", uid: "id", sortable: true},
-  {name: "TEMPLATE", uid: "template", sortable: true},
-  {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
+  {name: "TEMPLATE", uid: "template_name", sortable: true},
+  {name: "LAST MODIFIED DATE", uid: "last_date_modified", sortable: true},
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
   {name: "TYPE", uid: "type", sortable: true},
   {name: "ACTIVE", uid: "active", sortable: true},
@@ -194,7 +194,7 @@ export const rules_columns = [
   {name: "ID", uid: "id", sortable: true},
   {name: "IF", uid: "if_logic"},
   {name: "THEN", uid: "then_logic"},
-  {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
+  {name: "LAST MODIFIED DATE", uid: "last_date_modified", sortable: true},
   {name: "LAST MODIFIED BY", uid: "last_modified_by"},
   {name: "DELAY", uid: "delay", sortable: true},
   {name: "ACTIONS", uid: "actions"},

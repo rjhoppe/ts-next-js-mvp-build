@@ -9,7 +9,7 @@ import {
   Input
 } from "@nextui-org/react";
 
-import { statusOptions, columns } from "@/constants/index";
+import { statusOptions, rules_columns } from "@/constants/index";
 import RichTextEditor from "./RichTextEditor";
 import { capitalize } from "@/app/utils";
 
@@ -33,7 +33,7 @@ const AddRule = () => {
           label="Action" 
           className="max-w-xl"
         >
-          {columns.map((column) => (
+          {rules_columns.map((column) => (
             <SelectItem key={column.name}>
               {capitalize(column.name.toLowerCase())}
             </SelectItem>
@@ -61,7 +61,7 @@ const AddRule = () => {
           className="max-w-xl"
           isRequired
         >
-          {columns.map((column) => (
+          {rules_columns.map((column) => (
             <SelectItem key={column.name}>
               {capitalize(column.name.toLowerCase())}
             </SelectItem>
@@ -74,7 +74,7 @@ const AddRule = () => {
           className="w-72"
           isRequired
         >
-          {columns.map((column) => (
+          {rules_columns.map((column) => (
             <SelectItem key={column.name}>
               {column.name}
             </SelectItem>
