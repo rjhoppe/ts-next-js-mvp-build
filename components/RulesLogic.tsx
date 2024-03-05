@@ -4,12 +4,10 @@
 
 import {  
   Select, 
-  SelectSection, 
   SelectItem,
-  Divider,
 } from "@nextui-org/react";
 
-import { columns } from "@/constants/index";
+import { rules_columns } from "@/constants/index";
 
 import React from 'react'
 
@@ -20,7 +18,7 @@ const RulesLogic = () => {
       label="Case Info Type" 
       className="max-w-xs" 
     >
-      {columns.map((column) => (
+      {rules_columns.map((column) => (
         <SelectItem key={column.name}>
           {column.name}
         </SelectItem>
@@ -40,7 +38,7 @@ const RulesLogicBlock = ({ label } : RulesLogicBlockProps) => {
       label={label}
       className="max-w-xs" 
     >
-      {columns.map((column) => (
+      {rules_columns.map((column) => (
         <SelectItem key={column.name}>
           {column.name}
         </SelectItem>
