@@ -7,6 +7,6 @@
 //       <TableDataFetch />
 //     </>
 //   )
-// }
+//  }
 
 // export default page
