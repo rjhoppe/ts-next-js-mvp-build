@@ -1,12 +1,12 @@
-import React from 'react'
-import TableDataFetch from '@/archive/DataTableFetchTest'
+// import React from 'react'
+// import TableDataFetch from '@/archive/DataTableFetchTest'
 
-const page = () => {
-  return (
-    <>
-      <TableDataFetch />
-    </>
-  )
-}
+// const page = () => {
+//   return (
+//     <>
+//       <TableDataFetch />
+//     </>
+//   )
+// }
 
-export default page
+// export default page
