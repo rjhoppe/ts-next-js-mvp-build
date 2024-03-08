@@ -69,7 +69,12 @@ const ViewCaseRecord = ({ id, emails, case_number, case_time, case_type, assigne
               <ModalFooter>
                 <div className='flex gap-5'>
                   <div className='flex mr-20'>
-                    <AddVictim />
+                    <AddVictim 
+                      caseNumber={case_number} 
+                      victim_phone_numbers={phone_numbers} 
+                      victim_emails={emails} 
+                      victim_names={victims}
+                    />
                   </div>
                   <div className='flex gap-5 mr-4'>
                     <Button color="danger" onPress={onClose}>
