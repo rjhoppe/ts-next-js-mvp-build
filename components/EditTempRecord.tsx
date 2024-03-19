@@ -16,9 +16,35 @@ import {
 
 import { HiPencil } from "react-icons/hi";
 import { TempTestModalProps } from './TempTestModal';
+import supabase from "@/lib/supabase";
 
-const EditTempRecord = ({ template, type, subject, body, active }: EditTempRecordProps ) => {
+const EditTempRecord = ({ template, type, subject, body, active, templateID }: EditTempRecordProps) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [templateName, setTemplateName] = React.useState(template)
+  const [activeStatus, setActiveStatus] = React.useState(active)
+  const [activeSubject, setActiveSubject] = React.useState(subject)
+
+  const handleSubmit = async () => {
+    try {
+      const { data } = await supabase
+      .from('templates')
+      // @ts-ignore
+      .update({ 
+        'template_name': templateName,
+        'active': activeStatus,
+        'subject': activeSubject,
+      })
+      .eq('template_id', templateID )
+      .select()
+
+      if (data) {
+        console.log(data)
+      }
+        
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -34,16 +60,17 @@ const EditTempRecord = ({ template, type, subject, body, active }: EditTempRecor
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>
-                  <Input label='Template Name' defaultValue={template}></Input>
+                  <Input label='Template Name' defaultValue={template} onChange={(e) => {setTemplateName(e.target.value)}}></Input>
                   <Select
                     label="Active"
                     defaultSelectedKeys={[active]}
+                    onChange={(e) => {setActiveStatus(e.target.value)}}
                   >
                     <SelectItem key="True" value="True">True</SelectItem>
                     <SelectItem key="False" value="False">False</SelectItem>
                   </Select>
                   {
-                    type === 'Email' ? <Input label='Subject' defaultValue={subject}></Input> : null
+                    type === 'Email' ? <Input label='Subject' defaultValue={subject} onChange={(e) => {setActiveSubject(e.target.value)}}></Input> : null
                   }
                   <Textarea label='Message' readOnly placeholder={body}></Textarea>
                 </div>
@@ -59,7 +86,7 @@ const EditTempRecord = ({ template, type, subject, body, active }: EditTempRecor
                     <Button color="danger" onPress={onClose}>
                       Cancel
                     </Button>
-                    <Button color="primary" onPress={onClose}>
+                    <Button color="primary" onPress={handleSubmit}>
                       Save
                     </Button>
                   </div>
@@ -75,6 +102,7 @@ const EditTempRecord = ({ template, type, subject, body, active }: EditTempRecor
 
 export type EditTempRecordProps = TempTestModalProps & {
   active: string;
+  templateID: string;
 };
 
 export default EditTempRecord

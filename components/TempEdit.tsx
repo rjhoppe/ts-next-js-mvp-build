@@ -5,13 +5,17 @@ import {
   Input,
   Select,
   SelectItem,
-  Textarea,
-} from "@nextui-org/react"
+  Textarea, 
+  Popover, 
+  PopoverTrigger, 
+  PopoverContent
+} from "@nextui-org/react";
 
-import RichTextEditor from "./RichTextEditor"
-import { Button } from "@nextui-org/button"
-import Link from "next/link"
+import RichTextEditor from "./RichTextEditor";
+import { Button } from "@nextui-org/button";
+import Link from "next/link";
 import supabase from "@/lib/supabase";
+import SuccessPopover from "./SuccessPopover";
 
 const TempEdit = ({ parentToChild }: any) => {
   const [templateName, setTemplateName] = React.useState("");
@@ -21,6 +25,7 @@ const TempEdit = ({ parentToChild }: any) => {
   const [subject, setSubject] = React.useState("");
   const [active, setActive] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [successStatus, setSuccessStatus] = React.useState(false);
 
   const handleSubmit = async () => {
     try {
@@ -47,6 +52,8 @@ const TempEdit = ({ parentToChild }: any) => {
     } catch (error) {
       console.log(error)
     }
+
+    setSuccessStatus(true)
   }
 
   return (
@@ -86,9 +93,14 @@ const TempEdit = ({ parentToChild }: any) => {
         <Button href="/" as={Link} className="flex" color="danger">
           Cancel
         </Button>
-        <Button href="/" as={Link} className="flex" color="primary" onClick={handleSubmit}>
+        <Button className="flex" color="primary" onClick={handleSubmit}>
           Save
         </Button>
+        {
+          successStatus === true
+          ? <SuccessPopover recordType={'template'}/>
+          : null
+        }
       </div>
     </section>
   )

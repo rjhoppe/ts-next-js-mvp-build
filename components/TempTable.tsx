@@ -138,6 +138,7 @@ const TempTable = ({ rows }: TempTableProps) => {
                     subject={record.subject}
                     body={record.message}
                     active={record.active}
+                    templateID={record.template_id}
                   />
                 </span>
               </Tooltip>

@@ -13,7 +13,7 @@ import {
 import { statusOptions, rules_columns } from "@/constants/index";
 import RichTextEditor from "./RichTextEditor";
 import supabase from "@/lib/supabase";
-import { data } from "autoprefixer";
+import SuccessPopover from "./SuccessPopover";
 
 const AddRule = () => {
   const [sendType, setSendType] = React.useState("Email")
@@ -22,6 +22,7 @@ const AddRule = () => {
   const [status, setStatus] = React.useState("")
   const [ifLogic, setIfLogic] = React.useState("")
   const [thenLogic, setThenLogic] = React.useState("")
+  const [successStatus, setSuccessStatus] = React.useState(false);
 
   const handleSubmit = async () => {
     try {
@@ -46,6 +47,8 @@ const AddRule = () => {
     } catch (error) {
       console.log(error)
     }
+
+    setSuccessStatus(true)
   }
 
   return (
@@ -115,6 +118,11 @@ const AddRule = () => {
         <Button className="flex" color="primary" onClick={handleSubmit}>
           Save
         </Button>
+        {
+          successStatus === true
+          ? <SuccessPopover recordType={'rule'}/>
+          : null
+        }
       </div>
     </section>
   );
