@@ -65,22 +65,22 @@ const AddVictim = ({ caseNumber, victim_phone_numbers, victim_emails, victim_nam
       const { data } = await supabase
       .from('cases_test_upload')
       
-        // I have NO IDEA why I get a 'type 'string' is not assignable to parameter of type 'never''
-        // I spent a whole day trying to fix this thing 
-        // It works fine, even with TS bitching. Might be related to PostgrestQueryBuilder file
-        // but nothing I did there seemed to fix it. DELETE and GET requests don't throw any errors
-        // @ts-ignore
-        .update({ 
-          'victim_names' : victim_names,
-          'victim_emails': victim_emails,
-          'victim_phone_numbers': victim_phone_numbers
-        })
-        .eq('case_number', caseNumber )
-        .select()
+      // I have NO IDEA why I get a 'type 'string' is not assignable to parameter of type 'never''
+      // I spent a whole day trying to fix this thing 
+      // It works fine, even with TS bitching. Might be related to PostgrestQueryBuilder file
+      // but nothing I did there seemed to fix it. DELETE and GET requests don't throw any errors
+      // @ts-ignore
+      .update({ 
+        'victim_names' : victim_names,
+        'victim_emails': victim_emails,
+        'victim_phone_numbers': victim_phone_numbers
+      })
+      .eq('case_number', caseNumber )
+      .select()
 
-        if (data) {
-          console.log(data)
-        }
+      if (data) {
+        console.log(data)
+      }
         
     } catch (error) {
       console.log(error)

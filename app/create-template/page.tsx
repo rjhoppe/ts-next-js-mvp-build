@@ -10,7 +10,6 @@ import React from "react";
 
 const CreateTemplate = () => {
   const [parentData, setParentData] = useState('email');
-
   const handleRadioChange = (e: any) => {
     setParentData(prevValue => {
       if (prevValue === "email") {
