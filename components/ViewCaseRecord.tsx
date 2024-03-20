@@ -1,3 +1,5 @@
+import React from "react";
+
 import {  
   Button,
   Textarea,
@@ -16,8 +18,9 @@ import AddVictim from "./AddVictim";
 import { MdRemoveRedEye } from "react-icons/md";
 
 const ViewCaseRecord = ({ id, emails, case_number, case_time, case_type, assignee, victims,
-  last_modified_time, last_modified_by, phone_numbers, status } : ViewCaseRecordProps) => {
+  last_modified_time, last_modified_by, phone_numbers, status, notification }: ViewCaseRecordProps) => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const [notificationStatus, setNotificationStatus] = React.useState(notification)
 
   return (
     <>
@@ -106,6 +109,7 @@ export type ViewCaseRecordProps = {
   phone_numbers: string | string[];
   status: string;
   last_modified_time: string;
+  notification: boolean;
 };
 
 
