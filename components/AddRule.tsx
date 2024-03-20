@@ -120,7 +120,7 @@ const AddRule = () => {
         </Button>
         {
           successStatus === true
-          ? <SuccessPopover recordType={'rule'}/>
+          ? <SuccessPopover placement='left' action='created' recordType='rule'/>
           : null
         }
       </div>

@@ -98,7 +98,7 @@ const TempEdit = ({ parentToChild }: any) => {
         </Button>
         {
           successStatus === true
-          ? <SuccessPopover recordType={'template'}/>
+          ? <SuccessPopover placement='right' action='edited' recordType='template'/>
           : null
         }
       </div>

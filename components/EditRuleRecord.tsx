@@ -14,6 +14,7 @@ import {
 } from "@nextui-org/react";
 
 import { HiPencil } from "react-icons/hi";
+import SuccessPopover from './SuccessPopover';
 
 import supabase from "@/lib/supabase";
 
@@ -30,6 +31,7 @@ const EditRuleRecord = ({ id, if_logic, then_logic, delay }: EditRuleRecordProps
   const [ifLogic, setIfLogic] = React.useState(if_logic);
   const [thenLogic, setThenLogic] = React.useState(then_logic);
   const [recordDelay, setRecordDelay] = React.useState(delay);
+  const [successStatus, setSuccessStatus] = React.useState(false);
 
   // Set up fetch of org templates after user auth config'd
   // const getTemplates = async () = {
@@ -61,6 +63,8 @@ const EditRuleRecord = ({ id, if_logic, then_logic, delay }: EditRuleRecordProps
     } catch (error) {
       console.log(error)
     }
+
+    setSuccessStatus(true)
   }
 
   return (
@@ -102,15 +106,20 @@ const EditRuleRecord = ({ id, if_logic, then_logic, delay }: EditRuleRecordProps
                   </Select>
                 </div>
               </ModalBody>
-              <ModalFooter>
-                <div className='flex gap-5'>
-                  <Button color="danger" onPress={onClose}>
-                    Cancel
-                  </Button>
-                  <Button color="primary" onPress={handleSubmit} onClick={onClose}>
-                    Save
-                  </Button>
-                </div>
+              <ModalFooter className='flex'>
+                  {
+                    successStatus === true
+                    ? <div className='flex mr-32 -ml-72'><SuccessPopover placement='bottom-start' action='edited' recordType='rule'/></div>
+                    : null
+                  }
+                  <div className='flex justify-items-end gap-5'>
+                    <Button color="danger" onPress={onClose}>
+                      Cancel
+                    </Button>
+                    <Button color="primary" onPress={handleSubmit}>
+                      Save
+                    </Button>
+                  </div>
               </ModalFooter>
             </>
           )}
