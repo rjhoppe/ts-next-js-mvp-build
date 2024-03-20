@@ -21,13 +21,20 @@ type DeleteRecordProps = {
 const DeleteRecordModal = ({ id, database }: DeleteRecordProps) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
 
+  let queryId = ''
+  if (database === 'templates') {
+    queryId = 'template_id'
+  } else {
+    queryId = 'rule_id'
+  }
+
   const handleSubmit = async () => {
     try {
       // @ts-ignore
       const { data } = await supabase
       .from(database)
       .delete()
-      .eq('template_id', id)
+      .eq(queryId, id)
 
       if (data) {
         console.log(data)

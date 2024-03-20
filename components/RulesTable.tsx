@@ -31,6 +31,7 @@ import Link from "next/link";
 import EditRuleRecord from "./EditRuleRecord";
 import ViewRuleRecord from "./ViewRuleRecord";
 import { RulesTableTypes } from "@/types/collection";
+import DeleteRecordModal from "./DeleteRecordModal";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -141,7 +142,12 @@ const RulesTable = ({ rows }: RulesTableProps) => {
                     last_modified_time={record.last_date_modified}
                   />
                 </DropdownItem>
-                <DropdownItem>Delete</DropdownItem>
+                <DropdownItem isReadOnly>
+                  <DeleteRecordModal 
+                    id={record.rule_id}
+                    database='rules'
+                  />
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>
