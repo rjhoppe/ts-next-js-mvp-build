@@ -36,6 +36,7 @@ import {
 import { temp_columns, statusOptions} from "@/constants/index";
 import { capitalize } from "@/app/utils";
 import { TempTableTypes } from "@/types/collection";
+import DeleteRecordModal from "./DeleteRecordModal";
 
 const activeColorMap: Record<string, ChipProps["color"]> = {
   "True": "success",
@@ -138,6 +139,7 @@ const TempTable = ({ rows }: TempTableProps) => {
                     subject={record.subject}
                     body={record.message}
                     active={record.active}
+                    templateID={record.template_id}
                   />
                 </span>
               </Tooltip>
@@ -161,7 +163,12 @@ const TempTable = ({ rows }: TempTableProps) => {
                     active={record.active}
                   />
                 </DropdownItem>
-                <DropdownItem isReadOnly key='delete_temp'>Delete</DropdownItem>
+                <DropdownItem isReadOnly key='delete_temp'>
+                  <DeleteRecordModal 
+                    id={record.template_id}
+                    database='templates'
+                  />
+                </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </div>

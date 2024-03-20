@@ -1,3 +1,5 @@
+import React from "react";
+
 import {  
   Button,
   Textarea,
@@ -16,8 +18,9 @@ import AddVictim from "./AddVictim";
 import { MdRemoveRedEye } from "react-icons/md";
 
 const ViewCaseRecord = ({ id, emails, case_number, case_time, case_type, assignee, victims,
-  last_modified_time, last_modified_by, phone_numbers, status } : ViewCaseRecordProps) => {
+  last_modified_time, last_modified_by, phone_numbers, status, notification }: ViewCaseRecordProps) => {
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
+    const [notificationStatus, setNotificationStatus] = React.useState(notification)
 
   return (
     <>
@@ -69,7 +72,12 @@ const ViewCaseRecord = ({ id, emails, case_number, case_time, case_type, assigne
               <ModalFooter>
                 <div className='flex gap-5'>
                   <div className='flex mr-20'>
-                    <AddVictim />
+                    <AddVictim 
+                      caseNumber={case_number} 
+                      victim_phone_numbers={phone_numbers} 
+                      victim_emails={emails} 
+                      victim_names={victims}
+                    />
                   </div>
                   <div className='flex gap-5 mr-4'>
                     <Button color="danger" onPress={onClose}>
@@ -101,6 +109,7 @@ export type ViewCaseRecordProps = {
   phone_numbers: string | string[];
   status: string;
   last_modified_time: string;
+  notification: boolean;
 };
 
 

@@ -1,4 +1,5 @@
 'use client';
+import React from "react";
 
 import {  
   Select, 
@@ -11,9 +12,45 @@ import {
 
 import { statusOptions, rules_columns } from "@/constants/index";
 import RichTextEditor from "./RichTextEditor";
-import { capitalize } from "@/app/utils";
+import supabase from "@/lib/supabase";
+import SuccessPopover from "./SuccessPopover";
 
 const AddRule = () => {
+  const [sendType, setSendType] = React.useState("Email")
+  const [delay, setDelay] = React.useState("")
+  const [lastModifiedBy, setLastModifiedBy] = React.useState("")
+  const [status, setStatus] = React.useState("")
+  const [ifLogic, setIfLogic] = React.useState("")
+  const [thenLogic, setThenLogic] = React.useState("")
+  const [successStatus, setSuccessStatus] = React.useState(false);
+
+  const handleSubmit = async () => {
+    try {
+      // @ts-ignore
+      const { data } = await supabase
+      .from('rules')
+      .insert({ 
+        'rule_id': 'R0000000',
+        'delay': 'Test',
+        'last_modified_by': 'Test',
+        'created_by': 'Test',
+        'client_code': 12345,
+        'police_dpt': 'Test',
+        'status': 'Test', 
+        'if_logic': 'Test',
+        'then_logic': 'Test',
+      })
+      if (data) {
+        console.log(data)
+      }
+        
+    } catch (error) {
+      console.log(error)
+    }
+
+    setSuccessStatus(true)
+  }
+
   return (
     <section className="mt-10">
       <div>
@@ -23,26 +60,8 @@ const AddRule = () => {
       <Divider className="my-2" />
       <h3 className="text-lg my-4">If</h3>
       <div className="my-6">
-        <Input className="my-6 max-w-xl" isReadOnly placeholder="Status" 
-        label='Case Info Type'>
-          Status
-        </Input>
-      </div>
-      <div className="my-6">
-      <Select 
-          label="Action" 
-          className="max-w-xl"
-        >
-          {rules_columns.map((column) => (
-            <SelectItem key={column.name}>
-              {capitalize(column.name.toLowerCase())}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
-      <div className="my-6">
         <Select 
-          label="Values" 
+          label="Case Status equals" 
           className="max-w-xl"
           isRequired
         >
@@ -57,20 +76,19 @@ const AddRule = () => {
       <h3 className="text-lg my-4">Then</h3>
       <div className="my-6">
         <Select 
-          label="Action" 
-          className="max-w-xl"
+          label="Send" 
+          className="w-72"
           isRequired
+          defaultSelectedKeys={["Email"]}
+          onChange={(e) => {setSendType(e.target.value)}}
         >
-          {rules_columns.map((column) => (
-            <SelectItem key={column.name}>
-              {capitalize(column.name.toLowerCase())}
-            </SelectItem>
-          ))}
+          <SelectItem key="SMS" value="SMS">SMS</SelectItem>
+          <SelectItem key="Email" value="Email">Email</SelectItem>
         </Select>
       </div>
       <div className="flex items-center my-6 gap-5">
         <Select 
-          label="Template" 
+          label="Using Template" 
           className="w-72"
           isRequired
         >
@@ -87,7 +105,9 @@ const AddRule = () => {
           Create Template
         </Button>
       </div>
-      <Input className="my-6 max-w-xl" isReadOnly label='Subject'></Input>
+      {
+        sendType === 'Email' ? <Input className="my-6 max-w-xl" label='Email Subject'></Input> : null
+      }
       <div className="flex flex-col justify-center mt-5 max-w-xl">
         <RichTextEditor />
       </div>
@@ -95,9 +115,14 @@ const AddRule = () => {
         <Button href="/" as={Link} className="flex" color="danger">
           Cancel
         </Button>
-        <Button href="/" as={Link} className="flex" color="primary">
+        <Button className="flex" color="primary" onClick={handleSubmit}>
           Save
         </Button>
+        {
+          successStatus === true
+          ? <SuccessPopover placement='left' action='created' recordType='rule'/>
+          : null
+        }
       </div>
     </section>
   );

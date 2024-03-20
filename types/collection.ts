@@ -5,3 +5,4 @@ export type DataTableTypes = Database["public"]["Tables"]["cases_test_upload"]["
 
 export type TempTableTypes = Database["public"]["Tables"]["templates"]["Row"];
 export type RulesTableTypes = Database["public"]["Tables"]["rules"]["Row"];
+export type InsertVictimTypes = Database["public"]["Tables"]["cases_test_upload"]["Update"]

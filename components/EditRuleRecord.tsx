@@ -14,9 +14,58 @@ import {
 } from "@nextui-org/react";
 
 import { HiPencil } from "react-icons/hi";
+import SuccessPopover from './SuccessPopover';
+
+import supabase from "@/lib/supabase";
+
+export type EditRuleRecordProps =  {
+  id: string;
+  if_logic: string;
+  then_logic: string;
+  delay: string;
+};
 
 const EditRuleRecord = ({ id, if_logic, then_logic, delay }: EditRuleRecordProps ) => {
+  
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const [ifLogic, setIfLogic] = React.useState(if_logic);
+  const [thenLogic, setThenLogic] = React.useState(then_logic);
+  const [recordDelay, setRecordDelay] = React.useState(delay);
+  const [successStatus, setSuccessStatus] = React.useState(false);
+
+  // Set up fetch of org templates after user auth config'd
+  // const getTemplates = async () = {
+
+  // }
+
+  const handleSubmit = async () => {
+    try {
+      const { data } = await supabase
+      .from('rules')
+      
+        // I have NO IDEA why I get a 'type 'string' is not assignable to parameter of type 'never''
+        // I spent a whole day trying to fix this thing 
+        // It works fine, even with TS bitching. Might be related to PostgrestQueryBuilder file
+        // but nothing I did there seemed to fix it. DELETE and GET requests don't throw any errors
+        // @ts-ignore
+        .update({ 
+          'if_logic' : ifLogic,
+          'then_logic': thenLogic,
+          'delay': recordDelay
+        })
+        .eq('rule_id', id )
+        .select()
+
+        if (data) {
+          console.log(data)
+        }
+        
+    } catch (error) {
+      console.log(error)
+    }
+
+    setSuccessStatus(true)
+  }
 
   return (
     <>
@@ -32,29 +81,45 @@ const EditRuleRecord = ({ id, if_logic, then_logic, delay }: EditRuleRecordProps
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>
-                  <Input label='If Logic' defaultValue={if_logic}></Input>
+                <Select 
+                    label="If Logic"
+                    defaultSelectedKeys={[if_logic]}
+                    onChange={(e) => {setIfLogic(e.target.value)}}
+                  >
+                    <SelectItem key="Status set to Rejected" value="Status set to Rejected">Status set to Rejected</SelectItem>
+                    <SelectItem key="Status set to Investigator Assigned" value="Status set to Investigator Assigned">Status set to Investigator Assigned</SelectItem>
+                    <SelectItem key="Status set to Closed" value="Status set to Closed">Status set to Closed</SelectItem>
+                    <SelectItem key="Status set to Court Scheduled" value="Status set to Court Scheduled">Status set to Court Scheduled</SelectItem>
+                    <SelectItem key="Status set to Active" value="Status set to Active">Status set to Active</SelectItem>
+                  </Select>
                   <Input label='Then Logic' defaultValue={then_logic}></Input>
                   <Select 
                     label="Delay"
                     defaultSelectedKeys={[delay]}
+                    onChange={(e) => {setRecordDelay(e.target.value)}}
                   >
-                    <SelectItem key="1 hour" value="1 hour">1 hour</SelectItem>
-                    <SelectItem key="2 hours" value="2 hours">2 hours</SelectItem>
-                    <SelectItem key="3 hours" value="3 hours">3 hours</SelectItem>
-                    <SelectItem key="12 hours" value="12 hours">12 hours</SelectItem>
-                    <SelectItem key="24 hours" value="24 hours">24 hours</SelectItem>
+                    <SelectItem key="1 Hour" value="1 Hour">1 Hour</SelectItem>
+                    <SelectItem key="2 Hours" value="2 Hours">2 Hours</SelectItem>
+                    <SelectItem key="3 Hours" value="3 Hours">3 Hours</SelectItem>
+                    <SelectItem key="12 Hours" value="12 Hours">12 Hours</SelectItem>
+                    <SelectItem key="24 Hours" value="24 Hours">24 Hours</SelectItem>
                   </Select>
                 </div>
               </ModalBody>
-              <ModalFooter>
-                <div className='flex gap-5'>
-                  <Button color="danger" onPress={onClose}>
-                    Cancel
-                  </Button>
-                  <Button color="primary" onPress={onClose}>
-                    Save
-                  </Button>
-                </div>
+              <ModalFooter className='flex'>
+                  {
+                    successStatus === true
+                    ? <div className='flex mr-32 -ml-72'><SuccessPopover placement='bottom-start' action='edited' recordType='rule'/></div>
+                    : null
+                  }
+                  <div className='flex justify-items-end gap-5'>
+                    <Button color="danger" onPress={onClose}>
+                      Cancel
+                    </Button>
+                    <Button color="primary" onPress={handleSubmit}>
+                      Save
+                    </Button>
+                  </div>
               </ModalFooter>
             </>
           )}
@@ -64,11 +129,5 @@ const EditRuleRecord = ({ id, if_logic, then_logic, delay }: EditRuleRecordProps
   );
 };
 
-export type EditRuleRecordProps =  {
-  id: string;
-  if_logic: string;
-  then_logic: string;
-  delay: string;
-};
 
 export default EditRuleRecord
