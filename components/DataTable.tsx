@@ -166,6 +166,7 @@ const DataTable = ({ rows }: DataTableProps) => {
                   last_modified_time={record.last_date_modified}
                   phone_numbers={record.victim_phone_numbers}
                   status={record.case_status}
+                  notification={record.notification}
                 />
               </span>
             </Tooltip>
