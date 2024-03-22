@@ -44,7 +44,7 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
 const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victim_names", "case_status", "last_date_modified", "actions"];
 
 type DataTableProps = {
-  rows: DataTableTypes[]
+  rows: DataTableTypes[];
 }
 
 const DataTable = ({ rows }: DataTableProps) => {

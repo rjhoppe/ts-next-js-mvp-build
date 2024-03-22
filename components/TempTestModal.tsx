@@ -17,9 +17,7 @@ import { RiTestTubeFill } from "react-icons/ri";
 
 const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-
   const [testData, setTestData] = useState("");
-
   const handleInputChange = (e: any) => {
     setTestData(e.target.value);
   };

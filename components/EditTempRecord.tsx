@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/navigation';
 
 import {  
   Button,
@@ -17,12 +18,20 @@ import {
 import { HiPencil } from "react-icons/hi";
 import { TempTestModalProps } from './TempTestModal';
 import supabase from "@/lib/supabase";
+import Link from 'next/link';
 
 const EditTempRecord = ({ template, type, subject, body, active, templateID }: EditTempRecordProps) => {
+  const router = useRouter();
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  const [templateName, setTemplateName] = React.useState(template)
-  const [activeStatus, setActiveStatus] = React.useState(active)
-  const [activeSubject, setActiveSubject] = React.useState(subject)
+  const [templateName, setTemplateName] = React.useState(template);
+  const [activeStatus, setActiveStatus] = React.useState(active);
+  const [activeSubject, setActiveSubject] = React.useState(subject);
+
+  // const query = { id: templateID };
+  // const href = {
+  //   pathname: '/edit-template[tid]',
+  //   query,
+  // };
 
   const handleSubmit = async () => {
     try {
@@ -78,8 +87,10 @@ const EditTempRecord = ({ template, type, subject, body, active, templateID }: E
               <ModalFooter>
                 <div className='flex gap-5'>
                   <div className='flex mr-20'>
-                    <Button color="secondary">
-                      Edit Message
+                    <Button color="secondary" onClick={() => {
+                      router.push(`/edit-template?id=${templateID}`)
+                    }} 
+                    >Edit Message
                     </Button>
                   </div>
                   <div className='flex gap-5'>

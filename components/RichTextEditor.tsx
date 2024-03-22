@@ -7,8 +7,11 @@ import "react-quill/dist/quill.snow.css";
 import { Spinner } from "@nextui-org/react";
 // import QuillNoSSRWrapper from "./QuillNoSSRWrapper";
 
-const RichTextEditor = () => {
+type RichTextEditorProps = {
+  message?: string
+} 
 
+const RichTextEditor = ({ message }: RichTextEditorProps) => {
   const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), 
   { ssr: false, loading: () => <Spinner /> }), []);
 
@@ -50,7 +53,7 @@ const RichTextEditor = () => {
     "code",
   ];
 
-  const [text, setText] = useState("Write content here");
+  const [text, setText] = useState(message ? message : 'Write content here');
 
   const handleTextChange = (content: any) => {
     setText(content);
