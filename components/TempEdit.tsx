@@ -12,11 +12,13 @@ import {
 } from "@nextui-org/react";
 
 import supabase from "@/lib/supabase";
+import { capitalize } from "@/app/utils";
 
 import RichTextEditor from "./RichTextEditor";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import SuccessPopover from "./SuccessPopover";
+import { randomInt } from "crypto";
 
 export type TempEditProps = {
   parentToChild?: any;
@@ -48,14 +50,18 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
   let edit = false
 
   function genTempId() {
-
+    const minCeiled = Math.ceil(1000000);
+    const maxFloored = Math.floor(9999999)
+    const genNumber = Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+    const genId = "T" + genNumber
+    return genId
   }
 
   function editCheck(edit: boolean) {
     if (editData && d_template_name && d_ccRecipients && d_subject && d_active && d_message) {
       edit = true
       // console.log(edit, d_template_name)
-      setTemplateName(d_template_name)
+      // setTemplateName(d_template_name)
       // setCCRecipients(d_ccRecipients)
       // setSubject(d_subject)
       // setActive(d_active)
@@ -67,11 +73,11 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
 
   useEffect(() => {
     editCheck(edit);
-    console.log(d_template_name, templateName)
+    // console.log(d_template_name, templateName)
   }, []);
 
   const handleSubmit = async () => {
-    if (edit !==  true) {
+    if (edit === true) {
       try {
         // @ts-ignore
         const { data } = await supabase
@@ -81,7 +87,7 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
           'template_id': templateId,
           'last_modified_by': 'Rick Hoppe',
           'template_name': templateName,
-          'type': type,
+          'type': capitalize(parentToChild),
           'cc_recipients': ccRecipients,
           'active': active,
           'subject': subject,
@@ -99,23 +105,26 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
       
     } else {
       try {
+        // console.log('Attempting to insert...')
+        const genId = genTempId()
         // @ts-ignore
         const { data } = await supabase
         .from('templates')
         .insert({ 
-          'template_id': templateId,
+          'template_id': genId,
           'last_modified_by': 'Rick Hoppe',
           'template_name': templateName,
           'created_by': 'Rick Hoppe',
-          //
-          'client_code': 'Test',
+          // Need to get client code and pd info from user account/table
+          'client_code': 12345,
           'police_dpt': 'Test',
-          'type': type,
-          //
+          'type': capitalize(parentToChild),
+          // ccRecipients cannot be blank for right now...
           'cc_recipients': ccRecipients,
           'active': active,
           'subject': subject,
-          'message': message,
+          // Need to bubble up message content from Rich Content Editor
+          'message': 'test test test',
         })
         if (data) {
           console.log(data)
