@@ -20,7 +20,7 @@ import Link from "next/link";
 import SuccessPopover from "./SuccessPopover";
 
 export type TempEditProps = {
-  parentToChild?: any;
+  parentToChild: any;
   editData?: boolean;
   d_clientCode?: number;
   d_police_dpt?: string; 
@@ -46,6 +46,8 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
   const [message, setMessage] = React.useState(d_message);
   const [successStatus, setSuccessStatus] = React.useState(false);
   const [editStatus, setEditStatus] = React.useState(false);
+
+ const [subType, setSubType] = React.useState(d_type || '');
 
   function genTempId() {
     const minCeiled = Math.ceil(1000000);
@@ -80,18 +82,27 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
     // console.log(d_type)
     if (parentToChild === 'sms') {
       // console.log('This action was performed: type === Email')
-      setType('Email');
-      // console.log(type)
-    } else {
+      // setType('Email');
+      console.log(parentToChild)
+      let temp = parentToChild
+      setSubType(temp.toUpperCase())
+      // setSubType(capitalize2(parentToChild))
+    } else if (parentToChild === 'email') {
+      console.log(parentToChild)
       // console.log('This action was performed: type === SMS')
-      setType('SMS');
-      // console.log(type)
+      // setType('SMS');
+      setSubType(capitalize2(parentToChild))
+      // console.log(subType)
+    } else {
+      console.log('Something went wrong...')
+      console.log(parentToChild)
     }
   }, [parentToChild]);
 
   const handleSubmit = async () => {
     if (editStatus === true) {
       try {
+        console.log(subType)
         // @ts-ignore
         const { data } = await supabase
         .from('templates')
@@ -100,7 +111,7 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
           'template_id': templateId,
           'last_modified_by': 'Rick Hoppe',
           'template_name': templateName,
-          'type': type,
+          'type': subType,
           'cc_recipients': ccRecipients,
           'active': active,
           'subject': subject,
@@ -118,7 +129,6 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
       
     } else {
       try {
-        console.log('Attempting to insert...')
         const genId = genTempId()
         // @ts-ignore
         const { data } = await supabase
@@ -190,7 +200,7 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
           : <Textarea label="SMS Message" defaultValue={ (message) ? message : '' } placeholder="Enter message text" minRows={5} onChange={(e) => {setMessage(e.target.value)}} className="h-40"/>
         }
       </div>
-      <div className="flex mt-5 gap-5 max-w-xl">
+      <div className="flex mt-5 gap-5 max-w-xl mb-36">
         <Button href="/" as={Link} className="flex" color="danger">
           Cancel
         </Button>

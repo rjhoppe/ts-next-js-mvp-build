@@ -17,6 +17,7 @@ const EditTempMsg = ({ rows }: TempTableProps) => {
   const [parentData, setParentData] = useState(rows[0].type);
   // Need to rework this section, very convoluted
   // Sometimes sending undefined
+
   // const handleRadioChange = (e: any) => {
   //   setParentData(prevValue => {
   //     if (prevValue === "email") {
@@ -34,7 +35,7 @@ const EditTempMsg = ({ rows }: TempTableProps) => {
   return (
     <> 
       <div className="flex gap-72 items-center">
-        <h1 className="mt-5 mb-5 text-lg">Edit Template: {rows[0].type}</h1>
+        <h1 className="mt-5 mb-5 -mr-16 text-lg">Edit Template: {rows[0].template_id}</h1>
         <RadioGroup
           orientation="horizontal"
           defaultValue={data.toLowerCase()}
