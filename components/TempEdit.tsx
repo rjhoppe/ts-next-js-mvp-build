@@ -12,13 +12,12 @@ import {
 } from "@nextui-org/react";
 
 import supabase from "@/lib/supabase";
-import { capitalize } from "@/app/utils";
+import { capitalize2 } from "@/app/utils";
 
 import RichTextEditor from "./RichTextEditor";
 import { Button } from "@nextui-org/button";
 import Link from "next/link";
 import SuccessPopover from "./SuccessPopover";
-import { randomInt } from "crypto";
 
 export type TempEditProps = {
   parentToChild?: any;
@@ -42,12 +41,11 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
   const validateEmail = (value: string) => value.match(/^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,4}$/i);
   const validatePhoneNumber = (value: string) => value.length > 9;
   const [subject, setSubject] = React.useState(d_subject);
-  const [type, setType] = React.useState(d_type);
+  const [type, setType] = React.useState(d_type || '');
   const [active, setActive] = React.useState(d_active);
   const [message, setMessage] = React.useState(d_message);
   const [successStatus, setSuccessStatus] = React.useState(false);
-
-  let edit = false
+  const [editStatus, setEditStatus] = React.useState(false);
 
   function genTempId() {
     const minCeiled = Math.ceil(1000000);
@@ -57,27 +55,42 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
     return genId
   }
 
-  function editCheck(edit: boolean) {
+  function editCheck() {
     if (editData && d_template_name && d_ccRecipients && d_subject && d_active && d_message) {
-      edit = true
-      // console.log(edit, d_template_name)
+      setEditStatus(true)
+      // console.log(edit)
       // setTemplateName(d_template_name)
       // setCCRecipients(d_ccRecipients)
       // setSubject(d_subject)
       // setActive(d_active)
       // setMessage(d_message)
       // console.log(templateName)
-      return edit
     }
   }
 
   useEffect(() => {
-    editCheck(edit);
+    editCheck();
+    // console.log(parentToChild)
     // console.log(d_template_name, templateName)
   }, []);
 
+
+  // Cant figure out why this is not updating type
+  useEffect(() => {
+    // console.log(d_type)
+    if (parentToChild === 'sms') {
+      // console.log('This action was performed: type === Email')
+      setType('Email');
+      // console.log(type)
+    } else {
+      // console.log('This action was performed: type === SMS')
+      setType('SMS');
+      // console.log(type)
+    }
+  }, [parentToChild]);
+
   const handleSubmit = async () => {
-    if (edit === true) {
+    if (editStatus === true) {
       try {
         // @ts-ignore
         const { data } = await supabase
@@ -87,7 +100,7 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
           'template_id': templateId,
           'last_modified_by': 'Rick Hoppe',
           'template_name': templateName,
-          'type': capitalize(parentToChild),
+          'type': type,
           'cc_recipients': ccRecipients,
           'active': active,
           'subject': subject,
@@ -105,7 +118,7 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
       
     } else {
       try {
-        // console.log('Attempting to insert...')
+        console.log('Attempting to insert...')
         const genId = genTempId()
         // @ts-ignore
         const { data } = await supabase
@@ -118,7 +131,7 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
           // Need to get client code and pd info from user account/table
           'client_code': 12345,
           'police_dpt': 'Test',
-          'type': capitalize(parentToChild),
+          'type': capitalize2(parentToChild),
           // ccRecipients cannot be blank for right now...
           'cc_recipients': ccRecipients,
           'active': active,

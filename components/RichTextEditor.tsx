@@ -54,7 +54,6 @@ const RichTextEditor = ({ message }: RichTextEditorProps) => {
   ];
 
   const [text, setText] = useState(message ? message : 'Write content here');
-
   const handleTextChange = (content: any) => {
     setText(content);
   };

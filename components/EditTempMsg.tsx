@@ -14,17 +14,19 @@ type TempTableProps = {
 }
 
 const EditTempMsg = ({ rows }: TempTableProps) => {
-  const [parentData, setParentData] = useState('email');
-  const handleRadioChange = (e: any) => {
-    setParentData(prevValue => {
-      if (prevValue === "email") {
-       return
-      }
-      return e.target.value
-    });
-  }
+  const [parentData, setParentData] = useState(rows[0].type);
+  // Need to rework this section, very convoluted
+  // Sometimes sending undefined
+  // const handleRadioChange = (e: any) => {
+  //   setParentData(prevValue => {
+  //     if (prevValue === "email") {
+  //      return
+  //     }
+  //     return e.target.value
+  //   });
+  // }
   
-  const [data, setData] = useState('');
+  const [data, setData] = useState(rows[0].type);
 	const childToParent = (childdata: string) => {
 		setData(childdata);
 	};
@@ -32,11 +34,11 @@ const EditTempMsg = ({ rows }: TempTableProps) => {
   return (
     <> 
       <div className="flex gap-72 items-center">
-        <h1 className="mt-5 mb-5 text-lg">Create Template</h1>
+        <h1 className="mt-5 mb-5 text-lg">Edit Template: {rows[0].type}</h1>
         <RadioGroup
           orientation="horizontal"
-          defaultValue="email"
-          onChange={handleRadioChange}
+          defaultValue={data.toLowerCase()}
+          onValueChange={setParentData}
         >
           <Radio key="email" value="email">Email</Radio>
           <Radio key="sms" className="ml-2" value="sms">SMS</Radio>
@@ -48,7 +50,7 @@ const EditTempMsg = ({ rows }: TempTableProps) => {
 				data === 'preview' 
         ? <TempPreview /> 
         : <TempEdit 
-            parentToChild={parentData}
+            parentToChild={parentData.toLowerCase()}
             editData={true}
             d_clientCode={rows[0]['client_code']}
             d_police_dpt={rows[0]['police_dpt']}
