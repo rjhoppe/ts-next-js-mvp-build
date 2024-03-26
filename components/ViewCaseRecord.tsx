@@ -22,6 +22,11 @@ const ViewCaseRecord = ({ id, emails, case_number, case_time, case_type, assigne
     const {isOpen, onOpen, onOpenChange} = useDisclosure();
     const [notificationStatus, setNotificationStatus] = React.useState(notification)
 
+  // func for saving case notes, notification status
+  // function handleSave() {
+
+  // } 
+
   return (
     <>
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>

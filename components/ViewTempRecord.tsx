@@ -21,12 +21,13 @@ template, type, subject, body } : TempViewRecordProps) => {
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
         View
       </Button>
-      <Modal disableAnimation isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal scrollBehavior="inside" disableAnimation isOpen={isOpen} 
+      onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader>
-                View: {template}
+                View Template: {id}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>

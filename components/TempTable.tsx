@@ -124,6 +124,7 @@ const TempTable = ({ rows }: TempTableProps) => {
               <Tooltip content="Test">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                   <TempTestModal
+                    id={record.template_id}
                     template={record.template_name}
                     type={record.type}
                     subject={record.subject}
@@ -133,13 +134,13 @@ const TempTable = ({ rows }: TempTableProps) => {
               </Tooltip>
               <Tooltip content="Edit">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EditTempRecord 
+                  <EditTempRecord
+                    id={record.template_id}
                     template={record.template_name}
                     type={record.type}
                     subject={record.subject}
                     body={record.message}
                     active={record.active}
-                    templateID={record.template_id}
                   />
                 </span>
               </Tooltip>

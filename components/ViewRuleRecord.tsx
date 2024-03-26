@@ -26,7 +26,7 @@ last_modified_by, last_modified_time  } : ViewRuleRecordProps ) => {
           {(onClose) => (
             <>
               <ModalHeader className="flex justify-between">
-                View: Rule {id}
+                View Rule: {id}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>

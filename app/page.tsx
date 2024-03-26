@@ -12,7 +12,6 @@ export default function Home() {
 	const [data, setData] = useState('')
 	const childToParent = (childdata: string) => {
 		setData(childdata);
-		console.log(data)
 	};
 
 	return (
