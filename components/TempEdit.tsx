@@ -76,26 +76,24 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
     // console.log(d_template_name, templateName)
   }, []);
 
-
-  // Cant figure out why this is not updating type
   useEffect(() => {
     // console.log(d_type)
     if (parentToChild === 'sms') {
       // console.log('This action was performed: type === Email')
       // setType('Email');
-      console.log(parentToChild)
+      // console.log(parentToChild)
       let temp = parentToChild
       setSubType(temp.toUpperCase())
       // setSubType(capitalize2(parentToChild))
     } else if (parentToChild === 'email') {
-      console.log(parentToChild)
+      // console.log(parentToChild)
       // console.log('This action was performed: type === SMS')
       // setType('SMS');
       setSubType(capitalize2(parentToChild))
       // console.log(subType)
     } else {
       console.log('Something went wrong...')
-      console.log(parentToChild)
+      // console.log(parentToChild)
     }
   }, [parentToChild]);
 

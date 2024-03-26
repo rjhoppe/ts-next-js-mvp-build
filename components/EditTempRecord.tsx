@@ -20,7 +20,7 @@ import { TempTestModalProps } from './TempTestModal';
 import supabase from "@/lib/supabase";
 import Link from 'next/link';
 
-const EditTempRecord = ({ template, type, subject, body, active, templateID }: EditTempRecordProps) => {
+const EditTempRecord = ({ id, template, type, subject, body, active }: EditTempRecordProps) => {
   const router = useRouter();
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [templateName, setTemplateName] = React.useState(template);
@@ -43,7 +43,7 @@ const EditTempRecord = ({ template, type, subject, body, active, templateID }: E
         'active': activeStatus,
         'subject': activeSubject,
       })
-      .eq('template_id', templateID )
+      .eq('template_id', id )
       .select()
 
       if (data) {
@@ -65,7 +65,7 @@ const EditTempRecord = ({ template, type, subject, body, active, templateID }: E
           {(onClose) => (
             <>
               <ModalHeader>
-                Edit: {template}
+                Edit Template: {id}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>
@@ -88,7 +88,7 @@ const EditTempRecord = ({ template, type, subject, body, active, templateID }: E
                 <div className='flex gap-5'>
                   <div className='flex mr-20'>
                     <Button color="secondary" onClick={() => {
-                      router.push(`/edit-template?id=${templateID}`)
+                      router.push(`/edit-template?id=${id}`)
                     }} 
                     >Edit Message
                     </Button>
@@ -113,7 +113,6 @@ const EditTempRecord = ({ template, type, subject, body, active, templateID }: E
 
 export type EditTempRecordProps = TempTestModalProps & {
   active: string;
-  templateID: string;
 };
 
 export default EditTempRecord

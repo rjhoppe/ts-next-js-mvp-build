@@ -15,7 +15,7 @@ import {
 
 import { RiTestTubeFill } from "react-icons/ri";
 
-const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) => {
+const TempTestModal = ({ id, template, type, subject, body } : TempTestModalProps) => {
   const {isOpen, onOpen, onOpenChange} = useDisclosure();
   const [testData, setTestData] = useState("");
   const handleInputChange = (e: any) => {
@@ -37,16 +37,16 @@ const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) =
       <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
         <RiTestTubeFill />
       </Button>
-      <Modal disableAnimation isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal scrollBehavior="inside" disableAnimation isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader>
-                Test {template}
+                Test Template: {id}
               </ModalHeader>
               <ModalBody>
                 <div className='flex flex-col gap-5'>
-                  <Input isReadOnly label='Template' placeholder={template}></Input>
+                  <Input isReadOnly label='Template Name' placeholder={template}></Input>
                   <Input isRequired onChange={handleInputChange} label={`Recipient ${type}`}
                   {... type === "Email" ? {placeholder:"example@axon.com"} : {placeholder:"+12345678901"}}>
 
@@ -74,6 +74,7 @@ const TempTestModal = ({ template, type, subject, body } : TempTestModalProps) =
 };
 
 export type TempTestModalProps = {
+  id: string;
   template: string;
   type: string;
   subject?: string;
