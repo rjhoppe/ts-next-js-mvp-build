@@ -74,6 +74,7 @@ d_ccRecipients, d_template_id, d_active, d_subject, d_message, editData}: TempEd
     editCheck();
     // console.log(parentToChild)
     // console.log(d_template_name, templateName)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
