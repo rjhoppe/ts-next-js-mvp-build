@@ -86,7 +86,7 @@ const TempTable = ({ rows }: TempTableProps) => {
     }
 
     return filteredRecords;
-  }, [filterValue, hasSearchFilter, statusFilter]);
+  }, [rows, filterValue, hasSearchFilter, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -298,6 +298,7 @@ const TempTable = ({ rows }: TempTableProps) => {
       </div>
     );
   }, [
+    rows.length,
     filterValue,
     statusFilter,
     visibleColumns,

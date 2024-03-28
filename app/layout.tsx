@@ -7,7 +7,7 @@ import QueryProvider from "@/components/QueryProvider";
 import NewNavbar from "@/components/NavBarNew";
 
 export const metadata: Metadata = {
-	title: 'Victim Notifications v2',
+	title: 'Victim Notifications',
 	description: 'MVP for Victim Notifications',
 	icons: {
 		icon:'/icon.png'

@@ -1,6 +1,5 @@
 "use client"
 import React from "react";
-import Link from "next/link";
 import {
   Table,
   TableHeader,
@@ -20,6 +19,7 @@ import {
   Selection,
   ChipProps,
   SortDescriptor,
+  Link,
 } from "@nextui-org/react";
 
 import ViewCaseRecord from "./ViewCaseRecord";
@@ -48,7 +48,7 @@ type DataTableProps = {
 }
 
 const DataTable = ({ rows }: DataTableProps) => {
-  const [filterValue, setFilterValue] = React.useState("");
+	const [filterValue, setFilterValue] = React.useState("");
   const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
   const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
@@ -83,7 +83,7 @@ const DataTable = ({ rows }: DataTableProps) => {
     }
 
     return filteredRecords;
-  }, [rows, filterValue, hasSearchFilter, statusFilter]);
+  }, [filterValue, hasSearchFilter, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -104,6 +104,8 @@ const DataTable = ({ rows }: DataTableProps) => {
     });
   }, [sortDescriptor, items]);
 
+  console.log(items)
+
   const renderCell = React.useCallback((record: DataTableTypes, columnKey: React.Key) => {
     const cellValue = record[columnKey as keyof DataTableTypes] as string;
 
@@ -111,12 +113,7 @@ const DataTable = ({ rows }: DataTableProps) => {
       case "case_number":
         return (
           <div className="flex flex-col">
-            <Link
-              href={`/view-case?id=${record.case_id}`}
-              className="text-bold text-small text-blue-600 capitalize"
-            >
-              {cellValue}
-            </Link>
+            <Link href={`/view-case?id=${record.case_id}`} className="text-bold text-small text-blue-600 capitalize">{cellValue}</Link>
             <p className="text-bold text-tiny capitalize">Time: {record.case_time}</p>
             <p className="text-bold text-tiny capitalize">Incident type: {record.case_type}</p>
           </div>
@@ -147,7 +144,7 @@ const DataTable = ({ rows }: DataTableProps) => {
         );
       case "case_status":
         return (
-          <Chip className="capitalize" color={statusColorMap[record.case_status]} radius="sm" size="sm" variant="flat">
+          <Chip className="capitalize" color={statusColorMap[record.case_status_id]} radius="sm" size="sm" variant="flat">
             {record.case_status}
           </Chip>
         );
@@ -294,7 +291,6 @@ const DataTable = ({ rows }: DataTableProps) => {
       </div>
     );
   }, [
-    rows.length,
     filterValue,
     statusFilter,
     visibleColumns,

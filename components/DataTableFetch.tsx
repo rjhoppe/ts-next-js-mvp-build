@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react'
-import DataTable from '@/components/DevPage2'
+import DataTable from '@/components/DataTable'
 import { Spinner } from '@nextui-org/react';
 import useSupabaseBrowser from '@/utils/supabase-browser'
 import { getUserCases } from '@/queries/get-user-cases'
