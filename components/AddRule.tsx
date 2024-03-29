@@ -77,7 +77,7 @@ const AddRule = () => {
       <div className="my-6">
         <Select 
           label="Send" 
-          className="w-72"
+          className="max-w-xl"
           isRequired
           defaultSelectedKeys={["Email"]}
           onChange={(e) => {setSendType(e.target.value)}}

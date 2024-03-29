@@ -81,7 +81,7 @@ const RulesTable = ({ rows }: RulesTableProps) => {
     }
 
     return filteredUsers;
-  }, [hasSearchFilter, filterValue, statusFilter]);
+  }, [rows, hasSearchFilter, filterValue, statusFilter]);
 
   const pages = Math.ceil(filteredItems.length / rowsPerPage);
 
@@ -243,6 +243,7 @@ const RulesTable = ({ rows }: RulesTableProps) => {
       </div>
     );
   }, [
+    rows.length,
     visibleColumns,
     onRowsPerPageChange
   ]);
