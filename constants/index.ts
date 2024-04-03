@@ -68,6 +68,59 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
+// MESSAGES TABLE SECTION
+export const msg_columns = [
+  {name: "TYPE", uid: "type"},
+  {name: "MESSAGE ID", uid: "msg_id"},
+  {name: "DISTRIBUTION TIME", uid: "distro_time"},
+  {name: "STATUS", uid: "status"},
+  {name: "TEMPLATE", uid: "temp"},
+  {name: "RECIPIENTS", uid: "recipients"},
+]
+
+export const msg_records = [
+  {
+    type: 'SMS',
+    msg_id: 'M274557',
+    distro_time: '08/06/2023, 14:35',
+    status: 'success',
+    temp: 'Investigator Assigned (SMS)',
+    recipients: '5291960784802'
+  },
+  {
+    type: 'Email',
+    msg_id: 'M274387',
+    distro_time: '10/22/2023, 11:18',
+    status: 'success',
+    temp: 'Investigator Assigned (Email)',
+    recipients: 'a.hensley@montgomery.info, t.farmer@gillespie.com'
+  },
+  {
+    type: 'Email',
+    msg_id: 'M274690',
+    distro_time: '10/22/2023, 11:35',
+    status: 'success',
+    temp: 'Investigator Assigned (Email)',
+    recipients: 'a.hensley@montgomery.info, t.farmer@gillespie.com'
+  },
+  {
+    type: 'Email',
+    msg_id: 'M274221',
+    distro_time: '12/10/2023, 03:22',
+    status: 'success',
+    temp: 'Court Scheduled (Email)',
+    recipients: 'r.fernandez@harris.biz, m.lang@rodriguez-herring.com'
+  },
+  {
+    type: 'SMS',
+    msg_id: 'M274068',
+    distro_time: '03/12/2024, 03:51',
+    status: 'fail',
+    temp: 'Investigator Assigned (Email)',
+    recipients: '1152867976655, 5452365950111, 1052169316013'
+  },
+];
+
 // DEV-PAGE SECTION
 export const data_columns = [
   {name: "ID", uid: "id", sortable: true},

@@ -1,6 +1,11 @@
+import MessagesTable from "@/components/MessagesTable"
+
 const MessagingLog = () => {
   return (
-    <h1>Placeholder</h1>
+    <section>
+      <h1 className="my-5">Messages</h1>
+      <MessagesTable />
+    </section>
   )
 }
 
