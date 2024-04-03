@@ -1,66 +1,104 @@
 import { SVGProps } from "react";
 import { Switch } from "@nextui-org/switch";
-import { 
-  IoMdChatboxes,
-  IoMdPeople,
-  IoMdBriefcase,
- } from "react-icons/io";
+import { IoMdChatboxes, IoMdPeople, IoMdBriefcase } from "react-icons/io";
 
- import { 
-  FaGear,
-  FaShield, 
-} from "react-icons/fa6";
+import { FaGear, FaShield } from "react-icons/fa6";
 
 import { HiPencil } from "react-icons/hi";
 
- import { FaSignOutAlt } from "react-icons/fa";
- import { MdSignpost } from "react-icons/md";
- import { BiSolidMessageDetail } from "react-icons/bi";
+import { FaSignOutAlt } from "react-icons/fa";
+import { MdSignpost } from "react-icons/md";
+import { BiSolidMessageDetail } from "react-icons/bi";
 
 // Constants for Navbar props
 export const NEW_NAV_DASH_LINKS = [
-  { href: '/', icon: IoMdChatboxes, key: 'post-contact', label: 'Post-Contact', title: 'Survey Dashboard' },
-  { href: '/', icon: IoMdPeople, key: 'community', label: 'Community'},
-  { href: '/', icon: IoMdBriefcase, key: 'employee', label: 'Employee'},
-  { href: '/messaging-log', icon: BiSolidMessageDetail, key: 'automated-messaging', label: 'Messaging', title: 'Messaging'},
-  { href: '/', icon: FaShield, key: 'victim-notification', label: 'Victim Notification'},
+  {
+    href: "/",
+    icon: IoMdChatboxes,
+    key: "post-contact",
+    label: "Post-Contact",
+    title: "Survey Dashboard",
+  },
+  { href: "/", icon: IoMdPeople, key: "community", label: "Community" },
+  { href: "/", icon: IoMdBriefcase, key: "employee", label: "Employee" },
+  {
+    href: "/messaging-log",
+    icon: BiSolidMessageDetail,
+    key: "automated-messaging",
+    label: "Messaging",
+    title: "Messaging",
+  },
+  {
+    href: "/",
+    icon: FaShield,
+    key: "victim-notification",
+    label: "Victim Notification",
+  },
 ];
 
 export const NEW_NAV_DASH_LINKS2 = [
-  { href: '/', icon: MdSignpost, key: 'evidence.com', label: 'Evidence.com'},
-  { href: '/', icon: FaSignOutAlt, key: 'sign-out', label: 'Sign Out'},
+  { href: "/", icon: MdSignpost, key: "evidence.com", label: "Evidence.com" },
+  { href: "/", icon: FaSignOutAlt, key: "sign-out", label: "Sign Out" },
 ];
 
 export const NAV_DASH_LINKS = [
-  { href: '/', icon: '', key: 'post-contact', label: 'Post-Contact' },
-  { href: '/', icon: '', key: 'community', label: 'Community' },
-  { href: '/', icon: '', key: 'employee', label: 'Employee' },
+  { href: "/", icon: "", key: "post-contact", label: "Post-Contact" },
+  { href: "/", icon: "", key: "community", label: "Community" },
+  { href: "/", icon: "", key: "employee", label: "Employee" },
 ];
 
 export const NAV_MES_LINKS = [
-  { href: '/', icon: '', key: 'automated-messaging', label: 'Automated Messaging' },
-  { href: '/', icon: '', key: 'victim-notifications', label: 'Victim Notifications' },
+  {
+    href: "/",
+    icon: "",
+    key: "automated-messaging",
+    label: "Automated Messaging",
+  },
+  {
+    href: "/",
+    icon: "",
+    key: "victim-notifications",
+    label: "Victim Notifications",
+  },
 ];
 
 export const NAV_SET_LINKS = [
-  { href: '/', icon: '', key: 'settings', label: 'Settings' },
+  { href: "/", icon: "", key: "settings", label: "Settings" },
 ];
 
 export const NAV_REDIRECT_LINKS = [
-  { href: '/', icon: '', key: 'evidence', label: 'Evidence.com' },
-  { href: '/', icon: '', key: 'sign-out', label: 'Sign Out' },
+  { href: "/", icon: "", key: "evidence", label: "Evidence.com" },
+  { href: "/", icon: "", key: "sign-out", label: "Sign Out" },
 ];
 
-// BreadCrumbs Components 
+// BreadCrumbs Components
 export const bcLayoutHeaders = [
-  { title: 'Cases', separator:'', size:'lg', key: 'cases', class_name:'' },
-  { title: 'Rules', separator:'', size:'lg', key: 'rules', class_name:'ml-10' },
-  { title: 'Templates', separator:'', size:'lg', key: 'templates', class_name:'ml-10' },
+  { title: "Cases", separator: "", size: "lg", key: "cases", class_name: "" },
+  {
+    title: "Rules",
+    separator: "",
+    size: "lg",
+    key: "rules",
+    class_name: "ml-10",
+  },
+  {
+    title: "Templates",
+    separator: "",
+    size: "lg",
+    key: "templates",
+    class_name: "ml-10",
+  },
 ];
 
 export const bcFormHeaders = [
-  { title: 'Editor', separator:'', size:'lg', key:'editor', class_name:'' },
-  { title: 'Preview', separator:'', size:'lg',  key:'preview', class_name:'ml-10' },
+  { title: "Editor", separator: "", size: "lg", key: "editor", class_name: "" },
+  {
+    title: "Preview",
+    separator: "",
+    size: "lg",
+    key: "preview",
+    class_name: "ml-10",
+  },
 ];
 
 // Icons Component
@@ -70,260 +108,267 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 
 // MESSAGES TABLE SECTION
 export const msg_columns = [
-  {name: "TYPE", uid: "type"},
-  {name: "MESSAGE ID", uid: "msg_id"},
-  {name: "DISTRIBUTION TIME", uid: "distro_time"},
-  {name: "STATUS", uid: "status"},
-  {name: "TEMPLATE", uid: "temp"},
-  {name: "RECIPIENTS", uid: "recipients"},
-]
+  { name: "TYPE", uid: "type" },
+  { name: "MESSAGE ID", uid: "msg_id" },
+  { name: "DISTRIBUTION TIME", uid: "distro_time" },
+  { name: "STATUS", uid: "status" },
+  { name: "TEMPLATE", uid: "temp" },
+  { name: "RECIPIENTS", uid: "recipients" },
+];
 
 export const msg_records = [
   {
-    type: 'SMS',
-    msg_id: 'M274557',
-    distro_time: '08/06/2023, 14:35',
-    status: 'success',
-    temp: 'Investigator Assigned (SMS)',
-    recipients: '5291960784802'
+    type: "SMS",
+    msg_id: "M274557",
+    distro_time: "08/06/2023, 14:35",
+    status: "success",
+    temp: "Investigator Assigned (SMS)",
+    recipients: "5291960784802",
   },
   {
-    type: 'Email',
-    msg_id: 'M274387',
-    distro_time: '10/22/2023, 11:18',
-    status: 'success',
-    temp: 'Investigator Assigned (Email)',
-    recipients: 'a.hensley@montgomery.info, t.farmer@gillespie.com'
+    type: "Email",
+    msg_id: "M274387",
+    distro_time: "10/22/2023, 11:18",
+    status: "success",
+    temp: "Investigator Assigned (Email)",
+    recipients: "a.hensley@montgomery.info, t.farmer@gillespie.com",
   },
   {
-    type: 'Email',
-    msg_id: 'M274690',
-    distro_time: '10/22/2023, 11:35',
-    status: 'success',
-    temp: 'Investigator Assigned (Email)',
-    recipients: 'a.hensley@montgomery.info, t.farmer@gillespie.com'
+    type: "Email",
+    msg_id: "M274690",
+    distro_time: "10/22/2023, 11:35",
+    status: "success",
+    temp: "Investigator Assigned (Email)",
+    recipients: "a.hensley@montgomery.info, t.farmer@gillespie.com",
   },
   {
-    type: 'Email',
-    msg_id: 'M274221',
-    distro_time: '12/10/2023, 03:22',
-    status: 'success',
-    temp: 'Court Scheduled (Email)',
-    recipients: 'r.fernandez@harris.biz, m.lang@rodriguez-herring.com'
+    type: "Email",
+    msg_id: "M274221",
+    distro_time: "12/10/2023, 03:22",
+    status: "success",
+    temp: "Court Scheduled (Email)",
+    recipients: "r.fernandez@harris.biz, m.lang@rodriguez-herring.com",
   },
   {
-    type: 'SMS',
-    msg_id: 'M274068',
-    distro_time: '03/12/2024, 03:51',
-    status: 'fail',
-    temp: 'Investigator Assigned (Email)',
-    recipients: '1152867976655, 5452365950111, 1052169316013'
+    type: "SMS",
+    msg_id: "M274068",
+    distro_time: "03/12/2024, 03:51",
+    status: "fail",
+    temp: "Investigator Assigned (Email)",
+    recipients: "1152867976655, 5452365950111, 1052169316013",
   },
 ];
 
 // DEV-PAGE SECTION
 export const data_columns = [
-  {name: "ID", uid: "id", sortable: true},
-  {name: "CREATED AT", uid: "created_at"},
-  {name: "CASE ID", uid: "case_id"},
-  {name: "CASE NUMBER", uid: "case_number"},
-  {name: "CLIENT CODE", uid: "client_code"},
-  {name: "POLICE DEPARTMENT", uid: "police_dpt"},
-  {name: "ASSIGNEE", uid: "assignee"},
-  {name: "LAST DATE MODIFIED", uid: "last_date_modified", sortable: true},
-  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
-  {name: "VICTIM NAMES", uid: "victim_names"},
-  {name: "VICTIM EMAILS", uid: "victim_emails"},
-  {name: "VICTIM PHONE NUMBERS", uid: "victim_phone_numbers"},
-  {name: "VICTIM IDS", uid: "victim_ids"},
+  { name: "ID", uid: "id", sortable: true },
+  { name: "CREATED AT", uid: "created_at" },
+  { name: "CASE ID", uid: "case_id" },
+  { name: "CASE NUMBER", uid: "case_number" },
+  { name: "CLIENT CODE", uid: "client_code" },
+  { name: "POLICE DEPARTMENT", uid: "police_dpt" },
+  { name: "ASSIGNEE", uid: "assignee" },
+  { name: "LAST DATE MODIFIED", uid: "last_date_modified", sortable: true },
+  { name: "LAST MODIFIED BY", uid: "last_modified_by" },
+  { name: "VICTIM NAMES", uid: "victim_names" },
+  { name: "VICTIM EMAILS", uid: "victim_emails" },
+  { name: "VICTIM PHONE NUMBERS", uid: "victim_phone_numbers" },
+  { name: "VICTIM IDS", uid: "victim_ids" },
   // {name: "NOTIFICATION", uid: "notification"},
   // {name: "OPT OUT VICTIM NAMES", uid: "opt_out_victim_names"},
   // {name: "OPT OUT VICTIM IDS", uid: "opt_out_victim_ids"},
-  {name: "CASE STATUS", uid: "case_status"},
-  {name: "ACTIONS", uid: "actions"}
-]
+  { name: "CASE STATUS", uid: "case_status" },
+  { name: "ACTIONS", uid: "actions" },
+];
 
 // TEMPLATES SECTION
 export const temp_columns = [
-  {name: "ID", uid: "id", sortable: true},
-  {name: "TEMPLATE", uid: "template_name", sortable: true},
-  {name: "LAST MODIFIED DATE", uid: "last_date_modified", sortable: true},
-  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
-  {name: "TYPE", uid: "type", sortable: true},
-  {name: "ACTIVE", uid: "active", sortable: true},
-  {name: "ACTIONS", uid: "actions"},
+  { name: "ID", uid: "id", sortable: true },
+  { name: "TEMPLATE", uid: "template_name", sortable: true },
+  { name: "LAST MODIFIED DATE", uid: "last_date_modified", sortable: true },
+  { name: "LAST MODIFIED BY", uid: "last_modified_by" },
+  { name: "TYPE", uid: "type", sortable: true },
+  { name: "ACTIVE", uid: "active", sortable: true },
+  { name: "ACTIONS", uid: "actions" },
 ];
 
 export const temp_records = [
   {
-    id: 'T2387503',
-    template: 'Investigator Assigned (SMS)',
-    last_modified_time: '08/06/2023, 14:35',
-    last_modified_by: 'Brown, Tracy (1234)',
-    active: 'True',
-    type: 'SMS',
-    actions: '',
-    subject: '',
-    body: 'Your case status has been updated to Investigator Assigned. Please visit our ' +
-    'website for more information. Please respond CANCEL to opt out of future case notifications.'
+    id: "T2387503",
+    template: "Investigator Assigned (SMS)",
+    last_modified_time: "08/06/2023, 14:35",
+    last_modified_by: "Brown, Tracy (1234)",
+    active: "True",
+    type: "SMS",
+    actions: "",
+    subject: "",
+    body:
+      "Your case status has been updated to Investigator Assigned. Please visit our " +
+      "website for more information. Please respond CANCEL to opt out of future case notifications.",
   },
   {
-    id: 'T2387547',
-    template: 'Investigator Assigned',
-    last_modified_time: '08/06/2023, 14:35',
-    last_modified_by: 'Brown, Tracy (1234)',
-    active: 'False',
-    type: 'Email',
-    actions: '',
-    subject: 'An Update On Your Case Status',
-    body: 'Your case status has been updated to Investigator Assigned. Please visit our ' +
-    'website for more information.'
+    id: "T2387547",
+    template: "Investigator Assigned",
+    last_modified_time: "08/06/2023, 14:35",
+    last_modified_by: "Brown, Tracy (1234)",
+    active: "False",
+    type: "Email",
+    actions: "",
+    subject: "An Update On Your Case Status",
+    body:
+      "Your case status has been updated to Investigator Assigned. Please visit our " +
+      "website for more information.",
   },
   {
-    id: 'T2387501',
-    template: 'Court Scheduled',
-    last_modified_time: '08/06/2023, 14:35',
-    last_modified_by: 'Brown, Tracy (1234)',
-    active: 'False',
-    type: 'Email',
-    actions: '',
-    subject: 'An Update On Your Case Status',
-    body: 'Your case status has been updated to Court Scheduled. Please visit our ' +
-    'website for more information.'
+    id: "T2387501",
+    template: "Court Scheduled",
+    last_modified_time: "08/06/2023, 14:35",
+    last_modified_by: "Brown, Tracy (1234)",
+    active: "False",
+    type: "Email",
+    actions: "",
+    subject: "An Update On Your Case Status",
+    body:
+      "Your case status has been updated to Court Scheduled. Please visit our " +
+      "website for more information.",
   },
   {
-    id: 'T2387524',
-    template: 'Court Scheduled (SMS)',
-    last_modified_time: '08/06/2023, 14:35',
-    last_modified_by: 'Brown, Tracy (1234)',
-    active: 'True',
-    type: 'SMS',
-    actions: '',
-    subject: '',
-    body: 'Your case status has been updated to Court Scheduled. Please visit our ' +
-    'website for more information. Please respond CANCEL to opt out of future case notifications.'
+    id: "T2387524",
+    template: "Court Scheduled (SMS)",
+    last_modified_time: "08/06/2023, 14:35",
+    last_modified_by: "Brown, Tracy (1234)",
+    active: "True",
+    type: "SMS",
+    actions: "",
+    subject: "",
+    body:
+      "Your case status has been updated to Court Scheduled. Please visit our " +
+      "website for more information. Please respond CANCEL to opt out of future case notifications.",
   },
   {
-    id: 'T2387511',
-    template: 'Closed',
-    last_modified_time: '08/06/2023, 14:35',
-    last_modified_by: 'Brown, Tracy (1234)',
-    active: 'True',
-    type: 'Email',
-    actions: '',
-    subject: 'An Update On Your Case Status',
-    body: 'Your case status has been closed. Please visit our website for more information or ' +
-    'reach out to the police department with any additional questions. Thank you.'
+    id: "T2387511",
+    template: "Closed",
+    last_modified_time: "08/06/2023, 14:35",
+    last_modified_by: "Brown, Tracy (1234)",
+    active: "True",
+    type: "Email",
+    actions: "",
+    subject: "An Update On Your Case Status",
+    body:
+      "Your case status has been closed. Please visit our website for more information or " +
+      "reach out to the police department with any additional questions. Thank you.",
   },
   {
-    id: 'T2387533',
-    template: 'Rejected',
-    last_modified_time: '08/06/2023, 14:35',
-    last_modified_by: 'Brown, Tracy (1234)',
-    active: 'True',
-    type: 'Email',
-    actions: '',
-    subject: 'An Update On Your Case Status',
-    body: 'Your case status has been rejected. Please visit our website for more information or ' +
-    'reach out to the police department with any additional questions. Thank you.'
+    id: "T2387533",
+    template: "Rejected",
+    last_modified_time: "08/06/2023, 14:35",
+    last_modified_by: "Brown, Tracy (1234)",
+    active: "True",
+    type: "Email",
+    actions: "",
+    subject: "An Update On Your Case Status",
+    body:
+      "Your case status has been rejected. Please visit our website for more information or " +
+      "reach out to the police department with any additional questions. Thank you.",
   },
   {
-    id: 'T2387498',
-    template: 'Subject Arrested (SMS)',
-    last_modified_time: '08/06/2023, 14:35',
-    last_modified_by: 'Brown, Tracy (1234)',
-    active: 'True',
-    type: 'SMS',
-    actions: '',
-    subject: 'An Update On Your Case Status',
-    body: 'Your case status has been updated to Subject Arrested. Please visit our ' +
-    'website for more information.'
+    id: "T2387498",
+    template: "Subject Arrested (SMS)",
+    last_modified_time: "08/06/2023, 14:35",
+    last_modified_by: "Brown, Tracy (1234)",
+    active: "True",
+    type: "SMS",
+    actions: "",
+    subject: "An Update On Your Case Status",
+    body:
+      "Your case status has been updated to Subject Arrested. Please visit our " +
+      "website for more information.",
   },
 ];
 
-
 // RULES SECTION
 export const rules_columns = [
-  {name: "ID", uid: "id", sortable: true},
-  {name: "IF", uid: "if_logic"},
-  {name: "THEN", uid: "then_logic"},
-  {name: "LAST MODIFIED DATE", uid: "last_date_modified", sortable: true},
-  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
-  {name: "DELAY", uid: "delay", sortable: true},
-  {name: "ACTIONS", uid: "actions"},
+  { name: "ID", uid: "id", sortable: true },
+  { name: "IF", uid: "if_logic" },
+  { name: "THEN", uid: "then_logic" },
+  { name: "LAST MODIFIED DATE", uid: "last_date_modified", sortable: true },
+  { name: "LAST MODIFIED BY", uid: "last_modified_by" },
+  { name: "DELAY", uid: "delay", sortable: true },
+  { name: "ACTIONS", uid: "actions" },
 ];
 
 export const rules_records = [
   {
-    id: '1',
+    id: "1",
     if_logic: 'Status set to "Investigator assigned"',
-    then_logic: 'Send SMS to victims in case using "Investigator Assigned (SMS)"',
-    last_modified_time: '10/31/2023, 8:02',
-    last_modified_by: 'Brown, Tracy (1234)',
-    delay: '1 hour',
-    actions: 'HiPencil',
+    then_logic:
+      'Send SMS to victims in case using "Investigator Assigned (SMS)"',
+    last_modified_time: "10/31/2023, 8:02",
+    last_modified_by: "Brown, Tracy (1234)",
+    delay: "1 hour",
+    actions: "HiPencil",
   },
   {
-    id: '2',
+    id: "2",
     if_logic: 'Status set to "Closed"',
     then_logic: 'Email victims in case using "Closed"',
-    last_modified_time: '10/31/2023, 8:02',
-    last_modified_by: 'Brown, Tracy (1234)',
-    delay: '1 hour',
-    actions: 'HiPencil',
+    last_modified_time: "10/31/2023, 8:02",
+    last_modified_by: "Brown, Tracy (1234)",
+    delay: "1 hour",
+    actions: "HiPencil",
   },
   {
-    id: '3',
+    id: "3",
     if_logic: 'Status set to "Subject arrested"',
     then_logic: 'Send SMS to victims in case using "Subject Arrested (SMS)"',
-    last_modified_time: '10/31/2023, 8:02',
-    last_modified_by: 'Brown, Tracy (1234)',
-    delay: '1 hour',
-    actions: 'HiPencil',
+    last_modified_time: "10/31/2023, 8:02",
+    last_modified_by: "Brown, Tracy (1234)",
+    delay: "1 hour",
+    actions: "HiPencil",
   },
   {
-    id: '4',
+    id: "4",
     if_logic: 'Status set to "Court scheduled"',
     then_logic: 'Send SMS to victims in case using "Court Scheduled (SMS)"',
-    last_modified_time: '10/31/2023, 8:02',
-    last_modified_by: 'Brown, Tracy (1234)',
-    delay: '1 hour',
-    actions: 'HiPencil',
+    last_modified_time: "10/31/2023, 8:02",
+    last_modified_by: "Brown, Tracy (1234)",
+    delay: "1 hour",
+    actions: "HiPencil",
   },
   {
-    id: '5',
+    id: "5",
     if_logic: 'Status set to "Rejected"',
     then_logic: 'Email victims in case using "Rejected"',
-    last_modified_time: '10/31/2023, 8:02',
-    last_modified_by: 'Brown, Tracy (1234)',
-    delay: '1 hour',
-    actions: 'HiPencil',
+    last_modified_time: "10/31/2023, 8:02",
+    last_modified_by: "Brown, Tracy (1234)",
+    delay: "1 hour",
+    actions: "HiPencil",
   },
 ];
 
 // RECORDS SECTION - DUMMY DATA
 export const dummy_columns = [
-  {name: "ID", uid: "id", sortable: true},
-  {name: "CASE NUMBER", uid: "case_number", sortable: true},
-  {name: "CASE TIME", uid: "case_time"},
-  {name: "CASE TYPE", uid: "case_type"},
-  {name: "ASSIGNEE", uid: "assignee"},
-  {name: "VICTIMS", uid: "victims"},
+  { name: "ID", uid: "id", sortable: true },
+  { name: "CASE NUMBER", uid: "case_number", sortable: true },
+  { name: "CASE TIME", uid: "case_time" },
+  { name: "CASE TYPE", uid: "case_type" },
+  { name: "ASSIGNEE", uid: "assignee" },
+  { name: "VICTIMS", uid: "victims" },
   // Make below validate for UTC time
-  {name: "LAST MODIFIED BY", uid: "last_modified_by"},
-  {name: "PHONE NUMBERS", uid: "phone_numbers"},
-  {name: "EMAILS", uid: "emails"},
-  {name: "STATUS", uid: "status", sortable: true},
-  {name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true},
-  {name: "ACTIONS", uid: "actions"},
+  { name: "LAST MODIFIED BY", uid: "last_modified_by" },
+  { name: "PHONE NUMBERS", uid: "phone_numbers" },
+  { name: "EMAILS", uid: "emails" },
+  { name: "STATUS", uid: "status", sortable: true },
+  { name: "LAST MODIFIED DATE", uid: "last_modified_time", sortable: true },
+  { name: "ACTIONS", uid: "actions" },
 ];
 
 export const statusOptions = [
-  {name: "Active", uid: "active"},
-  {name: "Investigator Assigned", uid: "invest_assigned"},
-  {name: "Court Scheduled", uid: "court_scheduled"},
-  {name: "Rejected", uid: "rejected"},
-  {name: "Closed", uid: "closed"},
+  { name: "Active", uid: "active" },
+  { name: "Investigator Assigned", uid: "invest_assigned" },
+  { name: "Court Scheduled", uid: "court_scheduled" },
+  { name: "Rejected", uid: "rejected" },
+  { name: "Closed", uid: "closed" },
 ];
 
 export const dummy_records = [
@@ -576,24 +621,15 @@ export const dummy_records = [
   },
   {
     id: 20,
-    victims: [
-      "Mia Robinson",
-      "Jamie Robinson"
-    ],
+    victims: ["Mia Robinson", "Jamie Robinson"],
     status: "active",
-    emails: [
-      "mia.robinson@example.com",
-      "jamie.robinson@example.com",
-    ],
+    emails: ["mia.robinson@example.com", "jamie.robinson@example.com"],
     last_modified_time: "10/02/2023 14:02",
     last_modified_by: "Young, Jerry (5045)",
     case_number: "2023-39-INC-23193792",
     case_time: "08/26/2023 10:28",
     case_type: "Robbery",
     assignee: "Young, Jerry (5045)",
-    phone_numbers: [
-      "505-660-5200",
-      "505-485-3924",
-    ],
+    phone_numbers: ["505-660-5200", "505-485-3924"],
   },
 ];

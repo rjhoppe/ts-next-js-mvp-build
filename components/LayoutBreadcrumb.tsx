@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React from "react";
 import { Breadcrumbs, BreadcrumbItem } from "@nextui-org/breadcrumbs";
@@ -15,17 +15,20 @@ const LayoutBreadcrumb = ({ childToParent }: any) => {
 
   return (
     <section className="flex items-end justify-between">
-      <Breadcrumbs underline="active" onAction={(key) => [setCurrentPage(key), childToParent(key)]}>
+      <Breadcrumbs
+        underline="active"
+        onAction={(key) => [setCurrentPage(key), childToParent(key)]}
+      >
         {bcLayoutHeaders.map((item) => (
-        <BreadcrumbItem
-          className={item.class_name}
-          separator={item.separator}
-          size='lg'
-          key={item.key}
-          isCurrent={currentPage === item.key}
-        >
-          {item.title}
-        </BreadcrumbItem>
+          <BreadcrumbItem
+            className={item.class_name}
+            separator={item.separator}
+            size="lg"
+            key={item.key}
+            isCurrent={currentPage === item.key}
+          >
+            {item.title}
+          </BreadcrumbItem>
         ))}
       </Breadcrumbs>
       <div className="flex justify-center gap-5">
@@ -43,6 +46,6 @@ const LayoutBreadcrumb = ({ childToParent }: any) => {
       </div>
     </section>
   );
-}
+};
 
-export default LayoutBreadcrumb
+export default LayoutBreadcrumb;

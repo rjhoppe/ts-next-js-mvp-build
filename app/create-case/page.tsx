@@ -1,9 +1,5 @@
 const CreateCase = () => {
-  return (
-    <div>
-      No longer needed - OBE
-    </div>
-  )
-}
+  return <div>No longer needed - OBE</div>;
+};
 
-export default CreateCase
+export default CreateCase;

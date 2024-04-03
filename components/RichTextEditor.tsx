@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState, useMemo } from "react";
 import dynamic from "next/dynamic";
@@ -8,12 +8,18 @@ import { Spinner } from "@nextui-org/react";
 // import QuillNoSSRWrapper from "./QuillNoSSRWrapper";
 
 type RichTextEditorProps = {
-  message?: string
-} 
+  message?: string;
+};
 
 const RichTextEditor = ({ message }: RichTextEditorProps) => {
-  const ReactQuill = useMemo(() => dynamic(() => import('react-quill'), 
-  { ssr: false, loading: () => <Spinner /> }), []);
+  const ReactQuill = useMemo(
+    () =>
+      dynamic(() => import("react-quill"), {
+        ssr: false,
+        loading: () => <Spinner />,
+      }),
+    [],
+  );
 
   const myColors = [
     "black",
@@ -23,7 +29,7 @@ const RichTextEditor = ({ message }: RichTextEditorProps) => {
     "green",
     "yellow",
     "purple",
-  ]
+  ];
 
   const modules = {
     toolbar: [
@@ -53,14 +59,14 @@ const RichTextEditor = ({ message }: RichTextEditorProps) => {
     "code",
   ];
 
-  const [text, setText] = useState(message ? message : 'Write content here');
+  const [text, setText] = useState(message ? message : "Write content here");
   const handleTextChange = (content: any) => {
     setText(content);
   };
 
   return (
     <>
-      <ReactQuill 
+      <ReactQuill
         theme="snow"
         value={text}
         modules={modules}

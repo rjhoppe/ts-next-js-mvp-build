@@ -1,4 +1,4 @@
-import {  
+import {
   Button,
   Input,
   Modal,
@@ -11,17 +11,28 @@ import {
 
 import { EditRuleRecordProps } from "./EditRuleRecord";
 
-const ViewRuleRecord = ({ id, if_logic, then_logic, delay, 
-last_modified_by, last_modified_time  } : ViewRuleRecordProps ) => {
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
-  
+const ViewRuleRecord = ({
+  id,
+  if_logic,
+  then_logic,
+  delay,
+  last_modified_by,
+  last_modified_time,
+}: ViewRuleRecordProps) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   return (
     <>
-      <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
+      <Button className="flex bg-transparent" isIconOnly onPress={onOpen}>
         View
       </Button>
-      <Modal scrollBehavior="inside" disableAnimation isOpen={isOpen} 
-      onOpenChange={onOpenChange} placement="bottom">
+      <Modal
+        scrollBehavior="inside"
+        disableAnimation
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+        placement="bottom"
+      >
         <ModalContent>
           {(onClose) => (
             <>
@@ -29,16 +40,32 @@ last_modified_by, last_modified_time  } : ViewRuleRecordProps ) => {
                 View Rule: {id}
               </ModalHeader>
               <ModalBody>
-                <div className='flex flex-col gap-5'>
-                  <Input readOnly label='If Logic' defaultValue={if_logic}></Input>
-                  <Input readOnly label='Then Logic' defaultValue={then_logic}></Input>
-                  <Input readOnly label='Delay' defaultValue={delay}></Input>
-                  <Input readOnly label='Last Modified Date' defaultValue={last_modified_time}></Input>
-                  <Input readOnly label='Last Modified By' defaultValue={last_modified_by}></Input>
+                <div className="flex flex-col gap-5">
+                  <Input
+                    readOnly
+                    label="If Logic"
+                    defaultValue={if_logic}
+                  ></Input>
+                  <Input
+                    readOnly
+                    label="Then Logic"
+                    defaultValue={then_logic}
+                  ></Input>
+                  <Input readOnly label="Delay" defaultValue={delay}></Input>
+                  <Input
+                    readOnly
+                    label="Last Modified Date"
+                    defaultValue={last_modified_time}
+                  ></Input>
+                  <Input
+                    readOnly
+                    label="Last Modified By"
+                    defaultValue={last_modified_by}
+                  ></Input>
                 </div>
               </ModalBody>
               <ModalFooter>
-                <div className='flex gap-5'>
+                <div className="flex gap-5">
                   <Button color="danger" onPress={onClose}>
                     Cancel
                   </Button>
@@ -61,4 +88,4 @@ export type ViewRuleRecordProps = EditRuleRecordProps & {
   last_modified_by: string;
 };
 
-export default ViewRuleRecord
+export default ViewRuleRecord;

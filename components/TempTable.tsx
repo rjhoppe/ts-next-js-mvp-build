@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import {
   Table,
@@ -26,34 +26,45 @@ import TempTestModal from "./TempTestModal";
 import EditTempRecord from "./EditTempRecord";
 import ViewTempRecord from "./ViewTempRecord";
 
-import { 
+import {
   PlusIcon,
   VerticalDotsIcon,
   ChevronDownIcon,
   SearchIcon,
-} from "@/components/icons"
+} from "@/components/icons";
 
-import { temp_columns, statusOptions} from "@/constants/index";
+import { temp_columns, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
 import { TempTableTypes } from "@/types/collection";
 import DeleteRecordModal from "./DeleteRecordModal";
 
 const activeColorMap: Record<string, ChipProps["color"]> = {
-  "True": "success",
-  "False": "danger",
+  True: "success",
+  False: "danger",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["id", "template_name", "last_date_modified", "last_modified_by", 
-"active", "type", "actions"];
+const INITIAL_VISIBLE_COLUMNS = [
+  "id",
+  "template_name",
+  "last_date_modified",
+  "last_modified_by",
+  "active",
+  "type",
+  "actions",
+];
 
 type TempTableProps = {
-  rows: TempTableTypes[]
-}
+  rows: TempTableTypes[];
+};
 
 const TempTable = ({ rows }: TempTableProps) => {
-	const [filterValue, setFilterValue] = React.useState("");
-  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
-  const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
+  const [filterValue, setFilterValue] = React.useState("");
+  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
+    new Set([]),
+  );
+  const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
+    new Set(INITIAL_VISIBLE_COLUMNS),
+  );
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
@@ -68,7 +79,9 @@ const TempTable = ({ rows }: TempTableProps) => {
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return temp_columns;
 
-    return temp_columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
+    return temp_columns.filter((column) =>
+      Array.from(visibleColumns).includes(column.uid),
+    );
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
@@ -79,7 +92,10 @@ const TempTable = ({ rows }: TempTableProps) => {
         record.template_name.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
-    if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
+    if (
+      statusFilter !== "all" &&
+      Array.from(statusFilter).length !== statusOptions.length
+    ) {
       filteredRecords = filteredRecords.filter((record) =>
         Array.from(statusFilter).includes(record.active),
       );
@@ -107,77 +123,85 @@ const TempTable = ({ rows }: TempTableProps) => {
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = React.useCallback((record: TempTableTypes, columnKey: React.Key) => {
-    const cellValue = record[columnKey as keyof TempTableTypes] as string;
+  const renderCell = React.useCallback(
+    (record: TempTableTypes, columnKey: React.Key) => {
+      const cellValue = record[columnKey as keyof TempTableTypes] as string;
 
-    switch (columnKey) {
-      case "active":
-        return (
-          <Chip className="capitalize" color={activeColorMap[record.active]} size="sm" variant="flat">
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="flex justify-center items-center">
-            <div className="flex">
-              <Tooltip content="Test">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <TempTestModal
-                    id={record.template_id}
-                    template={record.template_name}
-                    type={record.type}
-                    subject={record.subject}
-                    body={record.message}
-                  />
-                </span>
-              </Tooltip>
-              <Tooltip content="Edit">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EditTempRecord
-                    id={record.template_id}
-                    template={record.template_name}
-                    type={record.type}
-                    subject={record.subject}
-                    body={record.message}
-                    active={record.active}
-                  />
-                </span>
-              </Tooltip>
+      switch (columnKey) {
+        case "active":
+          return (
+            <Chip
+              className="capitalize"
+              color={activeColorMap[record.active]}
+              size="sm"
+              variant="flat"
+            >
+              {cellValue}
+            </Chip>
+          );
+        case "actions":
+          return (
+            <div className="flex justify-center items-center">
+              <div className="flex">
+                <Tooltip content="Test">
+                  <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                    <TempTestModal
+                      id={record.template_id}
+                      template={record.template_name}
+                      type={record.type}
+                      subject={record.subject}
+                      body={record.message}
+                    />
+                  </span>
+                </Tooltip>
+                <Tooltip content="Edit">
+                  <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                    <EditTempRecord
+                      id={record.template_id}
+                      template={record.template_name}
+                      type={record.type}
+                      subject={record.subject}
+                      body={record.message}
+                      active={record.active}
+                    />
+                  </span>
+                </Tooltip>
+              </div>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button isIconOnly size="sm" variant="light">
+                    <VerticalDotsIcon className="light text-foreground" />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu>
+                  <DropdownItem isReadOnly key="view_temp">
+                    <ViewTempRecord
+                      id={record.template_id}
+                      last_modified_time={record.last_date_modified}
+                      last_modified_by={record.last_modified_by}
+                      template={record.template_name}
+                      type={record.type}
+                      subject={record.subject}
+                      body={record.message}
+                      active={record.active}
+                    />
+                  </DropdownItem>
+                  <DropdownItem isReadOnly key="delete_temp">
+                    <DeleteRecordModal
+                      id={record.template_id}
+                      database="templates"
+                    />
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
             </div>
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon className="light text-foreground" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem isReadOnly key='view_temp' >
-                  <ViewTempRecord
-                    id={record.template_id}
-                    last_modified_time={record.last_date_modified}
-                    last_modified_by={record.last_modified_by}
-                    template={record.template_name}
-                    type={record.type}
-                    subject={record.subject}
-                    body={record.message}
-                    active={record.active}
-                  />
-                </DropdownItem>
-                <DropdownItem isReadOnly key='delete_temp'>
-                  <DeleteRecordModal 
-                    id={record.template_id}
-                    database='templates'
-                  />
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+          );
+        default:
+          return cellValue;
+      }
+    },
+    [],
+  );
 
   const onNextPage = React.useCallback(() => {
     if (page < pages) {
@@ -191,10 +215,13 @@ const TempTable = ({ rows }: TempTableProps) => {
     }
   }, [page]);
 
-  const onRowsPerPageChange = React.useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRowsPerPage(Number(e.target.value));
-    setPage(1);
-  }, []);
+  const onRowsPerPageChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setRowsPerPage(Number(e.target.value));
+      setPage(1);
+    },
+    [],
+  );
 
   const onSearchChange = React.useCallback((value?: string) => {
     if (value) {
@@ -205,10 +232,10 @@ const TempTable = ({ rows }: TempTableProps) => {
     }
   }, []);
 
-  const onClear = React.useCallback(()=>{
-    setFilterValue("")
-    setPage(1)
-  },[])
+  const onClear = React.useCallback(() => {
+    setFilterValue("");
+    setPage(1);
+  }, []);
 
   const topContent = React.useMemo(() => {
     return (
@@ -227,9 +254,9 @@ const TempTable = ({ rows }: TempTableProps) => {
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button 
+                <Button
                   className="bg-stone-800 text-white"
-                  endContent={<ChevronDownIcon className="text-small" />} 
+                  endContent={<ChevronDownIcon className="text-small" />}
                   variant="flat"
                 >
                   Status
@@ -252,9 +279,9 @@ const TempTable = ({ rows }: TempTableProps) => {
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button 
+                <Button
                   className="bg-stone-800 text-white"
-                  endContent={<ChevronDownIcon className="text-small" />} 
+                  endContent={<ChevronDownIcon className="text-small" />}
                   variant="flat"
                 >
                   Columns
@@ -275,8 +302,13 @@ const TempTable = ({ rows }: TempTableProps) => {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button as={Link} href="/create-template" color="primary" 
-            className="bg-stone-800 text-white" endContent={<PlusIcon />}>
+            <Button
+              as={Link}
+              href="/create-template"
+              color="primary"
+              className="bg-stone-800 text-white"
+              endContent={<PlusIcon />}
+            >
               Create Template
             </Button>
           </div>
@@ -285,7 +317,8 @@ const TempTable = ({ rows }: TempTableProps) => {
           <span className="text-small">Total templates: {rows.length}</span>
           <label className="flex items-center text-small">
             Rows per page:
-            <select defaultValue={5}
+            <select
+              defaultValue={5}
               className="bg-transparent outline-none text-small"
               onChange={onRowsPerPageChange}
             >
@@ -326,12 +359,20 @@ const TempTable = ({ rows }: TempTableProps) => {
           className="dark text-foreground"
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button className="bg-stone-800 text-white" size="sm" 
-          variant="flat" onPress={onPreviousPage}>
+          <Button
+            className="bg-stone-800 text-white"
+            size="sm"
+            variant="flat"
+            onPress={onPreviousPage}
+          >
             Previous
           </Button>
-          <Button className="bg-stone-800 text-white" size="sm" 
-          variant="flat" onPress={onNextPage}>
+          <Button
+            className="bg-stone-800 text-white"
+            size="sm"
+            variant="flat"
+            onPress={onNextPage}
+          >
             Next
           </Button>
         </div>
@@ -342,8 +383,8 @@ const TempTable = ({ rows }: TempTableProps) => {
     filteredItems.length,
     onPreviousPage,
     onNextPage,
-    page, 
-    pages, 
+    page,
+    pages,
   ]);
 
   return (
@@ -355,7 +396,7 @@ const TempTable = ({ rows }: TempTableProps) => {
       classNames={{
         wrapper: "max-h-[1000px]",
         th: "text-white bg-stone-800",
-        tr: "divide-y divide-solid"
+        tr: "divide-y divide-solid",
       }}
       selectedKeys={selectedKeys}
       selectionMode="multiple"
@@ -387,6 +428,6 @@ const TempTable = ({ rows }: TempTableProps) => {
       </TableBody>
     </Table>
   );
-}
+};
 
-export default TempTable
+export default TempTable;

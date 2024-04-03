@@ -1,69 +1,73 @@
-import {  
+import {
   Button,
   Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Popover, 
-  PopoverTrigger, 
+  Popover,
+  PopoverTrigger,
   PopoverContent,
-  useDisclosure
+  useDisclosure,
 } from "@nextui-org/react";
 
 import supabase from "@/lib/supabase";
 
 type DeleteRecordProps = {
   id: string;
-  database: 'rules' | 'templates'
-}
+  database: "rules" | "templates";
+};
 
 const DeleteRecordModal = ({ id, database }: DeleteRecordProps) => {
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  let queryId = ''
-  if (database === 'templates') {
-    queryId = 'template_id'
+  let queryId = "";
+  if (database === "templates") {
+    queryId = "template_id";
   } else {
-    queryId = 'rule_id'
+    queryId = "rule_id";
   }
 
   const handleSubmit = async () => {
     try {
       // @ts-ignore
-      const { data } = await supabase
-      .from(database)
-      .delete()
-      .eq(queryId, id)
+      const { data } = await supabase.from(database).delete().eq(queryId, id);
 
       if (data) {
-        console.log(data)
+        console.log(data);
       }
-
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <>
-      <Button className='flex bg-transparent ml-1' isIconOnly onPress={onOpen}>
+      <Button className="flex bg-transparent ml-1" isIconOnly onPress={onOpen}>
         Delete
       </Button>
-      <Modal disableAnimation size="xs" isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal
+        disableAnimation
+        size="xs"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className='flex justify-center mt-5 -mb-2'>
+              <ModalHeader className="flex justify-center mt-5 -mb-2">
                 Delete Template: {id}?
               </ModalHeader>
-              <ModalBody className='flex justify-center'>
-                <div className='flex'>
-                  <p>Are you sure you want to do delete this record? This action is irreversible.</p>
+              <ModalBody className="flex justify-center">
+                <div className="flex">
+                  <p>
+                    Are you sure you want to do delete this record? This action
+                    is irreversible.
+                  </p>
                 </div>
               </ModalBody>
-              <ModalFooter className='flex justify-center'>
-                <div className='flex justify-center gap-5'>
+              <ModalFooter className="flex justify-center">
+                <div className="flex justify-center gap-5">
                   <Button color="danger" onPress={onClose}>
                     Cancel
                   </Button>
@@ -78,7 +82,10 @@ const DeleteRecordModal = ({ id, database }: DeleteRecordProps) => {
                         <h3 className="text-small font-bold">
                           Record {id} Deleted
                         </h3>
-                        <div className="text-tiny">Your record was successfully deleted. Please refresh the page.</div>
+                        <div className="text-tiny">
+                          Your record was successfully deleted. Please refresh
+                          the page.
+                        </div>
                       </div>
                     </PopoverContent>
                   </Popover>
@@ -89,7 +96,7 @@ const DeleteRecordModal = ({ id, database }: DeleteRecordProps) => {
         </ModalContent>
       </Modal>
     </>
-  )
-}
+  );
+};
 
-export default DeleteRecordModal
+export default DeleteRecordModal;

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import { rules_columns, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
@@ -18,14 +18,14 @@ import {
   Pagination,
   Selection,
   ChipProps,
-  SortDescriptor
+  SortDescriptor,
 } from "@nextui-org/react";
 
-import { 
+import {
   PlusIcon,
   VerticalDotsIcon,
   ChevronDownIcon,
-} from "@/components/icons"
+} from "@/components/icons";
 import Link from "next/link";
 
 import EditRuleRecord from "./EditRuleRecord";
@@ -39,16 +39,28 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   vacation: "warning",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["id", "if_logic", "then_logic", "last_date_modified", "last_modified_by", "delay", "actions"];
+const INITIAL_VISIBLE_COLUMNS = [
+  "id",
+  "if_logic",
+  "then_logic",
+  "last_date_modified",
+  "last_modified_by",
+  "delay",
+  "actions",
+];
 
 type RulesTableProps = {
-  rows: RulesTableTypes[]
-}
+  rows: RulesTableTypes[];
+};
 
 const RulesTable = ({ rows }: RulesTableProps) => {
   const [filterValue, setFilterValue] = React.useState("");
-  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
-  const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
+  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
+    new Set([]),
+  );
+  const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
+    new Set(INITIAL_VISIBLE_COLUMNS),
+  );
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
@@ -63,7 +75,9 @@ const RulesTable = ({ rows }: RulesTableProps) => {
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return rules_columns;
 
-    return rules_columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
+    return rules_columns.filter((column) =>
+      Array.from(visibleColumns).includes(column.uid),
+    );
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
@@ -74,7 +88,10 @@ const RulesTable = ({ rows }: RulesTableProps) => {
         record.if_logic.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
-    if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
+    if (
+      statusFilter !== "all" &&
+      Array.from(statusFilter).length !== statusOptions.length
+    ) {
       filteredUsers = filteredUsers.filter((record) =>
         Array.from(statusFilter).includes(record.if_logic),
       );
@@ -95,67 +112,69 @@ const RulesTable = ({ rows }: RulesTableProps) => {
   const sortedItems = React.useMemo(() => {
     return [...items].sort((a: RulesTableTypes, b: RulesTableTypes) => {
       const first = a[sortDescriptor.column as keyof RulesTableTypes] as number;
-      const second = b[sortDescriptor.column as keyof RulesTableTypes] as number;
+      const second = b[
+        sortDescriptor.column as keyof RulesTableTypes
+      ] as number;
       const cmp = first < second ? -1 : first > second ? 1 : 0;
 
       return sortDescriptor.direction === "descending" ? -cmp : cmp;
     });
   }, [sortDescriptor, items]);
 
-  const renderCell = React.useCallback((record: RulesTableTypes, columnKey: React.Key) => {
-    const cellValue = record[columnKey as keyof RulesTableTypes];
+  const renderCell = React.useCallback(
+    (record: RulesTableTypes, columnKey: React.Key) => {
+      const cellValue = record[columnKey as keyof RulesTableTypes];
 
-    switch (columnKey) {
-      case "id":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-          </div>
-        );
-      case "actions":
-        return (
-          <div className="relative flex justify-end items-center gap-2">
-            <Tooltip content="Edit">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EditRuleRecord 
-                  id={record.rule_id}
-                  if_logic={record.if_logic}
-                  then_logic={record.then_logic}
-                  delay={record.delay}
-                />
-              </span>
-            </Tooltip>
-            <Dropdown>
-              <DropdownTrigger>
-                <Button isIconOnly size="sm" variant="light">
-                  <VerticalDotsIcon className="light text-foreground" />
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu>
-                <DropdownItem isReadOnly>
-                  <ViewRuleRecord 
+      switch (columnKey) {
+        case "id":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small capitalize">{cellValue}</p>
+            </div>
+          );
+        case "actions":
+          return (
+            <div className="relative flex justify-end items-center gap-2">
+              <Tooltip content="Edit">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <EditRuleRecord
                     id={record.rule_id}
                     if_logic={record.if_logic}
                     then_logic={record.then_logic}
                     delay={record.delay}
-                    last_modified_by={record.last_modified_by}
-                    last_modified_time={record.last_date_modified}
                   />
-                </DropdownItem>
-                <DropdownItem isReadOnly>
-                  <DeleteRecordModal 
-                    id={record.rule_id}
-                    database='rules'
-                  />
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+                </span>
+              </Tooltip>
+              <Dropdown>
+                <DropdownTrigger>
+                  <Button isIconOnly size="sm" variant="light">
+                    <VerticalDotsIcon className="light text-foreground" />
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu>
+                  <DropdownItem isReadOnly>
+                    <ViewRuleRecord
+                      id={record.rule_id}
+                      if_logic={record.if_logic}
+                      then_logic={record.then_logic}
+                      delay={record.delay}
+                      last_modified_by={record.last_modified_by}
+                      last_modified_time={record.last_date_modified}
+                    />
+                  </DropdownItem>
+                  <DropdownItem isReadOnly>
+                    <DeleteRecordModal id={record.rule_id} database="rules" />
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
+          );
+        default:
+          return cellValue;
+      }
+    },
+    [],
+  );
 
   const onNextPage = React.useCallback(() => {
     if (page < pages) {
@@ -169,10 +188,13 @@ const RulesTable = ({ rows }: RulesTableProps) => {
     }
   }, [page]);
 
-  const onRowsPerPageChange = React.useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRowsPerPage(Number(e.target.value));
-    setPage(1);
-  }, []);
+  const onRowsPerPageChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setRowsPerPage(Number(e.target.value));
+      setPage(1);
+    },
+    [],
+  );
 
   const onSearchChange = React.useCallback((value?: string) => {
     if (value) {
@@ -183,10 +205,10 @@ const RulesTable = ({ rows }: RulesTableProps) => {
     }
   }, []);
 
-  const onClear = React.useCallback(()=>{
-    setFilterValue("")
-    setPage(1)
-  },[])
+  const onClear = React.useCallback(() => {
+    setFilterValue("");
+    setPage(1);
+  }, []);
 
   const topContent = React.useMemo(() => {
     return (
@@ -198,9 +220,9 @@ const RulesTable = ({ rows }: RulesTableProps) => {
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button 
-                  className="bg-stone-800 text-white"  
-                  endContent={<ChevronDownIcon className="text-small" />} 
+                <Button
+                  className="bg-stone-800 text-white"
+                  endContent={<ChevronDownIcon className="text-small" />}
                   variant="flat"
                 >
                   Columns
@@ -221,8 +243,13 @@ const RulesTable = ({ rows }: RulesTableProps) => {
                 ))}
               </DropdownMenu>
             </Dropdown>
-            <Button className="text-white bg-stone-800" as={Link} href="/create-rule" color="primary" 
-            endContent={<PlusIcon />}>
+            <Button
+              className="text-white bg-stone-800"
+              as={Link}
+              href="/create-rule"
+              color="primary"
+              endContent={<PlusIcon />}
+            >
               Add New Rule
             </Button>
           </div>
@@ -242,11 +269,7 @@ const RulesTable = ({ rows }: RulesTableProps) => {
         </div>
       </div>
     );
-  }, [
-    rows.length,
-    visibleColumns,
-    onRowsPerPageChange
-  ]);
+  }, [rows.length, visibleColumns, onRowsPerPageChange]);
 
   const bottomContent = React.useMemo(() => {
     return (
@@ -267,21 +290,29 @@ const RulesTable = ({ rows }: RulesTableProps) => {
           className="dark text-foreground"
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button className="text-white bg-stone-800"
-          size="sm" variant="flat" onPress={onPreviousPage}>
+          <Button
+            className="text-white bg-stone-800"
+            size="sm"
+            variant="flat"
+            onPress={onPreviousPage}
+          >
             Previous
           </Button>
-          <Button className="text-white bg-stone-800"
-          size="sm" variant="flat" onPress={onNextPage}>
+          <Button
+            className="text-white bg-stone-800"
+            size="sm"
+            variant="flat"
+            onPress={onNextPage}
+          >
             Next
           </Button>
         </div>
       </div>
     );
   }, [
-    selectedKeys, 
-    page, 
-    pages, 
+    selectedKeys,
+    page,
+    pages,
     filteredItems.length,
     onNextPage,
     onPreviousPage,
@@ -296,7 +327,7 @@ const RulesTable = ({ rows }: RulesTableProps) => {
       classNames={{
         wrapper: "max-h-[1000px]",
         th: "text-white bg-stone-800",
-        tr: "divide-y divide-solid"
+        tr: "divide-y divide-solid",
       }}
       sortDescriptor={sortDescriptor}
       topContent={topContent}
@@ -325,6 +356,6 @@ const RulesTable = ({ rows }: RulesTableProps) => {
       </TableBody>
     </Table>
   );
-}
+};
 
-export default RulesTable
+export default RulesTable;
