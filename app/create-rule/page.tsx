@@ -1,13 +1,13 @@
-'use client'
+"use client";
 
-import AddRule from "@/components/AddRule"
+import AddRule from "@/components/AddRule";
 
 const CreateRule = () => {
   return (
     <div>
       <AddRule />
     </div>
-  )
-}
+  );
+};
 
-export default CreateRule
+export default CreateRule;

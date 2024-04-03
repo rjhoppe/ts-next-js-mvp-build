@@ -6,7 +6,6 @@ export function capitalize2(str: string) {
   return str && str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-
 // export function genTempId() {
 //   const minCeiled = Math.ceil(1000000);
 //   const maxFloored = Math.floor(9999999)

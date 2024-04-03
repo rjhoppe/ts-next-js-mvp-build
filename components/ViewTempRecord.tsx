@@ -1,4 +1,4 @@
-import {  
+import {
   Button,
   Textarea,
   Input,
@@ -10,46 +10,70 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 
-import { TempTestModalProps } from './TempTestModal';
+import { TempTestModalProps } from "./TempTestModal";
 
-const ViewTempRecord = ({ id, active, last_modified_time, last_modified_by,
-template, type, subject, body } : TempViewRecordProps) => {
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+const ViewTempRecord = ({
+  id,
+  active,
+  last_modified_time,
+  last_modified_by,
+  template,
+  type,
+  subject,
+  body,
+}: TempViewRecordProps) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
     <>
-      <Button className='flex bg-transparent' isIconOnly onPress={onOpen}>
+      <Button className="flex bg-transparent" isIconOnly onPress={onOpen}>
         View
       </Button>
-      <Modal scrollBehavior="inside" disableAnimation isOpen={isOpen} 
-      onOpenChange={onOpenChange}>
+      <Modal
+        scrollBehavior="inside"
+        disableAnimation
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
+      >
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader>
-                View Template: {id}
-              </ModalHeader>
+              <ModalHeader>View Template: {id}</ModalHeader>
               <ModalBody>
-                <div className='flex flex-col gap-5'>
-                  <Input readOnly label='Template ID' defaultValue={id}></Input>
-                  <Input readOnly label='Template Name' defaultValue={template}></Input>
-                  <Input readOnly label='Last Modified Date' defaultValue={last_modified_time}></Input>
-                  <Input readOnly label='Last Modified By' defaultValue={last_modified_by}></Input>
-                  <Input readOnly label='Active' defaultValue={active}></Input>
-                  {
-                    type === 'Email' ? <Input readOnly label='Subject' defaultValue={subject}></Input> : null
-                  }
-                  <Textarea label='Message' readOnly value={body}></Textarea>
+                <div className="flex flex-col gap-5">
+                  <Input readOnly label="Template ID" defaultValue={id}></Input>
+                  <Input
+                    readOnly
+                    label="Template Name"
+                    defaultValue={template}
+                  ></Input>
+                  <Input
+                    readOnly
+                    label="Last Modified Date"
+                    defaultValue={last_modified_time}
+                  ></Input>
+                  <Input
+                    readOnly
+                    label="Last Modified By"
+                    defaultValue={last_modified_by}
+                  ></Input>
+                  <Input readOnly label="Active" defaultValue={active}></Input>
+                  {type === "Email" ? (
+                    <Input
+                      readOnly
+                      label="Subject"
+                      defaultValue={subject}
+                    ></Input>
+                  ) : null}
+                  <Textarea label="Message" readOnly value={body}></Textarea>
                 </div>
               </ModalBody>
               <ModalFooter>
-                <div className='flex gap-5'>
-                  <div className='flex mr-20'>
-                    <Button color="secondary">
-                      Edit Message
-                    </Button>
+                <div className="flex gap-5">
+                  <div className="flex mr-20">
+                    <Button color="secondary">Edit Message</Button>
                   </div>
-                  <div className='flex gap-5'>
+                  <div className="flex gap-5">
                     <Button color="danger" onPress={onClose}>
                       Cancel
                     </Button>
@@ -74,4 +98,4 @@ export type TempViewRecordProps = TempTestModalProps & {
   last_modified_by: string;
 };
 
-export default ViewTempRecord
+export default ViewTempRecord;

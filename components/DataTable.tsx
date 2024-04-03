@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import {
   Table,
@@ -24,10 +24,7 @@ import {
 
 import ViewCaseRecord from "./ViewCaseRecord";
 
-import { 
-  ChevronDownIcon,
-  SearchIcon,
-} from "@/components/icons"
+import { ChevronDownIcon, SearchIcon } from "@/components/icons";
 
 import { data_columns, statusOptions } from "@/constants/index";
 import { capitalize } from "@/app/utils";
@@ -41,16 +38,27 @@ const statusColorMap: Record<string, ChipProps["color"]> = {
   closed: "danger",
 };
 
-const INITIAL_VISIBLE_COLUMNS = ["case_number", "assignee", "victim_names", "case_status", "last_date_modified", "actions"];
+const INITIAL_VISIBLE_COLUMNS = [
+  "case_number",
+  "assignee",
+  "victim_names",
+  "case_status",
+  "last_date_modified",
+  "actions",
+];
 
 type DataTableProps = {
   rows: DataTableTypes[];
-}
+};
 
 const DataTable = ({ rows }: DataTableProps) => {
-	const [filterValue, setFilterValue] = React.useState("");
-  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(new Set([]));
-  const [visibleColumns, setVisibleColumns] = React.useState<Selection>(new Set(INITIAL_VISIBLE_COLUMNS));
+  const [filterValue, setFilterValue] = React.useState("");
+  const [selectedKeys, setSelectedKeys] = React.useState<Selection>(
+    new Set([]),
+  );
+  const [visibleColumns, setVisibleColumns] = React.useState<Selection>(
+    new Set(INITIAL_VISIBLE_COLUMNS),
+  );
   const [statusFilter, setStatusFilter] = React.useState<Selection>("all");
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
@@ -65,7 +73,9 @@ const DataTable = ({ rows }: DataTableProps) => {
   const headerColumns = React.useMemo(() => {
     if (visibleColumns === "all") return data_columns;
 
-    return data_columns.filter((column) => Array.from(visibleColumns).includes(column.uid));
+    return data_columns.filter((column) =>
+      Array.from(visibleColumns).includes(column.uid),
+    );
   }, [visibleColumns]);
 
   const filteredItems = React.useMemo(() => {
@@ -76,7 +86,10 @@ const DataTable = ({ rows }: DataTableProps) => {
         record.assignee.toLowerCase().includes(filterValue.toLowerCase()),
       );
     }
-    if (statusFilter !== "all" && Array.from(statusFilter).length !== statusOptions.length) {
+    if (
+      statusFilter !== "all" &&
+      Array.from(statusFilter).length !== statusOptions.length
+    ) {
       filteredRecords = filteredRecords.filter((row) =>
         Array.from(statusFilter).includes(row.case_status),
       );
@@ -104,77 +117,99 @@ const DataTable = ({ rows }: DataTableProps) => {
     });
   }, [sortDescriptor, items]);
 
-  console.log(items)
+  console.log(items);
 
-  const renderCell = React.useCallback((record: DataTableTypes, columnKey: React.Key) => {
-    const cellValue = record[columnKey as keyof DataTableTypes] as string;
+  const renderCell = React.useCallback(
+    (record: DataTableTypes, columnKey: React.Key) => {
+      const cellValue = record[columnKey as keyof DataTableTypes] as string;
 
-    switch (columnKey) {
-      case "case_number":
-        return (
-          <div className="flex flex-col">
-            <Link href={`/view-case?id=${record.case_id}`} className="text-bold text-small text-blue-600 capitalize">{cellValue}</Link>
-            <p className="text-bold text-tiny capitalize">Time: {record.case_time}</p>
-            <p className="text-bold text-tiny capitalize">Incident type: {record.case_type}</p>
-          </div>
-        );
-      case "assignee":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{cellValue}</p>
-          </div>
-        );
-      case "victim_names":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{record.victim_names}</p>
-          </div>
-        );
-      case "victim_emails":
-        return(
-          <div className="flex flex-col">
-            <p className="text-bold text-small">{record.victim_emails}</p>
-          </div>
-        );
-      case "victim_phone_numbers":
-        return(
-          <div className="flex flex-col">
-            <p className="text-bold text-small capitalize">{record.victim_phone_numbers}</p>
-          </div>
-        );
-      case "case_status":
-        return (
-          <Chip className="capitalize" color={statusColorMap[record.case_status_id]} radius="sm" size="sm" variant="flat">
-            {record.case_status}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex justify-center items-center gap-2">
-            <Tooltip content="View">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <ViewCaseRecord
-                  id={record.id}
-                  emails={record.victim_emails}
-                  case_number={record.case_number}
-                  case_time={record.case_time}
-                  case_type={record.case_type}
-                  assignee={record.assignee}
-                  victims={record.victim_names}
-                  last_modified_by={record.last_modified_by}
-                  last_modified_time={record.last_date_modified}
-                  phone_numbers={record.victim_phone_numbers}
-                  status={record.case_status}
-                  notification={record.notification}
-                />
-              </span>
-            </Tooltip>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+      switch (columnKey) {
+        case "case_number":
+          return (
+            <div className="flex flex-col">
+              <Link
+                href={`/view-case?id=${record.case_id}`}
+                className="text-bold text-small text-blue-600 capitalize"
+              >
+                {cellValue}
+              </Link>
+              <p className="text-bold text-tiny capitalize">
+                Time: {record.case_time}
+              </p>
+              <p className="text-bold text-tiny capitalize">
+                Incident type: {record.case_type}
+              </p>
+            </div>
+          );
+        case "assignee":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small capitalize">{cellValue}</p>
+            </div>
+          );
+        case "victim_names":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small capitalize">
+                {record.victim_names}
+              </p>
+            </div>
+          );
+        case "victim_emails":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small">{record.victim_emails}</p>
+            </div>
+          );
+        case "victim_phone_numbers":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-small capitalize">
+                {record.victim_phone_numbers}
+              </p>
+            </div>
+          );
+        case "case_status":
+          return (
+            <Chip
+              className="capitalize"
+              color={statusColorMap[record.case_status_id]}
+              radius="sm"
+              size="sm"
+              variant="flat"
+            >
+              {record.case_status}
+            </Chip>
+          );
+        case "actions":
+          return (
+            <div className="relative flex justify-center items-center gap-2">
+              <Tooltip content="View">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <ViewCaseRecord
+                    id={record.id}
+                    emails={record.victim_emails}
+                    case_number={record.case_number}
+                    case_time={record.case_time}
+                    case_type={record.case_type}
+                    assignee={record.assignee}
+                    victims={record.victim_names}
+                    last_modified_by={record.last_modified_by}
+                    last_modified_time={record.last_date_modified}
+                    phone_numbers={record.victim_phone_numbers}
+                    status={record.case_status}
+                    notification={record.notification}
+                  />
+                </span>
+              </Tooltip>
+            </div>
+          );
+        default:
+          return cellValue;
+      }
+    },
+    [],
+  );
 
   const onNextPage = React.useCallback(() => {
     if (page < pages) {
@@ -188,10 +223,13 @@ const DataTable = ({ rows }: DataTableProps) => {
     }
   }, [page]);
 
-  const onRowsPerPageChange = React.useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    setRowsPerPage(Number(e.target.value));
-    setPage(1);
-  }, []);
+  const onRowsPerPageChange = React.useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setRowsPerPage(Number(e.target.value));
+      setPage(1);
+    },
+    [],
+  );
 
   const onSearchChange = React.useCallback((value?: string) => {
     if (value) {
@@ -202,10 +240,10 @@ const DataTable = ({ rows }: DataTableProps) => {
     }
   }, []);
 
-  const onClear = React.useCallback(()=>{
-    setFilterValue("")
-    setPage(1)
-  },[])
+  const onClear = React.useCallback(() => {
+    setFilterValue("");
+    setPage(1);
+  }, []);
 
   const topContent = React.useMemo(() => {
     return (
@@ -224,9 +262,9 @@ const DataTable = ({ rows }: DataTableProps) => {
           <div className="flex gap-3">
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button 
-                  className="bg-stone-800 text-white" 
-                  endContent={<ChevronDownIcon className="text-small" />} 
+                <Button
+                  className="bg-stone-800 text-white"
+                  endContent={<ChevronDownIcon className="text-small" />}
                   variant="flat"
                 >
                   Status
@@ -249,9 +287,9 @@ const DataTable = ({ rows }: DataTableProps) => {
             </Dropdown>
             <Dropdown>
               <DropdownTrigger className="hidden sm:flex">
-                <Button 
-                  className="bg-stone-800 text-white" 
-                  endContent={<ChevronDownIcon className="text-small" />} 
+                <Button
+                  className="bg-stone-800 text-white"
+                  endContent={<ChevronDownIcon className="text-small" />}
                   variant="flat"
                 >
                   Columns
@@ -278,7 +316,8 @@ const DataTable = ({ rows }: DataTableProps) => {
           <span className="text-small">Total cases: {rows.length}</span>
           <label className="flex items-center text-small">
             Rows per page:
-            <select defaultValue={5}
+            <select
+              defaultValue={5}
               className="bg-transparent outline-none text-small"
               onChange={onRowsPerPageChange}
             >
@@ -318,12 +357,22 @@ const DataTable = ({ rows }: DataTableProps) => {
           className="dark text-foreground"
         />
         <div className="hidden sm:flex w-[30%] justify-end gap-2">
-          <Button className="text-white bg-stone-800" isDisabled={pages === 1} 
-          size="sm" variant="flat" onPress={onPreviousPage}>
+          <Button
+            className="text-white bg-stone-800"
+            isDisabled={pages === 1}
+            size="sm"
+            variant="flat"
+            onPress={onPreviousPage}
+          >
             Previous
           </Button>
-          <Button className="text-white bg-stone-800" isDisabled={pages === 1} 
-          size="sm" variant="flat" onPress={onNextPage}>
+          <Button
+            className="text-white bg-stone-800"
+            isDisabled={pages === 1}
+            size="sm"
+            variant="flat"
+            onPress={onNextPage}
+          >
             Next
           </Button>
         </div>
@@ -334,8 +383,8 @@ const DataTable = ({ rows }: DataTableProps) => {
     filteredItems.length,
     onPreviousPage,
     onNextPage,
-    page, 
-    pages, 
+    page,
+    pages,
   ]);
 
   return (
@@ -347,7 +396,7 @@ const DataTable = ({ rows }: DataTableProps) => {
       classNames={{
         wrapper: "max-h-[1000px]",
         th: "text-white bg-stone-800",
-        tr: "divide-y divide-solid"
+        tr: "divide-y divide-solid",
       }}
       selectedKeys={selectedKeys}
       selectionMode="multiple"
@@ -378,6 +427,6 @@ const DataTable = ({ rows }: DataTableProps) => {
       </TableBody>
     </Table>
   );
-}
+};
 
-export default DataTable
+export default DataTable;
