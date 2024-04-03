@@ -1,6 +1,6 @@
 import { Input } from '@nextui-org/input';
 import { Divider } from '@nextui-org/divider';
-import { Select } from '@nextui-org/react';
+import { Button, Select } from '@nextui-org/react';
 
 const Settings = () => {
   return (
@@ -13,6 +13,14 @@ const Settings = () => {
       <Input className='my-4' type='email' label='Email' defaultValue='placeholder@email.org'></Input>
       <Input className='my-4' label='Organization' defaultValue='organization'></Input>
       <Input className='my-4' label='Organization Admins' readOnly defaultValue='admin'></Input>
+      <div className='flex justify-end gap-5'>
+        <Button color="danger">
+          Cancel
+        </Button>
+        <Button color="primary">
+          Save
+        </Button>
+      </div>
     </section>
   )
 }
